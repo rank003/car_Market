@@ -14,8 +14,8 @@ import os
 from pathlib import Path
 import dj_database_url
 
-if os.path.isfile("env.py"):
-    import env  # noqa: F401
+# if os.path.isfile("env.py"):
+#     import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,24 +26,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-# SECRET_KEY = (
-#     "django-insecure-xv$t2u+yq5tuoz0ou8wdc$0d%u0xua+x44f&hj$^y5j&"
-#     "vz(elq"
-# )
+SECRET_KEY = (
+    "django-insecure-xv$t2u+yq5tuoz0ou8wdc$0d%u0xua+x44f&hj$^y5j&"
+    "vz(elq"
+)
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'car-market-9069020e42dd.herokuapp.com',
-    '.herokuapp.com',
+    # '.herokuapp.com',
     '127.0.0.1',
-    'localhost',
-    'prior-essay-getup.ngrok-free.dev',
-    '.ngrok-free.dev',
-]
+    'localhost',]
 
 
 # Application definition
@@ -56,14 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-
-    'cloudinary_storage',
-
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'cloudinary',
     'home',
     'listings',
     'users',
@@ -198,8 +190,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'assets')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CLOUDINARY_LISTING_PLACEHOLDER_URL = os.environ.get(
-    'CLOUDINARY_LISTING_PLACEHOLDER_URL',
-    'https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png',
-)
