@@ -88,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request', # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'listings.context_processors.selected_vehicles',
             ],
         },
     },
@@ -122,11 +123,14 @@ WSGI_APPLICATION = 'CarMarket.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=not DEBUG,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "carMarket",
+        "USER": "macuser",
+        "PASSWORD": "1111",
+        "HOST": "localhost",
+        "PORT": "5435",
+    }
 }
 
 

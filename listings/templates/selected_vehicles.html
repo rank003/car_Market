@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- Selected Vehicles{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block page_header %}
+  <div class="container header-container">
+    <div class="row"><div class="col"></div></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="listings-app">
+  <main class="page-shell">
+    <section class="results-section">
+      <div class="section-title-wrap">
+        <h2>Selected Vehicles</h2>
+      </div>
+
+      {% if selected_listings %}
+        <div class="cards-grid">
+          {% for listing in selected_listings %}
+            <article class="listing-card">
+              <div class="listing-image-box">
+                <img src="https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png" alt="{{ listing.car_make }} {{ listing.car_model }}">
+              </div>
+              <div class="listing-card-body">
+                <h3>{{ listing.car_make }} {{ listing.car_model }}</h3>
+                <p><strong>Fuel Type:</strong> {{ listing.fuel_type|default:'-' }}</p>
+                <p><strong>Year:</strong> {{ listing.year|default:'-' }}</p>
+                <p><strong>Mileage:</strong> {{ listing.mileage|default:'-' }}</p>
+                <p><strong>Price:</strong> €{{ listing.price|default:'-' }}</p>
+                <div class="listing-card-actions">
+                  <a href="{% url 'single_listing' listing.id %}" class="btn-pill btn-pill-view">View</a>
+                  <form method="post" action="{% url 'unselect_vehicle' listing.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{% url 'selected_vehicles_page' %}">
+                    <button type="submit" class="btn-pill btn-pill-delete">Remove</button>
+                  </form>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <p>You have not selected any vehicles yet.</p>
+          <a href="{% url 'listings_page' %}" class="btn-pill btn-pill-view">Browse Listings</a>
+        </div>
+      {% endif %}
+    </section>
+  </main>
+</div>
+{% endblock %}

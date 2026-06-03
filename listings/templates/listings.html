@@ -43,9 +43,88 @@
                 <p><strong>Year:</strong> {{ listing.year|default:'-' }}</p>
                 <p><strong>Mileage:</strong> {{ listing.mileage|default:'-' }}</p>
                 <p><strong>Price:</strong> €{{ listing.price|default:'-' }}</p>
-                <a href="{% url 'account_login' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3 listing-contact-btn">Contact</a>
+
+                <!-- View / Edit / Delete action buttons -->
+                <div class="listing-card-actions">
+                  <button
+                    type="button"
+                    class="btn-pill btn-pill-view"
+                    data-toggle="modal"
+                    data-target="#listingModal-{{ listing.id }}"
+                    aria-label="View full details for {{ listing.car_make }} {{ listing.car_model }}">
+                    View
+                  </button>
+                  {% if request.user.is_authenticated %}
+                    {% if listing.owner and listing.owner.user == request.user %}
+                      <a href="{% url 'edit_listing' listing.id %}" class="btn-pill btn-pill-edit">Edit</a>
+                      <a href="{% url 'delete_listing' listing.id %}" class="btn-pill btn-pill-delete">Delete</a>
+                    {% endif %}
+                  {% endif %}
+                </div>
+
               </div>
             </article>
+
+            <!-- Listing details modal -->
+            <div class="modal fade vehicle-modal" id="listingModal-{{ listing.id }}" tabindex="-1" role="dialog" aria-labelledby="listingModalLabel-{{ listing.id }}" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header vehicle-modal-header">
+                    <h5 class="modal-title" id="listingModalLabel-{{ listing.id }}">{{ listing.car_make }} {{ listing.car_model }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="modal-body vehicle-modal-body">
+                    <div class="vehicle-modal-image-wrap">
+                      <img src="https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png" alt="{{ listing.car_make }} {{ listing.car_model }}">
+                    </div>
+
+                    <div class="vehicle-modal-grid">
+                      <p><strong>Make:</strong> {{ listing.car_make|default:'-' }}</p>
+                      <p><strong>Model:</strong> {{ listing.car_model|default:'-' }}</p>
+                      <p><strong>Fuel Type:</strong> {{ listing.fuel_type|default:'-' }}</p>
+                      <p><strong>Year:</strong> {{ listing.year|default:'-' }}</p>
+                      <p><strong>Mileage:</strong> {{ listing.mileage|default:'-' }}</p>
+                      <p><strong>Price:</strong> €{{ listing.price|default:'-' }}</p>
+                      <p><strong>Engine Size:</strong> {{ listing.engine_size|default:'-' }}</p>
+                      <p><strong>Transmission:</strong> {{ listing.transmission|default:'-' }}</p>
+                      <p><strong>Seats:</strong> {{ listing.seats|default:'-' }}</p>
+                      <p><strong>Torque:</strong> {{ listing.torque|default:'-' }}</p>
+                      <p><strong>Posted:</strong> {{ listing.created|date:'M d, Y H:i'|default:'-' }}</p>
+                      <p><strong>Seller:</strong> {% if listing.owner %}{{ listing.owner.name|default:listing.owner.username }}{% else %}-{% endif %}</p>
+                    </div>
+
+                    <div class="vehicle-modal-description">
+                      <strong>Description</strong>
+                      <p>{{ listing.description|default:'No description provided.' }}</p>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer vehicle-modal-footer">
+                    {% if request.user.is_authenticated %}
+                      {% if listing.id in selected_vehicle_ids %}
+                        <form method="post" action="{% url 'unselect_vehicle' listing.id %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                          <button type="submit" class="btn-pill btn-pill-delete">Remove from Bag</button>
+                        </form>
+                      {% else %}
+                        <form method="post" action="{% url 'select_vehicle' listing.id %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                          <button type="submit" class="btn-pill btn-pill-save">Select Car</button>
+                        </form>
+                      {% endif %}
+                    {% else %}
+                      <a href="{% url 'login' %}" class="btn-pill btn-pill-view">Login to Select</a>
+                    {% endif %}
+                    <button type="button" class="btn-pill btn-pill-cancel" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           {% empty %}
             <div class="empty-state">
               <p>No cars matched the values entered in the form.</p>

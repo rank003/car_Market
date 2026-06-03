@@ -1,299 +1,99 @@
-<!-- {% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-{% load humanize %}
-{% load widget_tweaks %}
-{% block title %}
-{{ listing.listing_title}}
-{% endblock title %}
+
+{% block extra_title %}- {{ listing.car_make }} {{ listing.car_model }}{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block page_header %}
+  <div class="container header-container">
+    <div class="row"><div class="col"></div></div>
+  </div>
+{% endblock %}
 
 {% block content %}
-<section id="listing" class="py-4">
-    <div class="container">
-        <button class="btn blue text-white mb-4" onclick="history.back()">Go Back</button>
-        <div class="row">
-            <div class="col-12 col-lg-7"> -->
-                <!-- Images carousel -->
-                <!-- <a href="{{ listing.listing_main_img }}" data-lightbox="listing-images">
-                    <img src="{{ listing.listing_main_img }}" alt="{{ listing.listing_title }} image" class="img-fluid" id="main-image">
-                </a>
-                <div class="row mb-5 thumbs mt-2">
-                    {% if listing.listing_image_2 %}
-                    <div class="col-4 col-md-2 mt-2 mt-md-0">
-                        <a href="{{ listing.listing_image_2.url }}" data-lightbox="listing-images">
-                            <img src="{{ listing.listing_image_2.url }}" alt="{{ listing.listing_title }} image" class="img-fluid img-thumb" >
-                        </a>
-                    </div>
-                    {% endif %}
+<div class="listings-app">
+  <main class="page-shell">
+    <div class="form-card" style="max-width:800px; margin:2rem auto;">
 
-                    {% if listing.listing_image_3 %}
-                    <div class="col-4 col-md-2 mt-2 mt-md-0">
-                        <a href="{{ listing.listing_image_3.url }}" data-lightbox="listing-images">
-                            <img src="{{ listing.listing_image_3.url }}" alt="{{ listing.listing_title }} image" class="img-fluid img-thumb">
-                        </a>
-                    </div>
-                    {% endif %}
-
-                    {% if listing.listing_image_4 %}
-                    <div class="col-4 col-md-2 mt-2 mt-md-0">
-                        <a href="{{ listing.listing_image_4.url }}" data-lightbox="listing-images">
-                            <img src="{{ listing.listing_image_4.url }}" alt="{{ listing.listing_title }} image" class="img-fluid img-thumb">
-                        </a>
-                    </div>
-                    {% endif %}
-
-                    {% if listing.listing_image_5 %}
-                    <div class="col-4 col-md-2 mt-2 mt-md-0">
-                        <a href="{{ listing.listing_image_5.url }}" data-lightbox="listing-images">
-                            <img src="{{ listing.listing_image_5.url }}" alt="{{ listing.listing_title }} image" class="img-fluid img-thumb">
-                        </a>
-                    </div>
-                    {% endif %}
-
-                    {% if listing.listing_image_6 %}
-                    <div class="col-4 col-md-2 mt-2 mt-md-0">
-                        <a href="{{ listing.listing_image_6.url }}" data-lightbox="listing-images">
-                            <img src="{{ listing.listing_image_6.url }}" alt="{{ listing.listing_title }} image" class="img-fluid img-thumb">
-                        </a>
-                    </div>
-                    {% endif %}
-
-                    {% if listing.listing_image_7 %}
-                    <div class="col-4 col-md-2 mt-2 mt-md-0">
-                        <a href="{{ listing.listing_image_7.url }}" data-lightbox="listing-images">
-                            <img src="{{ listing.listing_image_7.url }}" alt="{{ listing.listing_title }} image" class="img-fluid img-thumb">
-                        </a>
-                    </div>
-                    {% endif %}
-
-                </div>
-            </div> -->
-
-            <!-- Listing title and details -->
-            <!-- <div class="col-12 col-md-10 col-lg-5">
-                <div class="row">
-                    <div class="col-6">
-                        <h2>{{ listing.car_make }}</h2>
-                        <h4>{{ listing.car_model }}</h4>
-                    </div>
-                    <div class="col-6 text-end">
-                        <h2>€{{ listing.price|intcomma }}</h2>
-                        <p>{{ listing.created|timesince}} ago</p>
-                    </div>
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="icon">
-                                <span><i class="fa-regular fa-calendar-days custom-icon"></i> {{ listing.year }}</span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="icon">
-                                <span> <i class="fa-solid fa-gauge-high custom-icon"></i> {{ listing.mileage|intcomma }} km</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3"> -->
-                        <!-- Transmission -->
-                        <!-- <div class="col-6">
-                            <div class="icon">
-                                <span>
-                                    <svg class="custom-icon" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M24 3C24 1.343 22.657 0 21 0C19.343 0 18 1.343 18 3C18 4.305 18.838 5.403 20 5.816V11H13V5.816C14.162 5.403 15 4.305 15 3C15 1.343 13.657 0 12 0C10.343 0 9 1.343 9 3C9 4.305 9.838 5.403 11 5.816V11H4V5.816C5.162 5.403 6 4.305 6 3C6 1.343 4.657 0 3 0C1.343 0 0 1.343 0 3C0 4.305 0.838 5.403 2 5.816V18.184C0.838 18.597 0 19.695 0 21C0 22.657 1.343 24 3 24C4.657 24 6 22.657 6 21C6 19.695 5.162 18.597 4 18.184V13H11V18.184C9.838 18.597 9 19.695 9 21C9 22.657 10.343 24 12 24C13.657 24 15 22.657 15 21C15 19.695 14.162 18.597 13 18.184V13H20C21.103 13 22 12.103 22 11V5.816C23.162 5.403 24 4.305 24 3Z"
-                                            fill="#000" />
-                                    </svg>
-                                </span>
-                                {{ listing.transmission|capfirst }}
-                            </div>
-                        </div> -->
-                        <!-- Engine Size -->
-                        <!-- <div class="col-6">
-                            <div class="icon">
-                                <span>
-                                    <svg class="custom-icon" width="24" height="24" viewBox="0 0 24 24">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <path d="m0 0h24v24h-24z" />
-                                            <path
-                                                d="m3.6 13.8h-1.2v1.2c0 .6627417-.5372583 1.2-1.2 1.2s-1.2-.5372583-1.2-1.2v-4.8c0-.6627417.5372583-1.2 1.2-1.2s1.2.5372583 1.2 1.2v1.2h1.2v-2.4h1.2l2.04-2.04c.22448572-.22902677.53130492-.35866869.852-.36h3.108v-1.2h-1.2c-.6627417 0-1.2-.5372583-1.2-1.2s.5372583-1.2 1.2-1.2h4.8c.6627417 0 1.2.5372583 1.2 1.2s-.5372583 1.2-1.2 1.2h-1.2v1.2h2.112c.9123765-.0063496 1.7494427.50519089 2.16 1.32l1.728 3.48h2.4v-1.2h1.2s1.2-.492 1.2 4.8c0 4.8-1.2 4.8-1.2 4.8h-1.2v-2.4h-2.4v1.2c0 .6627417-.5372583 1.2-1.2 1.2h-8.4c-.75541753 0-1.46674948-.355666-1.92-.96l-2.88-3.84h-1.2zm2.4-1.2 3.6 4.8h7.2v-1.2c0-.6627417.5372583-1.2 1.2-1.2h3.6v-1.2h-3.144c-.4588741.0009183-.8780959-.2599308-1.08-.672l-2.052-4.116h-7.116l-2.208 2.172z"
-                                                fill="#000" fill-rule="nonzero" />
-                                        </g>
-                                    </svg>
-                                </span>
-                                {% if listing.engine_size %}
-                                {{ listing.engine_size }}L
-                                {% else %}
-                                 --
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3"> -->
-                        <!-- Body Type -->
-                        <!-- <div class="col-6">
-                            <div class="icon">
-                                <i class="fa-solid fa-car-side custom-icon"></i>
-                                {% if listing.body_type %}
-                                 {{ listing.body_type|capfirst }}
-                                 {% else %}
-                                 --
-                                 {% endif %}
-                            </div>
-                        </div> -->
-                        <!-- Fuel Type -->
-                        <!-- <div class="col-6">
-                            <div class="icon">
-                                <i class="fa-solid fa-gas-pump custom-icon"></i> {{ listing.fuel_type|capfirst }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3"> -->
-                        <!-- Location -->
-                        <!-- <div class="col-6">
-                            <div class="icon">
-                                <i class="fas fa-map-marker custom-icon"></i> {{ listing.town|capfirst }}, {{ listing.county|capfirst }}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <hr>
-                {% if request.user.profile.id != listing.owner.id %}
-                <div class="row">
-                    <div class="col-10">
-                        <form method="POST" action="{% url 'favourite-listings' listing.id %}">
-                            {% csrf_token %}
-                            
-                            {% if favourite %}
-                            <button class="btn" type="submit" name="favourites" value="submit">
-                                <i class="fa-solid fa-heart" style="color: #cc2424;"></i>
-                                Listing Saved</button>
-                            {% else %}
-                            <button class="btn" type="submit" name="favourites" value="submit">
-                                <i class="fa-regular fa-heart fa-bounce" style="color: #cc2424;"></i>
-                                Save Listing</button>
-                            {% endif %}
-                        </form>
-                    </div>
-                </div>
-                {% endif %} -->
-
-                 <!-- Seller's profile card -->
-                <!-- <div class="row mt-3 justify-content-center text-center">
-                    <div class="col-10 my-2 py-3 shadow-container seller-card">
-                        <div class="row d-flex justify-content-center align-items-center ">
-                            <div class="col-12 col-md-6 d-flex justify-content-center">
-                                <div class="seller-image-container p-3">
-                                    {% if request.user.profile.id == listing.owner.id %}
-                                    <a href="{% url 'profile' listing.owner.id %}">
-                                    {% else %}
-                                    <a href="{% url 'user-account' listing.owner.id %}">
-                                    {% endif %}
-                                        <img class="profile-image" src="{{ listing.owner.profile_img }}"
-                                        alt="user profile image">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <h4>{{ listing.owner.name }}</h4>
-                                {% if listing.owner.town and listing.owner.county %}
-                                <p>{{ listing.owner.town }}, {{ listing.owner.county }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row px-3  d-flex flex-column align-items-center">
-                            <div class="col-12 text-center m-auto">
-                                <p class="seller-email">Email: {{ listing.owner.email|slice:'51' }}</p>
-                                {% if listing.owner.phone %}
-                                <p>Phone: {{ listing.owner.phone }}</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% if request.user.profile.id != listing.owner.id %}
-                        <div class="row px-4">
-                            <button class="btn btn-blue btn-lg text-white" data-bs-toggle="modal" data-bs-target="#contactModal">Email Seller</button>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row my-5">
-            <div class="col-12 col-lg-10">
-                <h5>Description:</h5>
-                <hr>
-                <p>{{ listing.description }}</p>
-            </div>
-    </div> -->
-  
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="contactModalLabel">Contact {{ listing.owner.name }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-            <div class="col-12 text-center">
-            <form method="POST" action="{% url 'contact' listing.owner.id %}" class="mt-3">
-                {% csrf_token %}
-                <p>An email will be sent to {{listing.owner.name}} with your message and contact details.</p> -->
-
-                <!-- Listing id -->
-                <!-- <div class="form-floating mb-4">
-                {% render_field form.listing_id|attr:"hidden" %}
-                </div> -->
-
-                <!-- Listing Name -->
-                <!-- <div class="form-floating mb-4">
-                {% render_field form.listing|add_required_class:"is-required"|attr:"readonly" class="form-control" placeholder=form.listing.label %}
-                <label for="{{ form.listing.id_for_label }}" class="form-label">Listing:*</label>
-                {{ form.listing.errors }}
-                {% for error in form.listing.errors %}
-                <span class="text-danger">{{ error }}</span>
-                {% endfor %}
-                </div> -->
-
-                <!-- Name -->
-                <!-- <div class="form-floating mb-4">
-                {% render_field form.name|add_required_class:"is-required"|attr:"title:Please enter valid name"|attr:"pattern=^[A-Za-z\s\-]+$" class="form-control" placeholder=form.name.label %}
-                <label for="{{ form.name.id_for_label }}" class="form-label">Name:*</label>
-                </div> -->
-                
-                <!-- Email -->
-                <!-- <div class="form-floating mb-4">
-                {% render_field form.email|add_required_class:"is-required" class="form-control" placeholder=form.email.label %}
-                <label for="{{ form.email.id_for_label }}" class="form-label">Email:*</label>
-                </div> -->
-
-                <!-- Phone -->
-                <!-- <div class="form-floating mb-4">
-                    {% render_field form.phone|attr:"pattern:^(?:\+?\d{1,4}|\d{1,4}00)(\d{9})$"|attr:"title:'Please enter a 10-digit phone number'" class="form-control" placeholder=form.phone.label %}
-                    <label for="{{ form.phone.id_for_label }}" class="form-label">Phone:</label>
-                </div> -->
-
-                <!-- Message -->
-                <!-- <div class="form-control mb-4">
-                    <label for="{{ form.message.id_for_label }}" class="form-label">Message:</label>
-                    {% render_field form.message|attr:"maxlength:1000" class="form-control" placeholder='Max 1000 characters' %}
-                </div> -->
-
-                <!-- Submit button -->
-                <!-- <button type="submit" class="btn btn-lg btn-blue text-white btn-block mb-4">Send Message</button>
-            </form>
-            </div>
-            </div>
-        </div>
+      <div class="form-card-head">
+        <h1>{{ listing.car_make }} {{ listing.car_model }}</h1>
+        <a class="back-link" href="{% url 'listings_page' %}">Back to Listings</a>
       </div>
+
+      <!-- Listing image -->
+      <div style="margin:1rem 0;">
+        <img
+          src="https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png"
+          alt="{{ listing.car_make }} {{ listing.car_model }}"
+          style="width:100%; max-height:400px; object-fit:cover; border-radius:8px;">
+      </div>
+
+      <!-- Listing details -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0;">
+        <p><strong>Make:</strong> {{ listing.car_make|default:'-' }}</p>
+        <p><strong>Model:</strong> {{ listing.car_model|default:'-' }}</p>
+        <p><strong>Year:</strong> {{ listing.year|default:'-' }}</p>
+        <p><strong>Fuel Type:</strong> {{ listing.fuel_type|default:'-' }}</p>
+        <p><strong>Mileage:</strong> {{ listing.mileage|default:'-' }} miles</p>
+        <p><strong>Price:</strong> €{{ listing.price|default:'-' }}</p>
+        <p><strong>Engine Size:</strong> {{ listing.engine_size|default:'-' }}</p>
+        <p><strong>Transmission:</strong> {{ listing.transmission|default:'-' }}</p>
+        <p><strong>Seats:</strong> {{ listing.seats|default:'-' }}</p>
+        <p><strong>Torque:</strong> {{ listing.torque|default:'-' }}</p>
+      </div>
+
+      {% if listing.description %}
+        <div style="margin:1rem 0;">
+          <strong>Description:</strong>
+          <p>{{ listing.description }}</p>
+        </div>
+      {% endif %}
+
+      <!-- Seller info -->
+      {% if listing.owner %}
+        <div style="background:#f8f9fa; padding:1rem; border-radius:8px; margin-top:1.5rem;">
+          <strong>Seller:</strong> {{ listing.owner.name|default:listing.owner.username }}
+          {% if listing.owner.email %}
+            &nbsp;&mdash;&nbsp;{{ listing.owner.email }}
+          {% endif %}
+          {% if listing.owner.phone %}
+            &nbsp;&mdash;&nbsp;{{ listing.owner.phone }}
+          {% endif %}
+        </div>
+      {% endif %}
+
+            {% if request.user.is_authenticated %}
+                <div class="listing-card-actions">
+                    {% if listing.id in selected_vehicle_ids %}
+                        <form method="post" action="{% url 'unselect_vehicle' listing.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit" class="btn-pill btn-pill-delete">Remove from Bag</button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{% url 'select_vehicle' listing.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit" class="btn-pill btn-pill-save">Select Car</button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+      <!-- Edit / Delete: only visible to the listing owner -->
+      {% if request.user.is_authenticated %}
+        {% if listing.owner and listing.owner.user == request.user %}
+          <div class="listing-card-actions">
+            <a href="{% url 'edit_listing' listing.id %}" class="btn-pill btn-pill-edit">✏️ Edit Listing</a>
+            <a href="{% url 'delete_listing' listing.id %}" class="btn-pill btn-pill-delete">🗑 Delete Listing</a>
+          </div>
+        {% endif %}
+      {% endif %}
+
     </div>
-  </div>
-  </div>
-</section>
-{% endblock content%} -->
+  </main>
+</div>
+{% endblock %}

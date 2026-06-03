@@ -47,10 +47,15 @@
             </div>
         </li>
 
+        <!-- CHANGED: Show 'Trade/Sell Your Car' nav link only for logged-in non-admin users -->
         {% if request.user.is_authenticated %}
+        <!-- CHANGED: Hidden from staff and superusers -->
+        {% if not request.user.is_staff and not request.user.is_superuser %}
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black ml-lg-4" href="{% url 'create_listing_form' %}">Create Listing</a>
+            <!-- CHANGED: Renamed from 'Create Listing' to 'Trade/Sell Your Car' -->
+            <a class="logo-font font-weight-bold nav-link text-black ml-lg-4" href="{% url 'create_listing_form' %}">Trade/Sell Your Car</a>
         </li>
+        {% endif %}
         <li class="nav-item">
             <a class="logo-font font-weight-bold nav-link text-black" href="{% url 'profile' %}">{{ request.user.first_name|default:request.user.username }}</a>
         </li>

@@ -93,20 +93,20 @@
                 {% endif %}
               </div>
             </li>
+            {% if request.user.is_authenticated %}
             <li class="list-inline-item">
-              <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
+              <a class="text-black nav-link"
+                 href="#"
+                 data-toggle="modal"
+                 data-target="#shoppingBagModal"
+                 aria-label="Open selected vehicles list">
                 <div class="text-center">
                   <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                  <p class="my-0">
-                    {% if grand_total %}
-                      ${{ grand_total|floatformat:2 }}
-                    {% else %}
-                      $0.00
-                    {% endif %}
-                  </p>
+                  <p class="my-0">{{ selected_vehicle_count }} selected</p>
                 </div>
               </a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -136,6 +136,49 @@
 
     {% block content %}
     {% endblock %}
+
+    {% if request.user.is_authenticated %}
+    <div class="modal fade" id="shoppingBagModal" tabindex="-1" role="dialog" aria-labelledby="shoppingBagModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="shoppingBagModalLabel">Selected Vehicles ({{ selected_vehicle_count }})</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="max-height:70vh; overflow-y:auto;">
+            {% if selected_vehicles %}
+              <div class="list-group">
+                {% for vehicle in selected_vehicles %}
+                  <div class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <div>
+                      <strong>{{ vehicle.car_make }} {{ vehicle.car_model }}</strong><br>
+                      <small>Year: {{ vehicle.year|default:'-' }} | Price: €{{ vehicle.price|default:'-' }} | Fuel: {{ vehicle.fuel_type|default:'-' }}</small>
+                    </div>
+                    <div class="mt-2 mt-md-0 d-flex" style="gap:8px;">
+                      <a href="{% url 'single_listing' vehicle.id %}" class="btn btn-sm btn-outline-primary">View</a>
+                      <form method="post" action="{% url 'unselect_vehicle' vehicle.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                      </form>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p class="mb-0">No cars selected yet. Open any listing and click "Select Car".</p>
+            {% endif %}
+          </div>
+          <div class="modal-footer">
+            <a href="{% url 'selected_vehicles_page' %}" class="btn btn-primary">Open Full List</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
     
     {% block postloadjs %}
     {% endblock %}

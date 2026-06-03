@@ -258,6 +258,116 @@
   grid-column: 1 / -1;
 }
 
+/* --- Pill action buttons --- */
+.listings-app .btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.3px;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+.listings-app .btn-pill:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.listings-app .btn-pill-view {
+  background: #12497f;
+  color: #fff;
+}
+.listings-app .btn-pill-edit {
+  background: #2563eb;
+  color: #fff;
+}
+.listings-app .btn-pill-delete {
+  background: #dc2626;
+  color: #fff;
+}
+.listings-app .btn-pill-cancel {
+  background: #6b7280;
+  color: #fff;
+}
+.listings-app .btn-pill-save {
+  background: #16a34a;
+  color: #fff;
+}
+.listing-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.listing-card-actions form,
+.vehicle-modal-footer form {
+  display: inline-flex;
+  margin: 0;
+}
+
+.vehicle-modal .modal-content {
+  border-radius: 14px;
+  border: 1px solid #d9e0ea;
+}
+
+.vehicle-modal-header {
+  border-bottom: 1px solid #e5eaf1;
+}
+
+.vehicle-modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.vehicle-modal-image-wrap {
+  margin-bottom: 14px;
+  border: 1px solid #d8dee8;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.vehicle-modal-image-wrap img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.vehicle-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+.vehicle-modal-grid p {
+  margin: 0;
+}
+
+.vehicle-modal-description {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e5eaf1;
+}
+
+.vehicle-modal-description p {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+}
+
+.vehicle-modal-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 @media (max-width: 900px) {
   .listings-app .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -287,5 +397,9 @@
   .listings-app .form-card-head {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .vehicle-modal-grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- Edit Listing{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block page_header %}
+  <div class="container header-container">
+    <div class="row"><div class="col"></div></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="listings-app form-page-body">
+  <div class="form-card">
+    <div class="form-card-head">
+      <h1>Edit Listing</h1>
+      <a class="back-link" href="{% url 'listings_page' %}">Cancel</a>
+    </div>
+
+    <p class="intro-copy">Update the details of your listing below. Fields marked with * are required.</p>
+
+    {% if form_error %}
+      <div class="message-box message-error">
+        {{ form_error }}
+      </div>
+    {% endif %}
+
+    <form method="post" class="create-listing-grid">
+      {% csrf_token %}
+
+      <div class="field-block">
+        <label for="car_make">Car Make *</label>
+        <input id="car_make" name="car_make" value="{{ listing.car_make }}" required>
+      </div>
+
+      <div class="field-block">
+        <label for="car_model">Car Model *</label>
+        <input id="car_model" name="car_model" value="{{ listing.car_model }}" required>
+      </div>
+
+      <div class="field-block">
+        <label for="fuel_type">Fuel Type</label>
+        <input id="fuel_type" name="fuel_type" value="{{ listing.fuel_type|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="year">Year</label>
+        <input id="year" name="year" type="number" value="{{ listing.year|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="mileage">Mileage</label>
+        <input id="mileage" name="mileage" type="number" value="{{ listing.mileage|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="price">Price</label>
+        <input id="price" name="price" type="number" value="{{ listing.price|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="engine_size">Engine Size</label>
+        <input id="engine_size" name="engine_size" value="{{ listing.engine_size|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="transmission">Transmission</label>
+        <input id="transmission" name="transmission" value="{{ listing.transmission|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="seats">Seats</label>
+        <input id="seats" name="seats" type="number" value="{{ listing.seats|default:'' }}">
+      </div>
+
+      <div class="field-block">
+        <label for="torque">Torque</label>
+        <input id="torque" name="torque" type="number" value="{{ listing.torque|default:'' }}">
+      </div>
+
+      <div class="field-block full-span">
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{ listing.description|default:'' }}</textarea>
+      </div>
+
+      <div class="field-block full-span form-actions" style="display:flex; gap:10px; align-items:center;">
+        <button type="submit" class="btn-pill btn-pill-save">✓ Save Changes</button>
+        <a href="{% url 'listings_page' %}" class="btn-pill btn-pill-cancel">Cancel</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

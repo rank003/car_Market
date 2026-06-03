@@ -2,7 +2,8 @@
 
 {% load static %}
 
-{% block extra_title %}- Create Listing{% endblock %}
+<!-- CHANGED: Page tab title updated from 'Create Listing' to 'Trade/Sell Your Car' -->
+{% block extra_title %}- Trade/Sell Your Car{% endblock %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -20,11 +21,13 @@
   <div class="listings-app form-page-body">
     <div class="form-card">
       <div class="form-card-head">
-        <h1>Create Listing</h1>
+        <!-- CHANGED: Heading updated from 'Create Listing' to 'Trade/Sell Your Car' -->
+        <h1>Trade/Sell Your Car</h1>
         <a class="back-link" href="{% url 'listings_page' %}">View Listings</a>
       </div>
 
-      <p class="intro-copy">Enter a car make, car type, fuel type, year, mileage, and price. After you create a listing, it can appear on the listings page and be filtered by the blue search form.</p>
+      <!-- CHANGED: Intro paragraph updated to match new 'Trade/Sell Your Car' tone -->
+      <p class="intro-copy">Ready to trade or sell your car? Fill in the details below — car make, model, fuel type, year, mileage, and price. Your listing will appear on the listings page for buyers to find.</p>
 
       {% if result %}
         <div class="message-box {% if is_success %}message-success{% else %}message-error{% endif %}">

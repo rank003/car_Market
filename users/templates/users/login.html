@@ -11,16 +11,40 @@
 {% endblock %}
 
 {% block content %}
-<section class="container py-5 mt-5">
+<section class="container py-5 mt-5 auth-page">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-5">
-            <h2 class="mb-4">Login</h2>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-dark">Login</button>
-                <a href="{% url 'register' %}" class="btn btn-outline-secondary ml-2">Sign Up</a>
-            </form>
+        <div class="col-12 col-md-9 col-lg-6 col-xl-5">
+            <div class="auth-card">
+                <h2 class="auth-title">Welcome Back</h2>
+                <p class="auth-subtitle">Log in to manage your profile and car listings.</p>
+
+                {% if form.non_field_errors %}
+                    <div class="auth-alert auth-alert-error">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="auth-form">
+                    {% csrf_token %}
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.username.id_for_label }}" class="auth-label">Username</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}<small class="auth-error">{{ form.username.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.password.id_for_label }}" class="auth-label">Password</label>
+                        {{ form.password }}
+                        {% if form.password.errors %}<small class="auth-error">{{ form.password.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-actions">
+                        <button type="submit" class="btn auth-btn-primary">Login</button>
+                        <a href="{% url 'register' %}" class="btn auth-btn-secondary">Create Account</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>

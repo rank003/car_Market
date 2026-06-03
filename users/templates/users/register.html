@@ -11,16 +11,58 @@
 {% endblock %}
 
 {% block content %}
-<section class="container py-5 mt-5">
+<section class="container py-5 mt-5 auth-page">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-5">
-            <h2 class="mb-4">Create Account</h2>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-dark">Sign Up</button>
-                <a href="{% url 'login' %}" class="btn btn-outline-secondary ml-2">Login</a>
-            </form>
+        <div class="col-12 col-md-10 col-lg-7 col-xl-6">
+            <div class="auth-card">
+                <h2 class="auth-title">Create Your Account</h2>
+                <p class="auth-subtitle">Sign up to trade/sell your car and manage your listings.</p>
+
+                {% if form.non_field_errors %}
+                    <div class="auth-alert auth-alert-error">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="auth-form">
+                    {% csrf_token %}
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.name.id_for_label }}" class="auth-label">Name</label>
+                        {{ form.name }}
+                        {% if form.name.errors %}<small class="auth-error">{{ form.name.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.username.id_for_label }}" class="auth-label">Username</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}<small class="auth-error">{{ form.username.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.email.id_for_label }}" class="auth-label">Email</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<small class="auth-error">{{ form.email.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.password1.id_for_label }}" class="auth-label">Password</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}<small class="auth-error">{{ form.password1.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-field-wrap">
+                        <label for="{{ form.password2.id_for_label }}" class="auth-label">Confirm Password</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}<small class="auth-error">{{ form.password2.errors|striptags }}</small>{% endif %}
+                    </div>
+
+                    <div class="auth-actions">
+                        <button type="submit" class="btn auth-btn-primary">Sign Up</button>
+                        <a href="{% url 'login' %}" class="btn auth-btn-secondary">Back to Login</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>

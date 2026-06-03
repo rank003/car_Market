@@ -23,17 +23,23 @@
 #     return render(request, "single-listing.html", context)
 
 import json
+import uuid
 from typing import Any, Dict, Optional, Tuple
 
+from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from users.models import Profile
 from .models import CarMake, CarModel, Listing
+
+
+SESSION_KEY_SELECTED_VEHICLES = "selected_vehicle_ids"
 
 
 def _payload_from_request(request) -> Dict[str, Any]:
@@ -174,6 +180,22 @@ def _filtered_listings(request):
     return queryset
 
 
+def _get_selected_vehicle_ids(request):
+    raw_ids = request.session.get(SESSION_KEY_SELECTED_VEHICLES, [])
+    valid_ids = []
+    for value in raw_ids:
+        try:
+            valid_ids.append(str(uuid.UUID(str(value))))
+        except (TypeError, ValueError):
+            continue
+    return valid_ids
+
+
+def _save_selected_vehicle_ids(request, ids):
+    request.session[SESSION_KEY_SELECTED_VEHICLES] = ids
+    request.session.modified = True
+
+
 @require_http_methods(["GET"])
 def listings_page(request):
     queryset = _filtered_listings(request)
@@ -241,3 +263,141 @@ def create_listing_form(request):
 def create_listing_with_make_model(request):
     payload, status = _build_listing(_payload_from_request(request))
     return JsonResponse(payload, status=status)
+
+
+@require_http_methods(["GET"])
+def single_listing(request, listing_id):
+    """Display a single listing's details."""
+    listing = get_object_or_404(
+        Listing.objects.select_related("car_make", "car_model", "owner"),
+        pk=listing_id,
+    )
+    return render(request, "single-listing.html", {"listing": listing})
+
+
+@require_http_methods(["GET", "POST"])
+@login_required(login_url="login")
+def edit_listing(request, listing_id):
+    """Allow the listing owner to edit their listing."""
+    listing = get_object_or_404(Listing, pk=listing_id)
+
+    # Get the logged-in user's profile
+    profile = Profile.objects.filter(user=request.user).first()
+
+    # Only the owner may edit
+    if not profile or listing.owner != profile:
+        messages.error(request, "You do not have permission to edit this listing.")
+        return redirect("listings_page")
+
+    # Clear any stale queued messages so unrelated alerts don't appear here.
+    if request.method == "GET":
+        storage = get_messages(request)
+        for _ in storage:
+            pass
+
+    if request.method == "POST":
+        make_name = (request.POST.get("car_make") or "").strip()
+        model_name = (request.POST.get("car_model") or "").strip()
+
+        if not make_name or not model_name:
+            return render(
+                request,
+                "edit_listing.html",
+                {
+                    "listing": listing,
+                    "form_error": "Car make and car model are required.",
+                },
+            )
+
+        car_make, _, car_model, _ = _get_or_create_make_model(make_name, model_name)
+
+        listing.car_make = car_make
+        listing.car_model = car_model
+        listing.fuel_type = (request.POST.get("fuel_type") or "").strip()
+        listing.year = _parse_int(request.POST.dict(), "year")
+        listing.mileage = _parse_int(request.POST.dict(), "mileage")
+        listing.price = _parse_int(request.POST.dict(), "price")
+        listing.engine_size = (request.POST.get("engine_size") or "").strip()
+        listing.transmission = (request.POST.get("transmission") or "").strip()
+        listing.seats = _parse_int(request.POST.dict(), "seats")
+        listing.torque = _parse_int(request.POST.dict(), "torque")
+        listing.description = (request.POST.get("description") or "").strip()
+        listing.save()
+
+        messages.success(request, "Listing updated successfully.")
+        return redirect("listings_page")
+
+    return render(request, "edit_listing.html", {"listing": listing})
+
+
+@require_http_methods(["GET", "POST"])
+@login_required(login_url="login")
+def delete_listing(request, listing_id):
+    """Allow the listing owner to delete their listing."""
+    listing = get_object_or_404(Listing, pk=listing_id)
+
+    # Get the logged-in user's profile
+    profile = Profile.objects.filter(user=request.user).first()
+
+    # Only the owner may delete
+    if not profile or listing.owner != profile:
+        messages.error(request, "You do not have permission to delete this listing.")
+        return redirect("listings_page")
+
+    if request.method == "POST":
+        listing.delete()
+        messages.success(request, "Listing deleted successfully.")
+        return redirect("listings_page")
+
+    return render(request, "delete_listing.html", {"listing": listing})
+
+
+@require_http_methods(["POST"])
+@login_required(login_url="login")
+def select_vehicle(request, listing_id):
+    """Add a vehicle to the logged-in user's selected list (shopping bag)."""
+    listing = get_object_or_404(Listing, pk=listing_id)
+    selected_ids = _get_selected_vehicle_ids(request)
+    listing_id_str = str(listing.id)
+
+    if listing_id_str not in selected_ids:
+        selected_ids.append(listing_id_str)
+        _save_selected_vehicle_ids(request, selected_ids)
+        messages.success(request, "Vehicle added to your shopping bag.")
+
+    next_url = request.POST.get("next") or request.META.get("HTTP_REFERER")
+    return redirect(next_url or "listings_page")
+
+
+@require_http_methods(["POST"])
+@login_required(login_url="login")
+def unselect_vehicle(request, listing_id):
+    """Remove a vehicle from the logged-in user's selected list."""
+    selected_ids = _get_selected_vehicle_ids(request)
+    listing_id_str = str(listing_id)
+
+    if listing_id_str in selected_ids:
+        selected_ids.remove(listing_id_str)
+        _save_selected_vehicle_ids(request, selected_ids)
+        messages.success(request, "Vehicle removed from your shopping bag.")
+
+    next_url = request.POST.get("next") or request.META.get("HTTP_REFERER")
+    return redirect(next_url or "listings_page")
+
+
+@require_http_methods(["GET"])
+@login_required(login_url="login")
+def selected_vehicles_page(request):
+    """Display all vehicles currently selected by the logged-in user."""
+    selected_ids = _get_selected_vehicle_ids(request)
+    listings = Listing.objects.select_related("car_make", "car_model").filter(
+        id__in=selected_ids,
+    )
+    by_id = {str(listing.id): listing for listing in listings}
+    ordered = [by_id[_id] for _id in selected_ids if _id in by_id]
+
+    return render(
+        request,
+        "selected_vehicles.html",
+        {"selected_listings": ordered},
+    )
