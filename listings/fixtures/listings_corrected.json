@@ -3,14 +3,14 @@
     "model": "listings.listing",
     "pk": 1,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 3,
       "car_model": 72,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,493 cc",
       "transmission": "manual",
-      "created": "2026-04-18 16:45",
+      "created": "2026-04-18T16:45:00Z",
       "description": "This is a great car!",
       "price": 157000.0,
       "fuel_type": "Petrol",
@@ -21,21 +21,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 2,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 3,
       "car_model": 93,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,500 cc",
       "transmission": "manual",
-      "created": "2026-04-19 16:45",
+      "created": "2026-04-19T16:45:00Z",
       "description": "This is a great car!",
       "price": 62000.0,
       "fuel_type": "Petrol",
@@ -46,21 +47,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 3,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 3,
       "car_model": 57,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,500 cc",
       "transmission": "manual",
-      "created": "2026-04-20 16:45",
+      "created": "2026-04-20T16:45:00Z",
       "description": "This is a great car!",
       "price": 60000.0,
       "fuel_type": "Petrol",
@@ -71,21 +73,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 4,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 3,
       "car_model": 80,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,500 cc",
       "transmission": "manual",
-      "created": "2026-04-21 16:45",
+      "created": "2026-04-21T16:45:00Z",
       "description": "This is a great car!",
       "price": 45000.0,
       "fuel_type": "Petrol",
@@ -96,21 +99,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 5,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 1,
       "car_model": 110,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5,204 cc",
       "transmission": "manual",
-      "created": "2026-04-22 16:45",
+      "created": "2026-04-22T16:45:00Z",
       "description": "This is a great car!",
       "price": 1300000.0,
       "fuel_type": "Petrol",
@@ -121,21 +125,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 6,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 2,
       "car_model": 18,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5,204 cc",
       "transmission": "manual",
-      "created": "2026-04-23 16:45",
+      "created": "2026-04-23T16:45:00Z",
       "description": "This is a great car!",
       "price": 253290.0,
       "fuel_type": "Petrol",
@@ -146,21 +151,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 7,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 2,
       "car_model": 78,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5,204 cc",
       "transmission": "manual",
-      "created": "2026-04-24 16:45",
+      "created": "2026-04-24T16:45:00Z",
       "description": "This is a great car!",
       "price": 194000.0,
       "fuel_type": "Petrol",
@@ -171,21 +177,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 8,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 2,
       "car_model": 97,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,984 cc",
       "transmission": "manual",
-      "created": "2026-04-25 16:45",
+      "created": "2026-04-25T16:45:00Z",
       "description": "This is a great car!",
       "price": 49000.0,
       "fuel_type": "Petrol",
@@ -196,21 +203,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 9,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 4,
       "car_model": 37,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,996 cc",
       "transmission": "manual",
-      "created": "2026-04-26 16:45",
+      "created": "2026-04-26T16:45:00Z",
       "description": "This is a great car!",
       "price": 311000.0,
       "fuel_type": "Petrol",
@@ -221,21 +229,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 10,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 5,
       "car_model": 62,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,994 cc",
       "transmission": "manual",
-      "created": "2026-04-27 16:45",
+      "created": "2026-04-27T16:45:00Z",
       "description": "This is a great car!",
       "price": 499000.0,
       "fuel_type": "Petrol",
@@ -246,21 +255,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 11,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 5,
       "car_model": 55,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "4,395 cc",
       "transmission": "manual",
-      "created": "2026-04-28 16:45",
+      "created": "2026-04-28T16:45:00Z",
       "description": "This is a great car!",
       "price": 142000.0,
       "fuel_type": "Petrol",
@@ -271,21 +281,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 12,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 5,
       "car_model": 54,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2,993 cc",
       "transmission": "manual",
-      "created": "2026-04-29 16:45",
+      "created": "2026-04-29T16:45:00Z",
       "description": "This is a great car!",
       "price": 133000.0,
       "fuel_type": "Petrol",
@@ -296,21 +307,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 13,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 5,
       "car_model": 53,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2,993 cc",
       "transmission": "manual",
-      "created": "2026-04-30 16:45",
+      "created": "2026-04-30T16:45:00Z",
       "description": "This is a great car!",
       "price": 76000.0,
       "fuel_type": "Petrol",
@@ -321,21 +333,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 14,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 6,
       "car_model": 26,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "7993 cc",
       "transmission": "manual",
-      "created": "2026-05-01 16:45",
+      "created": "2026-05-01T16:45:00Z",
       "description": "This is a great car!",
       "price": 4500000.0,
       "fuel_type": "Petrol",
@@ -346,21 +359,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 15,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 6,
       "car_model": 65,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "7993 cc",
       "transmission": "manual",
-      "created": "2026-05-02 16:45",
+      "created": "2026-05-02T16:45:00Z",
       "description": "This is a great car!",
       "price": 5000000.0,
       "fuel_type": "Petrol",
@@ -371,21 +385,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 16,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 7,
       "car_model": 32,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2000 cc",
       "transmission": "manual",
-      "created": "2026-05-03 16:45",
+      "created": "2026-05-03T16:45:00Z",
       "description": "This is a great car!",
       "price": 34395.0,
       "fuel_type": "Petrol",
@@ -396,21 +411,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 17,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 7,
       "car_model": 33,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2700 cc",
       "transmission": "manual",
-      "created": "2026-05-04 16:45",
+      "created": "2026-05-04T16:45:00Z",
       "description": "This is a great car!",
       "price": 46595.0,
       "fuel_type": "Petrol",
@@ -421,21 +437,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 18,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 7,
       "car_model": 34,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2000 cc",
       "transmission": "manual",
-      "created": "2026-05-05 16:45",
+      "created": "2026-05-05T16:45:00Z",
       "description": "This is a great car!",
       "price": 38195.0,
       "fuel_type": "Petrol",
@@ -446,21 +463,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 19,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 7,
       "car_model": 35,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3000 cc",
       "transmission": "manual",
-      "created": "2026-05-06 16:45",
+      "created": "2026-05-06T16:45:00Z",
       "description": "This is a great car!",
       "price": 50995.0,
       "fuel_type": "Petrol",
@@ -471,21 +489,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 20,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 89,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "4300 cc",
       "transmission": "manual",
-      "created": "2026-05-07 16:45",
+      "created": "2026-05-07T16:45:00Z",
       "description": "This is a great car!",
       "price": 34900.0,
       "fuel_type": "Petrol",
@@ -496,21 +515,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 21,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 90,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6600 cc",
       "transmission": "manual",
-      "created": "2026-05-08 16:45",
+      "created": "2026-05-08T16:45:00Z",
       "description": "This is a great car!",
       "price": 56400.0,
       "fuel_type": "Diesel",
@@ -521,21 +541,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 22,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 105,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "manual",
-      "created": "2026-05-09 16:45",
+      "created": "2026-05-09T16:45:00Z",
       "description": "This is a great car!",
       "price": 64100.0,
       "fuel_type": "Petrol",
@@ -546,21 +567,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 23,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 91,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "manual",
-      "created": "2026-05-10 16:45",
+      "created": "2026-05-10T16:45:00Z",
       "description": "This is a great car!",
       "price": 64400.0,
       "fuel_type": "Petrol",
@@ -571,21 +593,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 24,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 27,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "66 kWh",
       "transmission": "automatic",
-      "created": "2026-05-11 16:45",
+      "created": "2026-05-11T16:45:00Z",
       "description": "This is a great car!",
       "price": 31700.0,
       "fuel_type": "Electric",
@@ -596,21 +619,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 25,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 101,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "automatic",
-      "created": "2026-05-12 16:45",
+      "created": "2026-05-12T16:45:00Z",
       "description": "This is a great car!",
       "price": 56995.0,
       "fuel_type": "Petrol",
@@ -621,21 +645,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 26,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 102,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "automatic",
-      "created": "2026-05-13 16:45",
+      "created": "2026-05-13T16:45:00Z",
       "description": "This is a great car!",
       "price": 62495.0,
       "fuel_type": "Petrol",
@@ -646,21 +671,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 27,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 105,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "automatic",
-      "created": "2026-05-14 16:45",
+      "created": "2026-05-14T16:45:00Z",
       "description": "This is a great car!",
       "price": 64100.0,
       "fuel_type": "Petrol",
@@ -671,21 +697,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 28,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 107,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "automatic",
-      "created": "2026-05-15 16:45",
+      "created": "2026-05-15T16:45:00Z",
       "description": "This is a great car!",
       "price": 66700.0,
       "fuel_type": "Petrol",
@@ -696,21 +723,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 29,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 104,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6200 cc",
       "transmission": "automatic",
-      "created": "2026-05-16 16:45",
+      "created": "2026-05-16T16:45:00Z",
       "description": "This is a great car!",
       "price": 71600.0,
       "fuel_type": "Petrol",
@@ -721,21 +749,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 30,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 100,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6200 cc",
       "transmission": "automatic",
-      "created": "2026-05-17 16:45",
+      "created": "2026-05-17T16:45:00Z",
       "description": "This is a great car!",
       "price": 76700.0,
       "fuel_type": "Petrol",
@@ -746,21 +775,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 31,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 103,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "automatic",
-      "created": "2026-05-18 16:45",
+      "created": "2026-05-18T16:45:00Z",
       "description": "This is a great car!",
       "price": 65500.0,
       "fuel_type": "Petrol",
@@ -771,21 +801,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 32,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 8,
       "car_model": 106,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6200 cc",
       "transmission": "automatic",
-      "created": "2026-05-19 16:45",
+      "created": "2026-05-19T16:45:00Z",
       "description": "This is a great car!",
       "price": 70000.0,
       "fuel_type": "Petrol",
@@ -796,21 +827,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 33,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 9,
       "car_model": 87,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3990 cc",
       "transmission": "automatic",
-      "created": "2026-05-20 16:45",
+      "created": "2026-05-20T16:45:00Z",
       "description": "This is a great car!",
       "price": 1100000.0,
       "fuel_type": "Petrol",
@@ -821,21 +853,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 34,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 9,
       "car_model": 40,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,900 cc",
       "transmission": "automatic",
-      "created": "2026-05-21 16:45",
+      "created": "2026-05-21T16:45:00Z",
       "description": "This is a great car!",
       "price": 280000.0,
       "fuel_type": "Petrol",
@@ -846,21 +879,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 35,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 9,
       "car_model": 12,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6496 cc",
       "transmission": "automatic",
-      "created": "2026-05-22 16:45",
+      "created": "2026-05-22T16:45:00Z",
       "description": "This is a great car!",
       "price": 350000.0,
       "fuel_type": "Petrol",
@@ -871,21 +905,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 36,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 9,
       "car_model": 76,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,900 cc",
       "transmission": "automatic",
-      "created": "2026-05-23 16:45",
+      "created": "2026-05-23T16:45:00Z",
       "description": "This is a great car!",
       "price": 210000.0,
       "fuel_type": "Petrol",
@@ -896,21 +931,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 37,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 10,
       "car_model": 71,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5,000 cc",
       "transmission": "automatic",
-      "created": "2026-05-24 16:45",
+      "created": "2026-05-24T16:45:00Z",
       "description": "This is a great car!",
       "price": 60000.0,
       "fuel_type": "Petrol",
@@ -921,21 +957,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 38,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 10,
       "car_model": 82,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2,000 cc",
       "transmission": "automatic",
-      "created": "2026-05-25 16:45",
+      "created": "2026-05-25T16:45:00Z",
       "description": "This is a great car!",
       "price": 40000.0,
       "fuel_type": "Diesel",
@@ -946,21 +983,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 39,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 10,
       "car_model": 38,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2,500 cc",
       "transmission": "automatic",
-      "created": "2026-05-26 16:45",
+      "created": "2026-05-26T16:45:00Z",
       "description": "This is a great car!",
       "price": 38000.0,
       "fuel_type": "Hybrid",
@@ -971,21 +1009,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 40,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 10,
       "car_model": 28,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2,700 cc",
       "transmission": "automatic",
-      "created": "2026-05-27 16:45",
+      "created": "2026-05-27T16:45:00Z",
       "description": "This is a great car!",
       "price": 45000.0,
       "fuel_type": "Petrol",
@@ -996,21 +1035,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 41,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 10,
       "car_model": 39,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,000 cc",
       "transmission": "automatic",
-      "created": "2026-05-28 16:45",
+      "created": "2026-05-28T16:45:00Z",
       "description": "This is a great car!",
       "price": 55000.0,
       "fuel_type": "Petrol",
@@ -1021,21 +1061,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 42,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 11,
       "car_model": 108,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1500 cc",
       "transmission": "automatic",
-      "created": "2026-05-29 16:45",
+      "created": "2026-05-29T16:45:00Z",
       "description": "This is a great car!",
       "price": 29900.0,
       "fuel_type": "Petrol",
@@ -1046,21 +1087,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 43,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 11,
       "car_model": 21,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2000 cc",
       "transmission": "automatic",
-      "created": "2026-05-30 16:45",
+      "created": "2026-05-30T16:45:00Z",
       "description": "This is a great car!",
       "price": 36800.0,
       "fuel_type": "Petrol",
@@ -1071,21 +1113,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 44,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 11,
       "car_model": 116,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5300 cc",
       "transmission": "automatic",
-      "created": "2026-05-31 16:45",
+      "created": "2026-05-31T16:45:00Z",
       "description": "This is a great car!",
       "price": 57400.0,
       "fuel_type": "Petrol",
@@ -1096,21 +1139,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 45,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 11,
       "car_model": 117,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6200 cc",
       "transmission": "automatic",
-      "created": "2026-06-01 16:45",
+      "created": "2026-06-01T16:45:00Z",
       "description": "This is a great car!",
       "price": 61100.0,
       "fuel_type": "Petrol",
@@ -1121,21 +1165,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 46,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 12,
       "car_model": 75,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3,471 cc",
       "transmission": "automatic",
-      "created": "2026-06-02 16:45",
+      "created": "2026-06-02T16:45:00Z",
       "description": "This is a great car!",
       "price": 40000.0,
       "fuel_type": "Petrol",
@@ -1146,21 +1191,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 47,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 12,
       "car_model": 31,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,498 cc",
       "transmission": "automatic",
-      "created": "2026-06-03 16:45",
+      "created": "2026-06-03T16:45:00Z",
       "description": "This is a great car!",
       "price": 26350.0,
       "fuel_type": "Petrol",
@@ -1171,21 +1217,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 48,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 12,
       "car_model": 29,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,497 cc",
       "transmission": "automatic",
-      "created": "2026-06-04 16:45",
+      "created": "2026-06-04T16:45:00Z",
       "description": "This is a great car!",
       "price": 15400.0,
       "fuel_type": "Petrol",
@@ -1196,21 +1243,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 49,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 12,
       "car_model": 30,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,996 cc",
       "transmission": "automatic",
-      "created": "2026-06-05 16:45",
+      "created": "2026-06-05T16:45:00Z",
       "description": "This is a great car!",
       "price": 20400.0,
       "fuel_type": "Petrol",
@@ -1221,21 +1269,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 50,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 13,
       "car_model": 47,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,197 cc",
       "transmission": "automatic",
-      "created": "2026-06-06 16:45",
+      "created": "2026-06-06T16:45:00Z",
       "description": "This is a great car!",
       "price": 12400.0,
       "fuel_type": "Petrol",
@@ -1246,21 +1295,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 51,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 13,
       "car_model": 48,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1,396 cc",
       "transmission": "automatic",
-      "created": "2026-06-07 16:45",
+      "created": "2026-06-07T16:45:00Z",
       "description": "This is a great car!",
       "price": 15400.0,
       "fuel_type": "Petrol",
@@ -1271,21 +1321,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 52,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 14,
       "car_model": 51,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5000 cc",
       "transmission": "automatic",
-      "created": "2026-06-08 16:45",
+      "created": "2026-06-08T16:45:00Z",
       "description": "This is a great car!",
       "price": 90000.0,
       "fuel_type": "Petrol",
@@ -1296,21 +1347,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 53,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 14,
       "car_model": 49,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1999 cc",
       "transmission": "automatic",
-      "created": "2026-06-09 16:45",
+      "created": "2026-06-09T16:45:00Z",
       "description": "This is a great car!",
       "price": 75000.0,
       "fuel_type": "Petrol",
@@ -1321,21 +1373,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 54,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 14,
       "car_model": 50,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1999 cc",
       "transmission": "automatic",
-      "created": "2026-06-10 16:45",
+      "created": "2026-06-10T16:45:00Z",
       "description": "This is a great car!",
       "price": 60000.0,
       "fuel_type": "Petrol",
@@ -1346,21 +1399,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 55,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 15,
       "car_model": 112,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3600 cc",
       "transmission": "automatic",
-      "created": "2026-06-11 16:45",
+      "created": "2026-06-11T16:45:00Z",
       "description": "This is a great car!",
       "price": 35195.0,
       "fuel_type": "Petrol",
@@ -1371,21 +1425,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 56,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 15,
       "car_model": 113,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "2000 cc",
       "transmission": "automatic",
-      "created": "2026-06-12 16:45",
+      "created": "2026-06-12T16:45:00Z",
       "description": "This is a great car!",
       "price": 42100.0,
       "fuel_type": "Petrol",
@@ -1396,21 +1451,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 57,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 15,
       "car_model": 44,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "3600 cc",
       "transmission": "automatic",
-      "created": "2026-06-13 16:45",
+      "created": "2026-06-13T16:45:00Z",
       "description": "This is a great car!",
       "price": 41530.0,
       "fuel_type": "Petrol",
@@ -1421,21 +1477,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 58,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 15,
       "car_model": 83,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "11.4 kWh",
       "transmission": "automatic",
-      "created": "2026-06-14 16:45",
+      "created": "2026-06-14T16:45:00Z",
       "description": "This is a great car!",
       "price": 44500.0,
       "fuel_type": "Hybrid",
@@ -1446,21 +1503,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 59,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 15,
       "car_model": 111,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "100 kWh",
       "transmission": "automatic",
-      "created": "2026-06-15 16:45",
+      "created": "2026-06-15T16:45:00Z",
       "description": "This is a great car!",
       "price": 80000.0,
       "fuel_type": "Electric",
@@ -1471,21 +1529,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 60,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 16,
       "car_model": 88,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "1998 cc",
       "transmission": "automatic",
-      "created": "2026-06-16 16:45",
+      "created": "2026-06-16T16:45:00Z",
       "description": "This is a great car!",
       "price": 40000.0,
       "fuel_type": "Petrol",
@@ -1496,21 +1555,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 61,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 17,
       "car_model": 46,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "5204 cc",
       "transmission": "automatic",
-      "created": "2026-06-17 16:45",
+      "created": "2026-06-17T16:45:00Z",
       "description": "This is a great car!",
       "price": 342000.0,
       "fuel_type": "Petrol",
@@ -1521,21 +1581,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 62,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 17,
       "car_model": 19,
       "mileage": 50000,
       "year": 1999,
       "engine_size": "6498 cc",
       "transmission": "automatic",
-      "created": "2026-06-18 16:45",
+      "created": "2026-06-18T16:45:00Z",
       "description": "This is a great car!",
       "price": 573000.0,
       "fuel_type": "Petrol",
@@ -1546,21 +1607,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 63,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 18,
       "car_model": 114,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2179 cc",
       "transmission": "automatic",
-      "created": "2026-06-19 16:45",
+      "created": "2026-06-19T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Diesel",
@@ -1571,21 +1633,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 64,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 18,
       "car_model": 85,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2179 cc",
       "transmission": "automatic",
-      "created": "2026-06-20 16:45",
+      "created": "2026-06-20T16:45:00Z",
       "description": "This is a great car!",
       "price": 16400.0,
       "fuel_type": "Diesel",
@@ -1596,21 +1659,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 65,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 20,
       "car_model": 58,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1500 cc",
       "transmission": "automatic",
-      "created": "2026-06-21 16:45",
+      "created": "2026-06-21T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Petrol",
@@ -1621,21 +1685,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 66,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 20,
       "car_model": 59,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2000 cc",
       "transmission": "automatic",
-      "created": "2026-06-22 16:45",
+      "created": "2026-06-22T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Petrol",
@@ -1646,21 +1711,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 67,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 20,
       "car_model": 60,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2500 cc",
       "transmission": "automatic",
-      "created": "2026-06-23 16:45",
+      "created": "2026-06-23T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Petrol",
@@ -1671,21 +1737,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 68,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 20,
       "car_model": 61,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2500 cc",
       "transmission": "automatic",
-      "created": "2026-06-24 16:45",
+      "created": "2026-06-24T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Petrol",
@@ -1696,21 +1763,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 69,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 20,
       "car_model": 36,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2000 cc",
       "transmission": "automatic",
-      "created": "2026-06-25 16:45",
+      "created": "2026-06-25T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Petrol",
@@ -1721,21 +1789,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 70,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 19,
       "car_model": 23,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2996 cc",
       "transmission": "automatic",
-      "created": "2026-06-26 16:45",
+      "created": "2026-06-26T16:45:00Z",
       "description": "This is a great car!",
       "price": 71000.0,
       "fuel_type": "Petrol",
@@ -1746,21 +1815,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 71,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 19,
       "car_model": 25,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1991 cc",
       "transmission": "automatic",
-      "created": "2026-06-27 16:45",
+      "created": "2026-06-27T16:45:00Z",
       "description": "This is a great car!",
       "price": 90000.0,
       "fuel_type": "Petrol",
@@ -1771,21 +1841,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 72,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 19,
       "car_model": 22,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "100 kWh",
       "transmission": "automatic",
-      "created": "2026-06-28 16:45",
+      "created": "2026-06-28T16:45:00Z",
       "description": "This is a great car!",
       "price": 102000.0,
       "fuel_type": "Electric",
@@ -1796,21 +1867,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 73,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 19,
       "car_model": 24,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "5980 cc",
       "transmission": "automatic",
-      "created": "2026-06-29 16:45",
+      "created": "2026-06-29T16:45:00Z",
       "description": "This is a great car!",
       "price": 200000.0,
       "fuel_type": "Petrol",
@@ -1821,21 +1893,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 74,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 21,
       "car_model": 63,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1200 cc",
       "transmission": "automatic",
-      "created": "2026-06-30 16:45",
+      "created": "2026-06-30T16:45:00Z",
       "description": "This is a great car!",
       "price": 200000.0,
       "fuel_type": "Petrol",
@@ -1846,21 +1919,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 75,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 21,
       "car_model": 64,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1200 cc",
       "transmission": "automatic",
-      "created": "2026-07-01 16:45",
+      "created": "2026-07-01T16:45:00Z",
       "description": "This is a great car!",
       "price": 200000.0,
       "fuel_type": "Petrol",
@@ -1871,21 +1945,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 76,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 21,
       "car_model": 73,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2500 cc",
       "transmission": "automatic",
-      "created": "2026-07-02 16:45",
+      "created": "2026-07-02T16:45:00Z",
       "description": "This is a great car!",
       "price": 200000.0,
       "fuel_type": "Petrol",
@@ -1896,21 +1971,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 77,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 22,
       "car_model": 17,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2488 cc",
       "transmission": "automatic",
-      "created": "2026-07-03 16:45",
+      "created": "2026-07-03T16:45:00Z",
       "description": "This is a great car!",
       "price": 25000.0,
       "fuel_type": "Petrol",
@@ -1921,21 +1997,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 78,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 22,
       "car_model": 56,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "3498 cc",
       "transmission": "automatic",
-      "created": "2026-07-04 16:45",
+      "created": "2026-07-04T16:45:00Z",
       "description": "This is a great car!",
       "price": 35000.0,
       "fuel_type": "Petrol",
@@ -1946,21 +2023,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 79,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 22,
       "car_model": 86,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1998 cc",
       "transmission": "automatic",
-      "created": "2026-07-05 16:45",
+      "created": "2026-07-05T16:45:00Z",
       "description": "This is a great car!",
       "price": 20000.0,
       "fuel_type": "Petrol",
@@ -1971,21 +2049,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 80,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 22,
       "car_model": 81,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2488 cc",
       "transmission": "automatic",
-      "created": "2026-07-06 16:45",
+      "created": "2026-07-06T16:45:00Z",
       "description": "This is a great car!",
       "price": 28000.0,
       "fuel_type": "Petrol",
@@ -1996,21 +2075,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 81,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 22,
       "car_model": 74,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "3498 cc",
       "transmission": "automatic",
-      "created": "2026-07-07 16:45",
+      "created": "2026-07-07T16:45:00Z",
       "description": "This is a great car!",
       "price": 35000.0,
       "fuel_type": "Petrol",
@@ -2021,21 +2101,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 82,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 23,
       "car_model": 2,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1598 cc",
       "transmission": "automatic",
-      "created": "2026-07-08 16:45",
+      "created": "2026-07-08T16:45:00Z",
       "description": "This is a great car!",
       "price": 45000.0,
       "fuel_type": "Petrol",
@@ -2046,21 +2127,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 83,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 23,
       "car_model": 7,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1598 cc",
       "transmission": "automatic",
-      "created": "2026-07-09 16:45",
+      "created": "2026-07-09T16:45:00Z",
       "description": "This is a great car!",
       "price": 55000.0,
       "fuel_type": "Petrol",
@@ -2071,21 +2153,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 84,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 23,
       "car_model": 11,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1598 cc",
       "transmission": "automatic",
-      "created": "2026-07-10 16:45",
+      "created": "2026-07-10T16:45:00Z",
       "description": "This is a great car!",
       "price": 60000.0,
       "fuel_type": "Petrol",
@@ -2096,21 +2179,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 85,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 23,
       "car_model": 6,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1598 cc",
       "transmission": "automatic",
-      "created": "2026-07-11 16:45",
+      "created": "2026-07-11T16:45:00Z",
       "description": "This is a great car!",
       "price": 50000.0,
       "fuel_type": "Petrol",
@@ -2121,21 +2205,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 86,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 23,
       "car_model": 1,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1199 cc",
       "transmission": "automatic",
-      "created": "2026-07-12 16:45",
+      "created": "2026-07-12T16:45:00Z",
       "description": "This is a great car!",
       "price": 22000.0,
       "fuel_type": "Petrol",
@@ -2146,21 +2231,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 87,
     "fields": {
-      "owner": 1,
+      "owner": null,
       "car_make": 23,
       "car_model": 3,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1499 cc",
       "transmission": "automatic",
-      "created": "2026-07-13 16:45",
+      "created": "2026-07-13T16:45:00Z",
       "description": "This is a great car!",
       "price": 30000.0,
       "fuel_type": "Petrol",
@@ -2171,21 +2257,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 88,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 23,
       "car_model": 8,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1499 cc",
       "transmission": "automatic",
-      "created": "2026-07-14 16:45",
+      "created": "2026-07-14T16:45:00Z",
       "description": "This is a great car!",
       "price": 33000.0,
       "fuel_type": "Petrol",
@@ -2196,21 +2283,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 89,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 23,
       "car_model": 4,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1499 cc",
       "transmission": "automatic",
-      "created": "2026-07-15 16:45",
+      "created": "2026-07-15T16:45:00Z",
       "description": "This is a great car!",
       "price": 32000.0,
       "fuel_type": "Petrol",
@@ -2221,21 +2309,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 90,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 23,
       "car_model": 9,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1499 cc",
       "transmission": "automatic",
-      "created": "2026-07-16 16:45",
+      "created": "2026-07-16T16:45:00Z",
       "description": "This is a great car!",
       "price": 35000.0,
       "fuel_type": "Petrol",
@@ -2246,21 +2335,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 91,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 23,
       "car_model": 5,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1598 cc",
       "transmission": "automatic",
-      "created": "2026-07-17 16:45",
+      "created": "2026-07-17T16:45:00Z",
       "description": "This is a great car!",
       "price": 35000.0,
       "fuel_type": "Petrol",
@@ -2271,21 +2361,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 92,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 23,
       "car_model": 10,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "1598 cc",
       "transmission": "automatic",
-      "created": "2026-07-18 16:45",
+      "created": "2026-07-18T16:45:00Z",
       "description": "This is a great car!",
       "price": 38000.0,
       "fuel_type": "Petrol",
@@ -2296,21 +2387,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 93,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 24,
       "car_model": 13,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2981 cc",
       "transmission": "automatic",
-      "created": "2026-07-19 16:45",
+      "created": "2026-07-19T16:45:00Z",
       "description": "This is a great car!",
       "price": 110000.0,
       "fuel_type": "Petrol",
@@ -2321,21 +2413,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 94,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 24,
       "car_model": 16,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2981 cc",
       "transmission": "automatic",
-      "created": "2026-07-20 16:45",
+      "created": "2026-07-20T16:45:00Z",
       "description": "This is a great car!",
       "price": 131300.0,
       "fuel_type": "Petrol",
@@ -2346,21 +2439,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 95,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 24,
       "car_model": 14,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2981 cc",
       "transmission": "automatic",
-      "created": "2026-07-21 16:45",
+      "created": "2026-07-21T16:45:00Z",
       "description": "This is a great car!",
       "price": 106500.0,
       "fuel_type": "Petrol",
@@ -2371,21 +2465,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 96,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 24,
       "car_model": 15,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "2981 cc",
       "transmission": "automatic",
-      "created": "2026-07-22 16:45",
+      "created": "2026-07-22T16:45:00Z",
       "description": "This is a great car!",
       "price": 113300.0,
       "fuel_type": "Petrol",
@@ -2396,21 +2491,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 97,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 25,
       "car_model": 41,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "6,592 cc",
       "transmission": "automatic",
-      "created": "2026-07-23 16:45",
+      "created": "2026-07-23T16:45:00Z",
       "description": "This is a great car!",
       "price": 332000.0,
       "fuel_type": "Petrol",
@@ -2421,21 +2517,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 98,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 27,
       "car_model": 66,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "60 kWh",
       "transmission": "automatic",
-      "created": "2026-07-24 16:45",
+      "created": "2026-07-24T16:45:00Z",
       "description": "This is a great car!",
       "price": 40240.0,
       "fuel_type": "Electric",
@@ -2446,21 +2543,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 99,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 27,
       "car_model": 67,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "82 kWh",
       "transmission": "automatic",
-      "created": "2026-07-25 16:45",
+      "created": "2026-07-25T16:45:00Z",
       "description": "This is a great car!",
       "price": 53240.0,
       "fuel_type": "Electric",
@@ -2471,21 +2569,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 100,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 27,
       "car_model": 68,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "100 kWh",
       "transmission": "automatic",
-      "created": "2026-07-26 16:45",
+      "created": "2026-07-26T16:45:00Z",
       "description": "This is a great car!",
       "price": 98490.0,
       "fuel_type": "Electric",
@@ -2496,21 +2595,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 101,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 27,
       "car_model": 69,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "100 kWh",
       "transmission": "automatic",
-      "created": "2026-07-27 16:45",
+      "created": "2026-07-27T16:45:00Z",
       "description": "This is a great car!",
       "price": 113490.0,
       "fuel_type": "Electric",
@@ -2521,21 +2621,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 102,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 27,
       "car_model": 70,
       "mileage": 100000,
       "year": 1999,
       "engine_size": "75 kWh",
       "transmission": "automatic",
-      "created": "2026-07-28 16:45",
+      "created": "2026-07-28T16:45:00Z",
       "description": "This is a great car!",
       "price": 47490.0,
       "fuel_type": "Electric",
@@ -2546,21 +2647,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 103,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 42,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "2998 cc",
       "transmission": "automatic",
-      "created": "2026-07-29 16:45",
+      "created": "2026-07-29T16:45:00Z",
       "description": "This is a great car!",
       "price": 53900.0,
       "fuel_type": "Petrol",
@@ -2571,21 +2673,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 104,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 95,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1998 cc",
       "transmission": "automatic",
-      "created": "2026-07-30 16:45",
+      "created": "2026-07-30T16:45:00Z",
       "description": "This is a great car!",
       "price": 27000.0,
       "fuel_type": "Petrol",
@@ -2596,21 +2699,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 105,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 94,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "2387 cc",
       "transmission": "automatic",
-      "created": "2026-07-31 16:45",
+      "created": "2026-07-31T16:45:00Z",
       "description": "This is a great car!",
       "price": 30000.0,
       "fuel_type": "Petrol",
@@ -2621,21 +2725,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 106,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 96,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "5663 cc",
       "transmission": "automatic",
-      "created": "2026-08-01 16:45",
+      "created": "2026-08-01T16:45:00Z",
       "description": "This is a great car!",
       "price": 85000.0,
       "fuel_type": "Diesel",
@@ -2646,21 +2751,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 107,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 92,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "2694 cc",
       "transmission": "automatic",
-      "created": "2026-08-02 16:45",
+      "created": "2026-08-02T16:45:00Z",
       "description": "This is a great car!",
       "price": 26400.0,
       "fuel_type": "Petrol",
@@ -2671,21 +2777,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 108,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 98,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "5663 cc",
       "transmission": "automatic",
-      "created": "2026-08-03 16:45",
+      "created": "2026-08-03T16:45:00Z",
       "description": "This is a great car!",
       "price": 39900.0,
       "fuel_type": "Petrol",
@@ -2696,21 +2803,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 109,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 99,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "3456 cc",
       "transmission": "automatic",
-      "created": "2026-08-04 16:45",
+      "created": "2026-08-04T16:45:00Z",
       "description": "This is a great car!",
       "price": 43400.0,
       "fuel_type": "Hybrid",
@@ -2721,21 +2829,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 110,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 115,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1496 cc",
       "transmission": "automatic",
-      "created": "2026-08-05 16:45",
+      "created": "2026-08-05T16:45:00Z",
       "description": "This is a great car!",
       "price": 18400.0,
       "fuel_type": "Petrol",
@@ -2746,21 +2855,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 111,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 20,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "998 cc",
       "transmission": "automatic",
-      "created": "2026-08-06 16:45",
+      "created": "2026-08-06T16:45:00Z",
       "description": "This is a great car!",
       "price": 18000.0,
       "fuel_type": "Petrol",
@@ -2771,21 +2881,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 112,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 26,
       "car_model": 45,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "2755 cc",
       "transmission": "automatic",
-      "created": "2026-08-07 16:45",
+      "created": "2026-08-07T16:45:00Z",
       "description": "This is a great car!",
       "price": 50000.0,
       "fuel_type": "Diesel",
@@ -2796,21 +2907,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 113,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 28,
       "car_model": 79,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "2487 cc",
       "transmission": "automatic",
-      "created": "2026-08-08 16:45",
+      "created": "2026-08-08T16:45:00Z",
       "description": "This is a great car!",
       "price": 50000.0,
       "fuel_type": "Petrol",
@@ -2821,21 +2933,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 114,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 30,
       "car_model": 43,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1498 cc",
       "transmission": "automatic",
-      "created": "2026-08-09 16:45",
+      "created": "2026-08-09T16:45:00Z",
       "description": "This is a great car!",
       "price": 23000.0,
       "fuel_type": "Petrol",
@@ -2846,21 +2959,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 115,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 30,
       "car_model": 77,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1984 cc",
       "transmission": "automatic",
-      "created": "2026-08-10 16:45",
+      "created": "2026-08-10T16:45:00Z",
       "description": "This is a great car!",
       "price": 25000.0,
       "fuel_type": "Petrol",
@@ -2871,21 +2985,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 116,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 30,
       "car_model": 109,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1984 cc",
       "transmission": "automatic",
-      "created": "2026-08-11 16:45",
+      "created": "2026-08-11T16:45:00Z",
       "description": "This is a great car!",
       "price": 28505.0,
       "fuel_type": "Petrol",
@@ -2896,21 +3011,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 117,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 30,
       "car_model": 52,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1498 cc",
       "transmission": "automatic",
-      "created": "2026-08-12 16:45",
+      "created": "2026-08-12T16:45:00Z",
       "description": "This is a great car!",
       "price": 21995.0,
       "fuel_type": "Petrol",
@@ -2921,21 +3037,22 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   },
   {
     "model": "listings.listing",
     "pk": 118,
     "fields": {
-      "owner": 2,
+      "owner": null,
       "car_make": 29,
       "car_model": 84,
       "mileage": 100000,
       "year": 2000,
       "engine_size": "1969 cc",
       "transmission": "automatic",
-      "created": "2026-08-13 16:45",
+      "created": "2026-08-13T16:45:00Z",
       "description": "This is a great car!",
       "price": 60000.0,
       "fuel_type": "Petrol",
@@ -2946,7 +3063,8 @@
       "listing_image_3": "Placeholder_00003.jpg",
       "listing_image_4": "Placeholder_00004.jpg",
       "listing_image_5": "Placeholder_00005.jpg",
-      "listing_image_6": "Placeholder_00006.jpg"
+      "listing_image_6": "Placeholder_00006.jpg",
+      "is_approved": true
     }
   }
 ]

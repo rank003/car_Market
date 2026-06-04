@@ -27,12 +27,12 @@
       </div>
 
       <!-- CHANGED: Intro paragraph updated to match new 'Trade/Sell Your Car' tone -->
-      <p class="intro-copy">Ready to trade or sell your car? Fill in the details below — car make, model, fuel type, year, mileage, and price. Your listing will appear on the listings page for buyers to find.</p>
+      <p class="intro-copy">Ready to trade or sell your car? Fill in the details below — car make, model, fuel type, year, mileage, and price. Your listing will be submitted for admin approval before it appears on the listings page.</p>
 
       {% if result %}
         <div class="message-box {% if is_success %}message-success{% else %}message-error{% endif %}">
           {% if is_success %}
-            <strong>Success:</strong> Listing created successfully.
+            <strong>Success:</strong> Listing submitted successfully and is now pending admin approval.
           {% else %}
             <strong>Failure:</strong> {{ result.error|default:"Could not create listing." }}
           {% endif %}

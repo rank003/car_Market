@@ -147,6 +147,7 @@ def _build_listing(data: Dict[str, Any]) -> Tuple[Dict[str, Any], int]:
             "owner_id": str(listing.owner_id) if listing.owner_id else None,
             "car_make_id": listing.car_make_id,
             "car_model_id": listing.car_model_id,
+            "is_approved": listing.is_approved,
         },
     }, 201
 
@@ -155,7 +156,7 @@ def _filtered_listings(request):
     queryset = Listing.objects.select_related(
         "car_make",
         "car_model",
-    ).order_by("-created", "-id")
+    ).filter(is_approved=True).order_by("-created", "-id")
 
     car_make = (request.GET.get("car_make") or "").strip()
     car_model = (request.GET.get("car_model") or "").strip()
@@ -272,6 +273,24 @@ def single_listing(request, listing_id):
         Listing.objects.select_related("car_make", "car_model", "owner"),
         pk=listing_id,
     )
+
+    profile = None
+    if request.user.is_authenticated:
+        profile = Profile.objects.filter(user=request.user).first()
+
+    can_view_unapproved = bool(
+        request.user.is_authenticated
+        and (
+            request.user.is_staff
+            or request.user.is_superuser
+            or (profile and listing.owner_id == profile.id)
+        )
+    )
+
+    if not listing.is_approved and not can_view_unapproved:
+        messages.error(request, "This listing is awaiting admin approval.")
+        return redirect("listings_page")
+
     return render(request, "single-listing.html", {"listing": listing})
 
 
@@ -322,9 +341,13 @@ def edit_listing(request, listing_id):
         listing.seats = _parse_int(request.POST.dict(), "seats")
         listing.torque = _parse_int(request.POST.dict(), "torque")
         listing.description = (request.POST.get("description") or "").strip()
+        listing.is_approved = False
         listing.save()
 
-        messages.success(request, "Listing updated successfully.")
+        messages.success(
+            request,
+            "Listing updated and sent back for admin approval.",
+        )
         return redirect("listings_page")
 
     return render(request, "edit_listing.html", {"listing": listing})
@@ -357,6 +380,12 @@ def delete_listing(request, listing_id):
 def select_vehicle(request, listing_id):
     """Add a vehicle to the logged-in user's selected list (shopping bag)."""
     listing = get_object_or_404(Listing, pk=listing_id)
+
+    if not listing.is_approved:
+        messages.error(request, "You can only select approved vehicles.")
+        next_url = request.POST.get("next") or request.META.get("HTTP_REFERER")
+        return redirect(next_url or "listings_page")
+
     selected_ids = _get_selected_vehicle_ids(request)
     listing_id_str = str(listing.id)
 
@@ -392,6 +421,7 @@ def selected_vehicles_page(request):
     selected_ids = _get_selected_vehicle_ids(request)
     listings = Listing.objects.select_related("car_make", "car_model").filter(
         id__in=selected_ids,
+        is_approved=True,
     )
     by_id = {str(listing.id): listing for listing in listings}
     ordered = [by_id[_id] for _id in selected_ids if _id in by_id]
@@ -400,4 +430,55 @@ def selected_vehicles_page(request):
         request,
         "selected_vehicles.html",
         {"selected_listings": ordered},
+    )
+
+
+@require_http_methods(["GET", "POST"])
+@login_required(login_url="login")
+def approvals_page(request):
+    """Allow admin users to approve submitted listings from a single page."""
+    if not (request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "You do not have permission to access approvals.")
+        return redirect("listings_page")
+
+    if request.method == "POST":
+        raw_ids = request.POST.getlist("listing_ids")
+        valid_ids = []
+
+        for raw_id in raw_ids:
+            try:
+                valid_ids.append(uuid.UUID(str(raw_id)))
+            except (TypeError, ValueError):
+                continue
+
+        if not valid_ids:
+            messages.error(request, "Select at least one submitted car to approve.")
+            return redirect("approvals_page")
+
+        approved_count = Listing.objects.filter(
+            id__in=valid_ids,
+            is_approved=False,
+        ).update(is_approved=True)
+
+        if approved_count:
+            messages.success(
+                request,
+                f"Approved {approved_count} submitted car(s).",
+            )
+        else:
+            messages.info(request, "No pending submissions were selected.")
+
+        return redirect("approvals_page")
+
+    pending_listings = Listing.objects.select_related(
+        "car_make",
+        "car_model",
+        "owner",
+        "owner__user",
+    ).filter(is_approved=False).order_by("-created")
+
+    return render(
+        request,
+        "approvals.html",
+        {"pending_listings": pending_listings},
     )

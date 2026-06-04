@@ -33,6 +33,7 @@ class Listing(models.Model):
     fuel_type = models.CharField(max_length=100, blank=True, default="")
     seats = models.IntegerField(null=True, blank=True)
     torque = models.IntegerField(null=True, blank=True)
+    is_approved = models.BooleanField(default=False)
     listing_image_1 = models.CharField(max_length=255, blank=True, default="listings/default-listing-img.jpg")
     listing_image_2 = models.CharField(max_length=255, blank=True, default="listings/default-listing-img.jpg")
     listing_image_3 = models.CharField(max_length=255, blank=True, default="listings/default-listing-img.jpg")
