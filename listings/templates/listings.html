@@ -2,6 +2,9 @@
 
 {% load static %}
 
+{% with placeholder_img="images/listing-avatar.svg" %}
+{% url 'home' as home_url %}
+
 {% block extra_title %}- Listings{% endblock %}
 
 {% block extra_css %}
@@ -32,8 +35,8 @@
           {% for listing in listings %}
             <article class="listing-card">
               <div class="listing-image-box">
-                <a href="{% url 'home' %}" aria-label="Go to home page">
-                  <img src="https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png" alt="Car placeholder image">
+                <a href="{{ home_url }}" aria-label="Go to home page">
+                  <img src="{{ listing.primary_image_url }}" alt="Car image for {{ listing.car_make }} {{ listing.car_model }}">
                 </a>
               </div>
 
@@ -88,7 +91,7 @@
 
                   <div class="modal-body vehicle-modal-body">
                     <div class="vehicle-modal-image-wrap">
-                      <img src="https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png" alt="{{ listing.car_make }} {{ listing.car_model }}">
+                      <img src="{{ listing.primary_image_url }}" alt="{{ listing.car_make }} {{ listing.car_model }}">
                     </div>
 
                     <div class="vehicle-modal-grid">
@@ -171,3 +174,5 @@
     </main>
   </div>
 {% endblock %}
+
+{% endwith %}

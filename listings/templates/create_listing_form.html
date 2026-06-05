@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% with placeholder_img="images/listing-placeholder.svg" %}
+
 <!-- CHANGED: Page tab title updated from 'Create Listing' to 'Trade/Sell Your Car' -->
 {% block extra_title %}- Trade/Sell Your Car{% endblock %}
 
@@ -21,25 +23,41 @@
   <div class="listings-app form-page-body">
     <div class="form-card">
       <div class="form-card-head">
-        <!-- CHANGED: Heading updated from 'Create Listing' to 'Trade/Sell Your Car' -->
-        <h1>Trade/Sell Your Car</h1>
-        <a class="back-link" href="{% url 'listings_page' %}">View Listings</a>
+        {% if is_admin_review %}
+          <h1>Review Submission</h1>
+        {% else %}
+          <h1>Trade/Sell Your Car</h1>
+        {% endif %}
+        <a class="back-link" href="{% if back_url %}{% url back_url %}{% else %}{% url 'listings_page' %}{% endif %}">{{ back_label|default:"View Listings" }}</a>
       </div>
 
-      <!-- CHANGED: Intro paragraph updated to match new 'Trade/Sell Your Car' tone -->
-      <p class="intro-copy">Ready to trade or sell your car? Fill in the details below — car make, model, fuel type, year, mileage, and price. Your listing will be submitted for admin approval before it appears on the listings page.</p>
+      {% if is_admin_review %}
+        <p class="intro-copy">Review the user submission, edit any details, update images if needed, and approve it to publish the listing.</p>
+      {% else %}
+        <p class="intro-copy">Ready to trade or sell your car? Fill in the details below — car make, model, fuel type, year, mileage, price, and images. Your listing will be submitted for admin approval before it appears on the listings page.</p>
+      {% endif %}
+
+      {% if form_error %}
+        <div class="message-box message-error">
+          <strong>Failure:</strong> {{ form_error }}
+        </div>
+      {% endif %}
 
       {% if result %}
         <div class="message-box {% if is_success %}message-success{% else %}message-error{% endif %}">
           {% if is_success %}
-            <strong>Success:</strong> Listing submitted successfully and is now pending admin approval.
+            {% if is_admin_submission %}
+              <strong>Success:</strong> Listing created and published successfully.
+            {% else %}
+              <strong>Success:</strong> Listing submitted successfully and is now pending admin approval.
+            {% endif %}
           {% else %}
             <strong>Failure:</strong> {{ result.error|default:"Could not create listing." }}
           {% endif %}
         </div>
       {% endif %}
 
-      <form method="post" class="create-listing-grid">
+      <form method="post" class="create-listing-grid" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="field-block">
@@ -102,10 +120,79 @@
           <textarea id="description" name="description">{{ form_data.description|default:'' }}</textarea>
         </div>
 
+        <div class="field-block full-span">
+          <label>Current Images</label>
+          {% if listing %}
+            <div class="current-images-grid">
+              <div class="current-image-item">
+                <img src="{% if listing and listing.listing_image_1 and listing.listing_image_1 != 'listings/default-listing-img.jpg' and listing.listing_image_1 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_1 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 1">
+              </div>
+              <div class="current-image-item">
+                <img src="{% if listing and listing.listing_image_2 and listing.listing_image_2 != 'listings/default-listing-img.jpg' and listing.listing_image_2 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_2 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 2">
+              </div>
+              <div class="current-image-item">
+                <img src="{% if listing and listing.listing_image_3 and listing.listing_image_3 != 'listings/default-listing-img.jpg' and listing.listing_image_3 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_3 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 3">
+              </div>
+              <div class="current-image-item">
+                <img src="{% if listing and listing.listing_image_4 and listing.listing_image_4 != 'listings/default-listing-img.jpg' and listing.listing_image_4 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_4 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 4">
+              </div>
+              <div class="current-image-item">
+                <img src="{% if listing and listing.listing_image_5 and listing.listing_image_5 != 'listings/default-listing-img.jpg' and listing.listing_image_5 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_5 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 5">
+              </div>
+              <div class="current-image-item">
+                <img src="{% if listing and listing.listing_image_6 and listing.listing_image_6 != 'listings/default-listing-img.jpg' and listing.listing_image_6 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_6 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 6">
+              </div>
+            </div>
+          {% else %}
+            <p class="text-muted mb-2">Upload up to 6 images for the vehicle.</p>
+          {% endif %}
+        </div>
+
+        <div class="field-block">
+          <label for="listing_image_1">Image 1</label>
+          <input id="listing_image_1" name="listing_image_1" type="file" accept="image/*">
+        </div>
+
+        <div class="field-block">
+          <label for="listing_image_2">Image 2</label>
+          <input id="listing_image_2" name="listing_image_2" type="file" accept="image/*">
+        </div>
+
+        <div class="field-block">
+          <label for="listing_image_3">Image 3</label>
+          <input id="listing_image_3" name="listing_image_3" type="file" accept="image/*">
+        </div>
+
+        <div class="field-block">
+          <label for="listing_image_4">Image 4</label>
+          <input id="listing_image_4" name="listing_image_4" type="file" accept="image/*">
+        </div>
+
+        <div class="field-block">
+          <label for="listing_image_5">Image 5</label>
+          <input id="listing_image_5" name="listing_image_5" type="file" accept="image/*">
+        </div>
+
+        <div class="field-block">
+          <label for="listing_image_6">Image 6</label>
+          <input id="listing_image_6" name="listing_image_6" type="file" accept="image/*">
+        </div>
+
+        {% if show_approval_checkbox %}
+          <div class="field-block full-span">
+            <label class="approval-check-wrap">
+              <input type="checkbox" name="approve_listing" {% if approval_checked %}checked{% endif %}>
+              Approve this listing after saving changes
+            </label>
+          </div>
+        {% endif %}
+
         <div class="field-block full-span form-actions">
-          <button type="submit">Create Listing</button>
+          <button type="submit">{{ submit_label|default:"Create Listing" }}</button>
         </div>
       </form>
     </div>
   </div>
 {% endblock %}
+
+{% endwith %}

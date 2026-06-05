@@ -238,6 +238,42 @@
   margin-bottom: 18px;
 }
 
+.listings-app .current-images-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.listings-app .current-image-item {
+  border: 1px solid #d7dee6;
+  background: #f8fafc;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.listings-app .current-image-item img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+}
+
+.listings-app .current-image-placeholder {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.listings-app .approval-check-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  margin: 0;
+}
+
 .listings-app .message-success {
   background: #e9f8ef;
   border: 1px solid #a3dcb3;

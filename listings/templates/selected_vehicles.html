@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% with placeholder_img="images/listing-placeholder.svg" %}
+
 {% block extra_title %}- Selected Vehicles{% endblock %}
 
 {% block extra_css %}
@@ -26,7 +28,7 @@
           {% for listing in selected_listings %}
             <article class="listing-card">
               <div class="listing-image-box">
-                <img src="https://res.cloudinary.com/dutukkel2/image/upload/v1776964548/Placeholder_00004_mfxr3e.png" alt="{{ listing.car_make }} {{ listing.car_model }}">
+                <img src="{{ listing.primary_image_url }}" alt="{{ listing.car_make }} {{ listing.car_model }}">
               </div>
               <div class="listing-card-body">
                 <h3>{{ listing.car_make }} {{ listing.car_model }}</h3>
@@ -56,3 +58,5 @@
   </main>
 </div>
 {% endblock %}
+
+{% endwith %}

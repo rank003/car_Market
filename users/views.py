@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 
-from .models import Profile
+from .models import Profile, Notification
 from .forms import LoginForm, ProfileForm, RegisterForm
 
 
@@ -140,3 +140,33 @@ def delete_profile(request):
 
     messages.success(request, 'Your account and profile have been deleted.')
     return redirect('home')
+
+
+@login_required(login_url='login')
+def inbox_view(request):
+    profile, _ = Profile.objects.get_or_create(
+        user=request.user,
+        defaults={
+            'username': request.user.username,
+            'email': request.user.email,
+            'name': request.user.get_full_name(),
+        },
+    )
+
+    notifications = profile.notifications.all()
+    unread_count = notifications.filter(is_read=False).count()
+
+    if request.method == 'POST':
+        profile.notifications.filter(is_read=False).update(is_read=True)
+        messages.success(request, 'All inbox messages marked as read.')
+        return redirect('inbox')
+
+    return render(
+        request,
+        'users/inbox.html',
+        {
+            'profile': profile,
+            'notifications': notifications,
+            'unread_count': unread_count,
+        },
+    )

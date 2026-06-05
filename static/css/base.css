@@ -27,6 +27,18 @@ body {
     width: fit-content;
 }
 
+.brand-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+}
+
+.brand-logo-img {
+    width: 280px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 .shop-now-button {
     background: black;
     color: white;

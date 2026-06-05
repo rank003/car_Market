@@ -39,14 +39,16 @@
     {% block extra_js %} 
     {% endblock %}
 
-    <title>CarMarket {% block extra_title %}{% endblock %}</title>
+    <title>Backyard CarMarket {% block extra_title %}{% endblock %}</title>
   </head>
   <body>
     <header class="container-fluid fixed-top">
       <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
           <a href="{% url 'home' %}" class="nav-link main-logo-link">
-            <h2 class="logo-font text-black my-0"><strong>Arti's</strong> CarMarket</h2>
+            <div class="brand-logo-wrap">
+              <img src="{% static 'images/artis-market-logo.svg' %}" alt="Backyard CarMarket" class="brand-logo-img">
+            </div>
           </a>
         </div>
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
@@ -86,6 +88,7 @@
                 <a href="" class="dropdown-item">Car Management</a>
                 {% endif %}
                 <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                <a href="{% url 'inbox' %}" class="dropdown-item">Inbox</a>
                 <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                 {% else %}
                 <a href="{% url 'register' %}" class="dropdown-item">Sign Up</a>

@@ -1,0 +1,16 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Vehicle placeholder image</title>
+  <desc id="desc">Simple placeholder illustration for car listings with a clean avatar-style icon.</desc>
+  <rect width="640" height="480" rx="28" fill="#EEF2F7"/>
+  <rect x="56" y="56" width="528" height="368" rx="24" fill="#FFFFFF" stroke="#D4DCE6" stroke-width="4"/>
+  <circle cx="320" cy="200" r="58" fill="#D9E2EC"/>
+  <path d="M262 326C262 293.967 288.967 268 321 268C353.033 268 380 293.967 380 326V340H262V326Z" fill="#C5D3E0"/>
+  <path d="M238 319H402C410.837 319 418 326.163 418 335V350H222V335C222 326.163 229.163 319 238 319Z" fill="#A8B9CA"/>
+  <circle cx="264" cy="352" r="26" fill="#6B7C8F"/>
+  <circle cx="376" cy="352" r="26" fill="#6B7C8F"/>
+  <circle cx="264" cy="352" r="11" fill="#EAF0F5"/>
+  <circle cx="376" cy="352" r="11" fill="#EAF0F5"/>
+  <path d="M280 197C280 174.356 298.356 156 321 156C343.644 156 362 174.356 362 197C362 219.644 343.644 238 321 238C298.356 238 280 219.644 280 197Z" fill="#1F4B3A"/>
+  <path d="M320 160C331 166 334 181 322 190C310 181 313 166 320 160Z" fill="#A7D36A"/>
+  <path d="M321 200V228" stroke="#F4E8D0" stroke-width="5" stroke-linecap="round"/>
+</svg>

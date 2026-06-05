@@ -1,0 +1,16 @@
+<svg width="640" height="480" viewBox="0 0 640 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Listing avatar placeholder</title>
+  <desc id="desc">Clean avatar-style placeholder for listings with no uploaded image.</desc>
+  <rect width="640" height="480" rx="28" fill="#F3F6FA"/>
+  <rect x="56" y="56" width="528" height="368" rx="24" fill="#FFFFFF" stroke="#D7E0EA" stroke-width="4"/>
+  <circle cx="320" cy="186" r="60" fill="#D9E2EC"/>
+  <path d="M248 330C248 289.12 281.12 256 322 256C362.88 256 396 289.12 396 330V346H248V330Z" fill="#BFCBDD"/>
+  <circle cx="320" cy="186" r="28" fill="#1F4B3A"/>
+  <path d="M320 166C330 172 333 184 321 192C309 184 312 172 320 166Z" fill="#A7D36A"/>
+  <path d="M320 214V240" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+  <path d="M214 346H426C434.837 346 442 353.163 442 362V372H198V362C198 353.163 205.163 346 214 346Z" fill="#97A9BA"/>
+  <circle cx="252" cy="372" r="28" fill="#617487"/>
+  <circle cx="388" cy="372" r="28" fill="#617487"/>
+  <circle cx="252" cy="372" r="11" fill="#EAF0F5"/>
+  <circle cx="388" cy="372" r="11" fill="#EAF0F5"/>
+</svg>

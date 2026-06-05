@@ -23,23 +23,107 @@
 #     return render(request, "single-listing.html", context)
 
 import json
+import os
 import uuid
 from typing import Any, Dict, Optional, Tuple
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages import get_messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from users.models import Profile
+from users.models import Notification
 from .models import CarMake, CarModel, Listing
 
 
 SESSION_KEY_SELECTED_VEHICLES = "selected_vehicle_ids"
+IMAGE_FIELDS = (
+    "listing_image_1",
+    "listing_image_2",
+    "listing_image_3",
+    "listing_image_4",
+    "listing_image_5",
+    "listing_image_6",
+)
+PLACEHOLDER_IMAGE = "listings_images/Placeholder_00001.png"
+
+
+def _store_uploaded_image(uploaded_file) -> Optional[str]:
+    if not uploaded_file:
+        return None
+
+    storage = FileSystemStorage(location=settings.MEDIA_ROOT, base_url=settings.MEDIA_URL)
+    base_name, ext = os.path.splitext(uploaded_file.name)
+    safe_name = f"listings/uploads/{uuid.uuid4().hex}_{base_name[:40]}{ext}"
+    return storage.save(safe_name, uploaded_file)
+
+
+def _listing_image_url(image_name: Optional[str]) -> str:
+    if image_name:
+        normalized = str(image_name).strip()
+        if normalized and normalized not in {
+            "listings/default-listing-img.jpg",
+            "Placeholder_00001.jpg",
+        }:
+            candidate = os.path.join(settings.MEDIA_ROOT, normalized)
+            if os.path.exists(candidate):
+                return f"{settings.MEDIA_URL}{normalized}"
+
+    return f"{settings.MEDIA_URL}{PLACEHOLDER_IMAGE}"
+
+
+def _attach_primary_image_url(listing: Listing) -> Listing:
+    listing.primary_image_url = _listing_image_url(listing.listing_image_1)
+    return listing
+
+
+def _resolve_listing_image(data: Dict[str, Any], files, field_name: str, fallback: str) -> str:
+    uploaded = files.get(field_name) if files else None
+    stored_name = _store_uploaded_image(uploaded)
+    if stored_name:
+        return stored_name
+
+    value = (data.get(field_name) or "").strip()
+    if value:
+        return value
+
+    return fallback
+
+
+def _apply_listing_fields(listing: Listing, data: Dict[str, Any], files, *, keep_existing_images: bool = False) -> None:
+    listing.car_make, _, listing.car_model, _ = _get_or_create_make_model(
+        (data.get("car_make") or "").strip(),
+        (data.get("car_model") or "").strip(),
+    )
+    listing.mileage = _parse_int(data, "mileage")
+    listing.year = _parse_int(data, "year")
+    listing.engine_size = (data.get("engine_size") or "").strip()
+    listing.transmission = (data.get("transmission") or "").strip()
+    listing.description = (data.get("description") or "").strip()
+    listing.price = _parse_int(data, "price")
+    listing.fuel_type = (data.get("fuel_type") or "").strip()
+    listing.seats = _parse_int(data, "seats")
+    listing.torque = _parse_int(data, "torque")
+
+    for field_name in IMAGE_FIELDS:
+        current_value = getattr(listing, field_name)
+        if keep_existing_images:
+            new_value = _resolve_listing_image(data, files, field_name, current_value)
+        else:
+            new_value = _resolve_listing_image(
+                data,
+                files,
+                field_name,
+                "listings/default-listing-img.jpg",
+            )
+        setattr(listing, field_name, new_value)
 
 
 def _payload_from_request(request) -> Dict[str, Any]:
@@ -83,7 +167,7 @@ def _get_or_create_make_model(
     return car_make, make_created, car_model, model_created
 
 
-def _build_listing(data: Dict[str, Any]) -> Tuple[Dict[str, Any], int]:
+def _build_listing(data: Dict[str, Any], files=None) -> Tuple[Dict[str, Any], int]:
     make_name = (data.get("car_make") or "").strip()
     model_name = (data.get("car_model") or "").strip()
 
@@ -105,24 +189,9 @@ def _build_listing(data: Dict[str, Any]) -> Tuple[Dict[str, Any], int]:
             username=owner_username,
         )
 
-    listing = Listing.objects.create(
-        owner=owner,
-        car_make=car_make,
-        car_model=car_model,
-        mileage=_parse_int(data, "mileage"),
-        year=_parse_int(data, "year"),
-        engine_size=(data.get("engine_size") or "").strip(),
-        transmission=(data.get("transmission") or "").strip(),
-        description=(data.get("description") or "").strip(),
-        price=_parse_int(data, "price"),
-        fuel_type=(data.get("fuel_type") or "").strip(),
-        seats=_parse_int(data, "seats"),
-        torque=_parse_int(data, "torque"),
-        listing_image_1=(
-            data.get("listing_image_1")
-            or "listings/default-listing-img.jpg"
-        ).strip(),
-    )
+    listing = Listing(owner=owner, car_make=car_make, car_model=car_model)
+    _apply_listing_fields(listing, data, files, keep_existing_images=False)
+    listing.save()
 
     return {
         "ok": True,
@@ -197,12 +266,39 @@ def _save_selected_vehicle_ids(request, ids):
     request.session.modified = True
 
 
+def _send_submission_notification(listing: Listing, status: str) -> None:
+    profile = listing.owner
+    if not profile:
+        return
+
+    if status == "approved":
+        subject = "Your car submission was accepted"
+        message = (
+            f"Your submission for {listing.car_make} {listing.car_model} was accepted by the admin and is now live on the site."
+        )
+    elif status == "rejected":
+        subject = "Your car submission was rejected"
+        message = (
+            f"Your submission for {listing.car_make} {listing.car_model} was rejected by the admin."
+        )
+    else:
+        return
+
+    Notification.objects.create(
+        profile=profile,
+        subject=subject,
+        message=message,
+    )
+
+
 @require_http_methods(["GET"])
 def listings_page(request):
     queryset = _filtered_listings(request)
     paginator = Paginator(queryset, 6)
     page_number = request.GET.get("page")
     listings = paginator.get_page(page_number)
+    for listing in listings:
+        _attach_primary_image_url(listing)
 
     fuel_types = (
         Listing.objects.exclude(fuel_type="")
@@ -234,12 +330,25 @@ def create_listing_form(request):
     if request.method == "POST":
         data = request.POST.dict()
         data["owner_username"] = profile.username or request.user.username
-        payload, status = _build_listing(data)
+        payload, status = _build_listing(data, request.FILES)
+
+        if (
+            status == 201
+            and payload.get("ok")
+            and (request.user.is_staff or request.user.is_superuser)
+        ):
+            listing_id = payload.get("listing", {}).get("id")
+            if listing_id:
+                Listing.objects.filter(pk=listing_id).update(is_approved=True)
+
         context = {
             "result": payload,
             "is_success": status == 201,
             "status_code": status,
             "form_data": data,
+            "is_admin_submission": bool(
+                request.user.is_staff or request.user.is_superuser
+            ),
         }
         return render(
             request,
@@ -262,7 +371,7 @@ def create_listing_form(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def create_listing_with_make_model(request):
-    payload, status = _build_listing(_payload_from_request(request))
+    payload, status = _build_listing(_payload_from_request(request), request.FILES)
     return JsonResponse(payload, status=status)
 
 
@@ -291,6 +400,7 @@ def single_listing(request, listing_id):
         messages.error(request, "This listing is awaiting admin approval.")
         return redirect("listings_page")
 
+    _attach_primary_image_url(listing)
     return render(request, "single-listing.html", {"listing": listing})
 
 
@@ -328,19 +438,8 @@ def edit_listing(request, listing_id):
                 },
             )
 
-        car_make, _, car_model, _ = _get_or_create_make_model(make_name, model_name)
-
-        listing.car_make = car_make
-        listing.car_model = car_model
-        listing.fuel_type = (request.POST.get("fuel_type") or "").strip()
-        listing.year = _parse_int(request.POST.dict(), "year")
-        listing.mileage = _parse_int(request.POST.dict(), "mileage")
-        listing.price = _parse_int(request.POST.dict(), "price")
-        listing.engine_size = (request.POST.get("engine_size") or "").strip()
-        listing.transmission = (request.POST.get("transmission") or "").strip()
-        listing.seats = _parse_int(request.POST.dict(), "seats")
-        listing.torque = _parse_int(request.POST.dict(), "torque")
-        listing.description = (request.POST.get("description") or "").strip()
+        data = request.POST.dict()
+        _apply_listing_fields(listing, data, request.FILES, keep_existing_images=True)
         listing.is_approved = False
         listing.save()
 
@@ -351,6 +450,81 @@ def edit_listing(request, listing_id):
         return redirect("listings_page")
 
     return render(request, "edit_listing.html", {"listing": listing})
+
+
+@require_http_methods(["GET", "POST"])
+@login_required(login_url="login")
+def review_submission(request, listing_id):
+    """Open a pending submission in the create listing form for admin review."""
+    if not (request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "You do not have permission to review submissions.")
+        return redirect("listings_page")
+
+    listing = get_object_or_404(Listing, pk=listing_id)
+
+    if request.method == "POST":
+        make_name = (request.POST.get("car_make") or "").strip()
+        model_name = (request.POST.get("car_model") or "").strip()
+
+        if not make_name or not model_name:
+            return render(
+                request,
+                "create_listing_form.html",
+                {
+                    "listing": listing,
+                    "form_data": request.POST.dict(),
+                    "is_admin_review": True,
+                    "form_error": "Car make and car model are required.",
+                    "submit_label": "Edit & Approve",
+                    "back_url": "approvals_page",
+                    "back_label": "Back to Approvals",
+                    "show_approval_checkbox": True,
+                },
+            )
+
+        data = request.POST.dict()
+        _apply_listing_fields(listing, data, request.FILES, keep_existing_images=True)
+        listing.is_approved = request.POST.get("approve_listing") == "on"
+        listing.save()
+
+        if listing.is_approved:
+            _send_submission_notification(listing, "approved")
+
+        messages.success(
+            request,
+            "Submission updated and approved." if listing.is_approved else "Submission updated and saved without approval.",
+        )
+        return redirect("approvals_page")
+
+    form_data = {
+        "car_make": listing.car_make.name if listing.car_make else "",
+        "car_model": listing.car_model.name if listing.car_model else "",
+        "fuel_type": listing.fuel_type,
+        "year": listing.year,
+        "mileage": listing.mileage,
+        "price": listing.price,
+        "engine_size": listing.engine_size,
+        "transmission": listing.transmission,
+        "seats": listing.seats,
+        "torque": listing.torque,
+        "description": listing.description,
+        "owner_username": listing.owner.username if listing.owner else "",
+    }
+
+    return render(
+        request,
+        "create_listing_form.html",
+        {
+            "listing": listing,
+            "form_data": form_data,
+            "is_admin_review": True,
+            "submit_label": "Edit & Approve",
+            "back_url": "approvals_page",
+            "back_label": "Back to Approvals",
+            "show_approval_checkbox": True,
+            "approval_checked": True,
+        },
+    )
 
 
 @require_http_methods(["GET", "POST"])
@@ -425,6 +599,8 @@ def selected_vehicles_page(request):
     )
     by_id = {str(listing.id): listing for listing in listings}
     ordered = [by_id[_id] for _id in selected_ids if _id in by_id]
+    for listing in ordered:
+        _attach_primary_image_url(listing)
 
     return render(
         request,
@@ -441,44 +617,60 @@ def approvals_page(request):
         messages.error(request, "You do not have permission to access approvals.")
         return redirect("listings_page")
 
-    if request.method == "POST":
-        raw_ids = request.POST.getlist("listing_ids")
-        valid_ids = []
-
-        for raw_id in raw_ids:
-            try:
-                valid_ids.append(uuid.UUID(str(raw_id)))
-            except (TypeError, ValueError):
-                continue
-
-        if not valid_ids:
-            messages.error(request, "Select at least one submitted car to approve.")
-            return redirect("approvals_page")
-
-        approved_count = Listing.objects.filter(
-            id__in=valid_ids,
-            is_approved=False,
-        ).update(is_approved=True)
-
-        if approved_count:
-            messages.success(
-                request,
-                f"Approved {approved_count} submitted car(s).",
-            )
-        else:
-            messages.info(request, "No pending submissions were selected.")
-
-        return redirect("approvals_page")
-
-    pending_listings = Listing.objects.select_related(
+    pending_queryset = Listing.objects.select_related(
         "car_make",
         "car_model",
         "owner",
         "owner__user",
-    ).filter(is_approved=False).order_by("-created")
+    ).filter(
+        is_approved=False,
+        owner__isnull=False,
+        owner__user__isnull=False,
+        owner__user__is_staff=False,
+        owner__user__is_superuser=False,
+    ).order_by("-created")
+
+    paginator = Paginator(pending_queryset, 6)
+    page_number = request.GET.get("page")
+    pending_listings = paginator.get_page(page_number)
+    for listing in pending_listings:
+        _attach_primary_image_url(listing)
 
     return render(
         request,
         "approvals.html",
         {"pending_listings": pending_listings},
     )
+
+
+@require_http_methods(["POST"])
+@login_required(login_url="login")
+def approve_submission(request, listing_id):
+    """Approve a single user-submitted listing."""
+    if not (request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "You do not have permission to approve submissions.")
+        return redirect("listings_page")
+
+    listing = get_object_or_404(Listing, pk=listing_id)
+    _attach_primary_image_url(listing)
+    listing.is_approved = True
+    listing.save(update_fields=["is_approved"])
+    _send_submission_notification(listing, "approved")
+    messages.success(request, "Submission approved successfully.")
+    return redirect("approvals_page")
+
+
+@require_http_methods(["POST"])
+@login_required(login_url="login")
+def reject_submission(request, listing_id):
+    """Reject a single user-submitted listing by removing it."""
+    if not (request.user.is_staff or request.user.is_superuser):
+        messages.error(request, "You do not have permission to reject submissions.")
+        return redirect("listings_page")
+
+    listing = get_object_or_404(Listing, pk=listing_id)
+    _attach_primary_image_url(listing)
+    _send_submission_notification(listing, "rejected")
+    listing.delete()
+    messages.success(request, "Submission rejected and removed.")
+    return redirect("approvals_page")
