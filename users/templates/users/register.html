@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block extra_title %}- Register{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -18,50 +24,67 @@
                 <h2 class="auth-title">Create Your Account</h2>
                 <p class="auth-subtitle">Sign up to trade/sell your car and manage your listings.</p>
 
-                {% if form.non_field_errors %}
-                    <div class="auth-alert auth-alert-error">
-                        {{ form.non_field_errors }}
+                {% if register_success %}
+                    <div class="auth-alert auth-alert-success" id="auth-success-banner">
+                        ✅ Account created successfully! Redirecting to your dashboard&hellip;
                     </div>
+                    <script>
+                        setTimeout(function () {
+                            window.location.href = "{{ redirect_url|default:'/' }}";
+                        }, 1800);
+                    </script>
+                {% else %}
+                    {% if form.errors %}
+                        <div class="auth-alert auth-alert-error">
+                            ⚠️ Please fix the errors below before continuing.
+                        </div>
+                    {% endif %}
+
+                    {% if form.non_field_errors %}
+                        <div class="auth-alert auth-alert-error">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <form method="POST" class="auth-form">
+                        {% csrf_token %}
+
+                        <div class="auth-field-wrap">
+                            <label for="{{ form.name.id_for_label }}" class="auth-label">Name</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}<small class="auth-error">{{ form.name.errors|striptags }}</small>{% endif %}
+                        </div>
+
+                        <div class="auth-field-wrap">
+                            <label for="{{ form.username.id_for_label }}" class="auth-label">Username</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}<small class="auth-error">{{ form.username.errors|striptags }}</small>{% endif %}
+                        </div>
+
+                        <div class="auth-field-wrap">
+                            <label for="{{ form.email.id_for_label }}" class="auth-label">Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}<small class="auth-error">{{ form.email.errors|striptags }}</small>{% endif %}
+                        </div>
+
+                        <div class="auth-field-wrap">
+                            <label for="{{ form.password1.id_for_label }}" class="auth-label">Password</label>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}<small class="auth-error">{{ form.password1.errors|striptags }}</small>{% endif %}
+                        </div>
+
+                        <div class="auth-field-wrap">
+                            <label for="{{ form.password2.id_for_label }}" class="auth-label">Confirm Password</label>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}<small class="auth-error">{{ form.password2.errors|striptags }}</small>{% endif %}
+                        </div>
+
+                        <div class="auth-actions">
+                            <button type="submit" class="btn auth-btn-primary">Sign Up</button>
+                            <a href="{% url 'login' %}" class="btn auth-btn-secondary">Back to Login</a>
+                        </div>
+                    </form>
                 {% endif %}
-
-                <form method="POST" class="auth-form">
-                    {% csrf_token %}
-
-                    <div class="auth-field-wrap">
-                        <label for="{{ form.name.id_for_label }}" class="auth-label">Name</label>
-                        {{ form.name }}
-                        {% if form.name.errors %}<small class="auth-error">{{ form.name.errors|striptags }}</small>{% endif %}
-                    </div>
-
-                    <div class="auth-field-wrap">
-                        <label for="{{ form.username.id_for_label }}" class="auth-label">Username</label>
-                        {{ form.username }}
-                        {% if form.username.errors %}<small class="auth-error">{{ form.username.errors|striptags }}</small>{% endif %}
-                    </div>
-
-                    <div class="auth-field-wrap">
-                        <label for="{{ form.email.id_for_label }}" class="auth-label">Email</label>
-                        {{ form.email }}
-                        {% if form.email.errors %}<small class="auth-error">{{ form.email.errors|striptags }}</small>{% endif %}
-                    </div>
-
-                    <div class="auth-field-wrap">
-                        <label for="{{ form.password1.id_for_label }}" class="auth-label">Password</label>
-                        {{ form.password1 }}
-                        {% if form.password1.errors %}<small class="auth-error">{{ form.password1.errors|striptags }}</small>{% endif %}
-                    </div>
-
-                    <div class="auth-field-wrap">
-                        <label for="{{ form.password2.id_for_label }}" class="auth-label">Confirm Password</label>
-                        {{ form.password2 }}
-                        {% if form.password2.errors %}<small class="auth-error">{{ form.password2.errors|striptags }}</small>{% endif %}
-                    </div>
-
-                    <div class="auth-actions">
-                        <button type="submit" class="btn auth-btn-primary">Sign Up</button>
-                        <a href="{% url 'login' %}" class="btn auth-btn-secondary">Back to Login</a>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

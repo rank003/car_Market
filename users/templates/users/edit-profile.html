@@ -14,11 +14,11 @@
 <section class="container py-5 mt-5">
 	<div class="row justify-content-center">
 		<div class="col-12 col-md-9 col-lg-7">
-			<h2 class="mb-4">Edit Profile</h2>
+			<h2 class="mb-4">{{ page_title|default:'Edit Profile' }}</h2>
 			<form method="POST">
 				{% csrf_token %}
 				{{ form.as_p }}
-				<button type="submit" class="btn btn-dark">Save Changes</button>
+				<button type="submit" class="btn btn-dark">{{ submit_label|default:'Save Changes' }}</button>
 				<a href="{% url 'profile' %}" class="btn btn-outline-secondary ml-2">Cancel</a>
 			</form>
 		</div>

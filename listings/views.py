@@ -33,6 +33,7 @@ from django.contrib.messages import get_messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -40,7 +41,7 @@ from django.views.decorators.http import require_http_methods
 
 from users.models import Profile
 from users.models import Notification
-from .models import CarMake, CarModel, Listing
+from .models import CarMake, CarModel, Listing, FuelType, TransmissionType, EngineSize, SeatCount, TorqueValue, CarType
 
 
 SESSION_KEY_SELECTED_VEHICLES = "selected_vehicle_ids"
@@ -110,7 +111,9 @@ def _apply_listing_fields(listing: Listing, data: Dict[str, Any], files, *, keep
     listing.price = _parse_int(data, "price")
     listing.fuel_type = (data.get("fuel_type") or "").strip()
     listing.seats = _parse_int(data, "seats")
-    listing.torque = _parse_int(data, "torque")
+    listing.torque = _parse_torque_int(data.get("torque"))
+    car_type_name = (data.get("car_type") or "").strip()
+    listing.car_type = CarType.objects.filter(name__iexact=car_type_name).first() if car_type_name else None
 
     for field_name in IMAGE_FIELDS:
         current_value = getattr(listing, field_name)
@@ -145,6 +148,45 @@ def _parse_int(data: Dict[str, Any], key: str) -> Optional[int]:
         return None
 
 
+def _parse_torque_int(value: Any) -> Optional[int]:
+    """Parse torque from either raw integer values or labels like '150 Nm'."""
+    if value in (None, ""):
+        return None
+
+    raw = str(value).strip()
+    if not raw:
+        return None
+
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        digits = "".join(ch for ch in raw if ch.isdigit())
+        if not digits:
+            return None
+        try:
+            return int(digits)
+        except (TypeError, ValueError):
+            return None
+
+
+def _get_choice_options() -> Dict[str, list]:
+    """Retrieve all choice options for form dropdowns."""
+    torque_values = []
+    for item in TorqueValue.objects.values_list("name", flat=True).order_by("name"):
+        parsed = _parse_torque_int(item)
+        if parsed is not None:
+            torque_values.append({"value": parsed, "label": item})
+
+    return {
+        "fuel_types": list(FuelType.objects.values_list("name", flat=True).order_by("name")),
+        "transmission_types": list(TransmissionType.objects.values_list("name", flat=True).order_by("name")),
+        "engine_sizes": list(EngineSize.objects.values_list("name", flat=True).order_by("name")),
+        "seat_counts": list(SeatCount.objects.values_list("count", flat=True).order_by("count")),
+        "torque_values": torque_values,
+        "car_types": list(CarType.objects.values_list("name", flat=True).order_by("name")),
+    }
+
+
 def _get_or_create_make_model(
     make_name: str,
     model_name: str,
@@ -167,7 +209,11 @@ def _get_or_create_make_model(
     return car_make, make_created, car_model, model_created
 
 
-def _build_listing(data: Dict[str, Any], files=None) -> Tuple[Dict[str, Any], int]:
+def _build_listing(
+    data: Dict[str, Any],
+    files=None,
+    owner_profile: Optional[Profile] = None,
+) -> Tuple[Dict[str, Any], int]:
     make_name = (data.get("car_make") or "").strip()
     model_name = (data.get("car_model") or "").strip()
 
@@ -181,13 +227,15 @@ def _build_listing(data: Dict[str, Any], files=None) -> Tuple[Dict[str, Any], in
         _get_or_create_make_model(make_name, model_name)
     )
 
-    owner = None
+    owner = owner_profile
     owner_created = False
     owner_username = (data.get("owner_username") or "").strip()
-    if owner_username:
-        owner, owner_created = Profile.objects.get_or_create(
-            username=owner_username,
-        )
+    if owner is None and owner_username:
+        owner = Profile.objects.filter(username=owner_username, user__isnull=False).first()
+        if owner is None:
+            owner, owner_created = Profile.objects.get_or_create(
+                username=owner_username,
+            )
 
     listing = Listing(owner=owner, car_make=car_make, car_model=car_model)
     _apply_listing_fields(listing, data, files, keep_existing_images=False)
@@ -227,6 +275,7 @@ def _filtered_listings(request):
         "car_model",
     ).filter(is_approved=True).order_by("-created", "-id")
 
+    q = (request.GET.get("q") or "").strip()
     car_make = (request.GET.get("car_make") or "").strip()
     car_model = (request.GET.get("car_model") or "").strip()
     fuel_type = (request.GET.get("fuel_type") or "").strip()
@@ -234,6 +283,11 @@ def _filtered_listings(request):
     mileage = (request.GET.get("mileage") or "").strip()
     price = (request.GET.get("price") or "").strip()
 
+    if q:
+        queryset = queryset.filter(
+            Q(car_make__name__icontains=q)
+            | Q(car_model__name__icontains=q)
+        )
     if car_make:
         queryset = queryset.filter(car_make__name__icontains=car_make)
     if car_model:
@@ -270,6 +324,14 @@ def _send_submission_notification(listing: Listing, status: str) -> None:
     profile = listing.owner
     if not profile:
         return
+
+    if profile.user_id is None and profile.username:
+        linked_profile = Profile.objects.filter(
+            username=profile.username,
+            user__isnull=False,
+        ).first()
+        if linked_profile:
+            profile = linked_profile
 
     if status == "approved":
         subject = "Your car submission was accepted"
@@ -327,10 +389,16 @@ def create_listing_form(request):
         },
     )
 
+    choice_options = _get_choice_options()
+
     if request.method == "POST":
         data = request.POST.dict()
         data["owner_username"] = profile.username or request.user.username
-        payload, status = _build_listing(data, request.FILES)
+        payload, status = _build_listing(
+            data,
+            request.FILES,
+            owner_profile=profile,
+        )
 
         if (
             status == 201
@@ -349,6 +417,7 @@ def create_listing_form(request):
             "is_admin_submission": bool(
                 request.user.is_staff or request.user.is_superuser
             ),
+            **choice_options,
         }
         return render(
             request,
@@ -363,7 +432,8 @@ def create_listing_form(request):
         {
             "form_data": {
                 "owner_username": profile.username or request.user.username,
-            }
+            },
+            **choice_options,
         },
     )
 
@@ -479,6 +549,7 @@ def review_submission(request, listing_id):
                     "back_url": "approvals_page",
                     "back_label": "Back to Approvals",
                     "show_approval_checkbox": True,
+                    **_get_choice_options(),
                 },
             )
 
@@ -500,6 +571,7 @@ def review_submission(request, listing_id):
         "car_make": listing.car_make.name if listing.car_make else "",
         "car_model": listing.car_model.name if listing.car_model else "",
         "fuel_type": listing.fuel_type,
+        "car_type": listing.car_type.name if listing.car_type else "",
         "year": listing.year,
         "mileage": listing.mileage,
         "price": listing.price,
@@ -523,6 +595,7 @@ def review_submission(request, listing_id):
             "back_label": "Back to Approvals",
             "show_approval_checkbox": True,
             "approval_checked": True,
+            **_get_choice_options(),
         },
     )
 

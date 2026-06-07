@@ -6,9 +6,9 @@
         </div>
     </a>
     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-        <form class="form" method="GET" action="">
+        <form class="form" method="GET" action="{% url 'listings_page' %}">
             <div class="input-group w-100">
-                <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
+                <input class="form-control border border-black rounded-0 js-navbar-search" id="mobile-navbar-search-input" type="text" name="q" placeholder="Search car brand or model" value="{{ request.GET.q|default:'' }}">
                 <div class="input-group-append">
                     <button class="form-control form-control btn btn-black border border-black rounded-0" type="submit">
                         <span class="icon">
@@ -23,7 +23,9 @@
 <li class="list-inline-item dropdown">
     <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="text-center">
-            <div><i class="fas fa-user fa-lg"></i></div>
+            <div class="profile-icon-wrap{% if request.user.is_authenticated and inbox_unread_count %} has-unread{% endif %}">
+                <i class="fas fa-user fa-lg"></i>
+            </div>
             <p class="my-0">
                 {% if request.user.is_authenticated %}
                     {{ request.user.first_name|default:request.user.username }}
@@ -39,6 +41,7 @@
                 <a href="{% url 'logout' %}" class="dropdown-item">Product Management</a>
             {% endif %}
             <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+            <a href="{% url 'inbox' %}" class="dropdown-item">Inbox{% if inbox_unread_count %} <span class="badge badge-pill badge-danger ml-1">{{ inbox_unread_count }}</span>{% endif %}</a>
             <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
         {% else %}
             <a href="{% url 'register' %}" class="dropdown-item">Sign Up</a>

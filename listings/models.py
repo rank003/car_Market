@@ -18,6 +18,60 @@ class CarModel(models.Model):
     def __str__(self):
         return self.name
 
+class FuelType(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+class TransmissionType(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+class EngineSize(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+class SeatCount(models.Model):
+    count = models.IntegerField(unique=True)
+
+    class Meta:
+        ordering = ["count"]
+
+    def __str__(self):
+        return str(self.count)
+
+class TorqueValue(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
+class CarType(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
 class Listing(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
@@ -33,6 +87,7 @@ class Listing(models.Model):
     fuel_type = models.CharField(max_length=100, blank=True, default="")
     seats = models.IntegerField(null=True, blank=True)
     torque = models.IntegerField(null=True, blank=True)
+    car_type = models.ForeignKey(CarType, on_delete=models.SET_NULL, null=True, blank=True)
     is_approved = models.BooleanField(default=False)
     listing_image_1 = models.CharField(max_length=255, blank=True, default="listings/default-listing-img.jpg")
     listing_image_2 = models.CharField(max_length=255, blank=True, default="listings/default-listing-img.jpg")

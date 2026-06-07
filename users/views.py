@@ -41,11 +41,12 @@ def register_user(request):
             login(request, authenticated_user)
         else:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        messages.success(
-            request,
-            'Registration successful. Welcome to CarMarket!',
-        )
-        return redirect('home')
+
+        return render(request, 'users/register.html', {
+            'form': form,
+            'register_success': True,
+            'redirect_url': '/',
+        })
 
     return render(request, 'users/register.html', {'form': form})
 
@@ -55,6 +56,9 @@ def login_user(request):
         return redirect('profile')
 
     form = LoginForm(request.POST or None)
+    auth_error = None
+    login_success = False
+
     if request.method == 'POST' and form.is_valid():
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
@@ -63,11 +67,16 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            messages.success(request, 'Login successful.')
-            return redirect('home')
-        messages.error(request, 'Invalid username or password')
+            login_success = True
+        else:
+            auth_error = 'Invalid username or password. Please try again.'
 
-    return render(request, 'users/login.html', {'form': form})
+    return render(request, 'users/login.html', {
+        'form': form,
+        'auth_error': auth_error,
+        'login_success': login_success,
+        'redirect_url': '/',
+    })
 
 
 @login_required(login_url='login')
@@ -91,6 +100,45 @@ def profile_view(request, profile_id=None):
             },
         )
     return render(request, 'users/profile.html', {'profile': profile})
+
+
+@login_required(login_url='login')
+def create_profile(request):
+    profile, created = Profile.objects.get_or_create(
+        user=request.user,
+        defaults={
+            'username': request.user.username,
+            'email': request.user.email,
+            'name': request.user.get_full_name(),
+        },
+    )
+
+    if not created:
+        messages.info(request, 'Your profile already exists. You can edit it instead.')
+        return redirect('update-profile')
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            created_profile = form.save(commit=False)
+            created_profile.user = request.user
+            created_profile.username = request.user.username
+            created_profile.save()
+
+            request.user.email = created_profile.email
+            request.user.first_name = created_profile.name
+            request.user.save(update_fields=['email', 'first_name'])
+
+            messages.success(request, 'Profile created successfully.')
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(request, 'users/edit-profile.html', {
+        'form': form,
+        'page_title': 'Create Profile',
+        'submit_label': 'Create Profile',
+    })
 
 
 @login_required(login_url='login')
@@ -121,7 +169,11 @@ def update_profile(request):
     else:
         form = ProfileForm(instance=profile)
 
-    return render(request, 'users/edit-profile.html', {'form': form})
+    return render(request, 'users/edit-profile.html', {
+        'form': form,
+        'page_title': 'Edit Profile',
+        'submit_label': 'Save Changes',
+    })
 
 
 @login_required(login_url='login')
@@ -153,12 +205,11 @@ def inbox_view(request):
         },
     )
 
+    profile.notifications.filter(is_read=False).update(is_read=True)
     notifications = profile.notifications.all()
-    unread_count = notifications.filter(is_read=False).count()
+    unread_count = 0
 
     if request.method == 'POST':
-        profile.notifications.filter(is_read=False).update(is_read=True)
-        messages.success(request, 'All inbox messages marked as read.')
         return redirect('inbox')
 
     return render(

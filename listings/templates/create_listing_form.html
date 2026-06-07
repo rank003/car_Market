@@ -66,13 +66,28 @@
         </div>
 
         <div class="field-block">
-          <label for="car_model">Car Type *</label>
+          <label for="car_model">Car Model *</label>
           <input id="car_model" name="car_model" value="{{ form_data.car_model|default:'' }}" required>
         </div>
 
         <div class="field-block">
           <label for="fuel_type">Fuel Type</label>
-          <input id="fuel_type" name="fuel_type" value="{{ form_data.fuel_type|default:'' }}">
+          <select id="fuel_type" name="fuel_type">
+            <option value="">-- Select Fuel Type --</option>
+            {% for fuel in fuel_types %}
+              <option value="{{ fuel }}" {% if form_data.fuel_type == fuel %}selected{% endif %}>{{ fuel }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="field-block">
+          <label for="car_type">Car Type</label>
+          <select id="car_type" name="car_type">
+            <option value="">-- Select Car Type --</option>
+            {% for car_type in car_types %}
+              <option value="{{ car_type }}" {% if form_data.car_type == car_type %}selected{% endif %}>{{ car_type }}</option>
+            {% endfor %}
+          </select>
         </div>
 
         <div class="field-block">
@@ -97,22 +112,42 @@
 
         <div class="field-block">
           <label for="engine_size">Engine Size</label>
-          <input id="engine_size" name="engine_size" value="{{ form_data.engine_size|default:'' }}">
+          <select id="engine_size" name="engine_size">
+            <option value="">-- Select Engine Size --</option>
+            {% for size in engine_sizes %}
+              <option value="{{ size }}" {% if form_data.engine_size == size %}selected{% endif %}>{{ size }}</option>
+            {% endfor %}
+          </select>
         </div>
 
         <div class="field-block">
           <label for="transmission">Transmission</label>
-          <input id="transmission" name="transmission" value="{{ form_data.transmission|default:'' }}">
+          <select id="transmission" name="transmission">
+            <option value="">-- Select Transmission --</option>
+            {% for trans in transmission_types %}
+              <option value="{{ trans }}" {% if form_data.transmission == trans %}selected{% endif %}>{{ trans }}</option>
+            {% endfor %}
+          </select>
         </div>
 
         <div class="field-block">
           <label for="seats">Seats</label>
-          <input id="seats" name="seats" type="number" value="{{ form_data.seats|default:'' }}">
+          <select id="seats" name="seats">
+            <option value="">-- Select Number of Seats --</option>
+            {% for count in seat_counts %}
+              <option value="{{ count }}" {% if form_data.seats|stringformat:"s" == count|stringformat:"s" %}selected{% endif %}>{{ count }}</option>
+            {% endfor %}
+          </select>
         </div>
 
         <div class="field-block">
           <label for="torque">Torque</label>
-          <input id="torque" name="torque" type="number" value="{{ form_data.torque|default:'' }}">
+          <select id="torque" name="torque">
+            <option value="">-- Select Torque --</option>
+            {% for option in torque_values %}
+              <option value="{{ option.value }}" {% if form_data.torque|stringformat:"s" == option.value|stringformat:"s" %}selected{% endif %}>{{ option.label }}</option>
+            {% endfor %}
+          </select>
         </div>
 
         <div class="field-block full-span">

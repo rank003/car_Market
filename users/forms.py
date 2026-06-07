@@ -86,6 +86,7 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = [
             'name',
+            'about_me',
             'email',
             'phone',
             'address',
@@ -96,6 +97,7 @@ class ProfileForm(forms.ModelForm):
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'about_me': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),

@@ -12,7 +12,7 @@ Inbox
                 <div class="profile-nav text-center text-lg-start">
                     <a href="{% url 'home' %}" class="profile-nav-link d-block">Home</a>
                     <a href="{% url 'profile' %}" class="profile-nav-link d-block">Profile</a>
-                    <a href="{% url 'inbox' %}" class="profile-nav-link d-block">Inbox</a>
+                    <a href="{% url 'inbox' %}" class="profile-nav-link d-block">Inbox{% if inbox_unread_count %} ({{ inbox_unread_count }}){% endif %}</a>
                     <a href="{% url 'listings_page' %}" class="profile-nav-link d-block">Search</a>
                 </div>
             </div>

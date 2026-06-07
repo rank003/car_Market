@@ -7,6 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     username = models.CharField(max_length=150, blank=True, default="")
     name = models.CharField(max_length=255, blank=True, default="")
+    about_me = models.TextField(blank=True, default="")
     email = models.EmailField(blank=True, default="")
     password = models.CharField(max_length=128, blank=True, default="")
     phone = models.CharField(max_length=50, blank=True, default="")

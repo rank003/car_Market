@@ -33,7 +33,7 @@
 
         <div class="cards-grid">
           {% for listing in listings %}
-            <article class="listing-card">
+            <article class="listing-card" data-search-term="{{ listing.car_make }} {{ listing.car_model }} {{ listing.fuel_type }} {{ listing.year }}">
               <div class="listing-image-box">
                 <a href="{{ home_url }}" aria-label="Go to home page">
                   <img src="{{ listing.primary_image_url }}" alt="Car image for {{ listing.car_make }} {{ listing.car_model }}">
@@ -145,6 +145,10 @@
           {% endfor %}
         </div>
 
+        <div id="navbar-search-empty" class="empty-state d-none">
+          <p>No cars match your search term.</p>
+        </div>
+
         {% if listings.paginator.num_pages > 1 %}
           <nav class="pagination-wrap" aria-label="Listings pagination">
             <div class="pagination-list">
@@ -176,3 +180,42 @@
 {% endblock %}
 
 {% endwith %}
+
+{% block postloadjs %}
+  {{ block.super }}
+  <script>
+    (function () {
+      const searchInputs = document.querySelectorAll('.js-navbar-search');
+      const cards = Array.from(document.querySelectorAll('.listing-card'));
+      const emptyState = document.getElementById('navbar-search-empty');
+
+      if (!searchInputs.length || !cards.length) {
+        return;
+      }
+
+      const filterCards = () => {
+        const term = Array.from(searchInputs)
+          .find((input) => input && input.value !== undefined)?.value.trim().toLowerCase() || '';
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const haystack = (card.dataset.searchTerm || '').toLowerCase();
+          const matches = !term || haystack.includes(term);
+          card.style.display = matches ? '' : 'none';
+          if (matches) visibleCount += 1;
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('d-none', visibleCount > 0);
+        }
+      };
+
+      searchInputs.forEach((input) => {
+        input.addEventListener('input', filterCards);
+      });
+
+      filterCards();
+    })();
+  </script>
+{% endblock %}
