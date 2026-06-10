@@ -273,15 +273,33 @@ def _filtered_listings(request):
     queryset = Listing.objects.select_related(
         "car_make",
         "car_model",
-    ).filter(is_approved=True).order_by("-created", "-id")
+        "car_type",
+    ).filter(is_approved=True)
 
     q = (request.GET.get("q") or "").strip()
     car_make = (request.GET.get("car_make") or "").strip()
     car_model = (request.GET.get("car_model") or "").strip()
     fuel_type = (request.GET.get("fuel_type") or "").strip()
-    year = (request.GET.get("year") or "").strip()
-    mileage = (request.GET.get("mileage") or "").strip()
-    price = (request.GET.get("price") or "").strip()
+    transmission = (request.GET.get("transmission") or "").strip()
+    year_from = (request.GET.get("year_from") or "").strip()
+    year_to = (request.GET.get("year_to") or "").strip()
+    legacy_year = (request.GET.get("year") or "").strip()
+    mileage_min = (request.GET.get("mileage_min") or "").strip()
+    mileage_max = (request.GET.get("mileage_max") or "").strip()
+    legacy_mileage = (request.GET.get("mileage") or "").strip()
+    price_min = (request.GET.get("price_min") or "").strip()
+    price_max = (request.GET.get("price_max") or "").strip()
+    legacy_price = (request.GET.get("price") or "").strip()
+    vehicle_segment = (request.GET.get("vehicle_segment") or "all").strip().lower()
+    sort = (request.GET.get("sort") or "car_make").strip().lower()
+
+    if legacy_year and not year_from and not year_to:
+        year_from = legacy_year
+        year_to = legacy_year
+    if legacy_mileage and not mileage_min and not mileage_max:
+        mileage_max = legacy_mileage
+    if legacy_price and not price_min and not price_max:
+        price_max = legacy_price
 
     if q:
         queryset = queryset.filter(
@@ -294,12 +312,57 @@ def _filtered_listings(request):
         queryset = queryset.filter(car_model__name__icontains=car_model)
     if fuel_type:
         queryset = queryset.filter(fuel_type__iexact=fuel_type)
-    if year:
-        queryset = queryset.filter(year=year)
-    if mileage:
-        queryset = queryset.filter(mileage__lte=mileage)
-    if price:
-        queryset = queryset.filter(price__lte=price)
+    if transmission:
+        queryset = queryset.filter(transmission__iexact=transmission)
+    if year_from:
+        queryset = queryset.filter(year__gte=year_from)
+    if year_to:
+        queryset = queryset.filter(year__lte=year_to)
+    if mileage_min:
+        queryset = queryset.filter(mileage__gte=mileage_min)
+    if mileage_max:
+        queryset = queryset.filter(mileage__lte=mileage_max)
+    if price_min:
+        queryset = queryset.filter(price__gte=price_min)
+    if price_max:
+        queryset = queryset.filter(price__lte=price_max)
+
+    if vehicle_segment == "suvs":
+        queryset = queryset.filter(
+            Q(car_type__name__in=["SUV", "Pickup Truck", "Crossover"])
+            | Q(car_model__name__icontains="suv")
+            | Q(car_model__name__icontains="truck")
+            | Q(car_model__name__icontains="awd")
+            | Q(description__icontains="suv")
+            | Q(description__icontains="truck")
+            | Q(description__icontains="awd")
+        )
+    elif vehicle_segment == "cars":
+        queryset = queryset.filter(
+            Q(car_type__name__in=[
+                "Sedan",
+                "Coupe",
+                "Hatchback",
+                "Wagon",
+                "Convertible",
+                "Sports Car",
+            ])
+            | (
+                Q(car_type__isnull=True)
+                & ~Q(car_model__name__icontains="suv")
+                & ~Q(car_model__name__icontains="truck")
+                & ~Q(car_model__name__icontains="awd")
+            )
+        )
+
+    if sort == "price":
+        queryset = queryset.order_by("price", "-created", "-id")
+    elif sort == "year":
+        queryset = queryset.order_by("-year", "-created", "-id")
+    elif sort == "date_added":
+        queryset = queryset.order_by("-created", "-id")
+    else:
+        queryset = queryset.order_by("car_make__name", "car_model__name", "-created", "-id")
 
     return queryset
 
@@ -369,10 +432,24 @@ def listings_page(request):
         .order_by("fuel_type")
     )
 
+    transmission_types = list(
+        TransmissionType.objects.values_list("name", flat=True).order_by("name")
+    )
+    if not transmission_types:
+        transmission_types = list(
+            Listing.objects.exclude(transmission="")
+            .values_list("transmission", flat=True)
+            .distinct()
+            .order_by("transmission")
+        )
+
     context = {
         "listings": listings,
         "values": request.GET,
         "fuel_types": fuel_types,
+        "transmission_types": transmission_types,
+        "sort": (request.GET.get("sort") or "car_make").strip().lower(),
+        "vehicle_segment": (request.GET.get("vehicle_segment") or "all").strip().lower(),
     }
     return render(request, "listings.html", context)
 
@@ -594,7 +671,7 @@ def review_submission(request, listing_id):
             "back_url": "approvals_page",
             "back_label": "Back to Approvals",
             "show_approval_checkbox": True,
-            "approval_checked": True,
+            "approval_checked": False,
             **_get_choice_options(),
         },
     )

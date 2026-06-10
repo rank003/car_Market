@@ -42,6 +42,16 @@
   gap: 14px;
 }
 
+.listings-app .search-toggle-btn {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #12497f;
+  background: #12497f;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
 .listings-app .search-item input,
 .listings-app .search-item select,
 .listings-app .search-actions button,
@@ -437,6 +447,10 @@
     padding: 16px;
   }
 
+  .listings-app #mobileSearchFilters {
+    margin-top: 6px;
+  }
+
   .listings-app .search-grid,
   .listings-app .cards-grid,
   .listings-app .create-listing-grid {
@@ -450,5 +464,11 @@
 
   .vehicle-modal-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .listings-app #mobileSearchFilters {
+    display: block !important;
   }
 }

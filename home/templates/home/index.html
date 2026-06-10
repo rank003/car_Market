@@ -14,16 +14,17 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center">
             <div class="col-12 col-md-7 col-lg-6 my-auto">
-                <div class="d-flex flex-column align-items-start">
-                    <h1 class="display-4 logo-font text-white mb-4">
-                        Arti's Cars
+                <div class="home-hero-block d-flex flex-column align-items-center text-center">
+                    <h1 class="display-4 hero-brand-title text-white mb-4">
+                        Backyard CarMarket
                     </h1>
                     <div class="d-flex flex-column">
                         <a href="{% url 'listings_page' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
-                        <a href="{% url 'create_listing_form' %}" class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3 mt-3">Create Listing</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

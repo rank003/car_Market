@@ -1,50 +1,21 @@
 <div class="collapse navbar-collapse" id="main-nav">
     <ul class="navbar-nav w-auto mx-auto">
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'listings_page' %}?vehicle_segment=all">
                 All Vehicles
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="{% url 'listings_page' %}" class="dropdown-item">By Price</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item ">By Rating</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item ">By Category</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">All Vehicles</a>
-            </div>
         </li>
 
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'listings_page' %}?vehicle_segment=cars">
                 Cars
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-                <a href="{% url 'listings_page' %}" class="dropdown-item">Performance &amp; Cars</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">Commuters</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">Luxury</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">All Cars</a>
-            </div>
         </li>
 
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="homeware-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'listings_page' %}?vehicle_segment=suvs">
                 SUVs
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="homeware-link">
-                <a href="{% url 'listings_page' %}" class="dropdown-item">Sports &amp; Vehicles</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">AWD Utility &amp; Vehicles</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">All SUVs</a>
-            </div>
-        </li>
-
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Special Offers
-            </a>
-            <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="{% url 'listings_page' %}" class="dropdown-item">New Arrivals</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">Deals</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">Clearance</a>
-                <a href="{% url 'listings_page' %}" class="dropdown-item">All Specials</a>
-            </div>
         </li>
 
         {% if request.user.is_authenticated %}

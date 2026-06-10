@@ -5,7 +5,9 @@ html {
 body {
     background: url('https://res.cloudinary.com/dutukkel2/image/upload/v1776968818/CarMarket_Cover_Pic_v2_fz1qkz.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    min-height: 100vh;
+    height: auto;
+    padding-top: 118px;
     color: #555;
     font-family: 'Lato';
 }
@@ -43,6 +45,24 @@ body {
     background: black;
     color: white;
     min-width: 260px;
+}
+
+.home-hero-block {
+    width: 100%;
+    max-width: 520px;
+    margin: 72px auto 0;
+}
+
+.hero-brand-title {
+    font-family: 'Montserrat', 'Lato', Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 991px) {
+    .home-hero-block {
+        margin-top: 36px;
+    }
 }
 
 .btn-black {
@@ -121,9 +141,29 @@ body {
         z-index: 1030;
     }
 
-    .header-container {
+    body {
         padding-top: 164px;
     }
+}
+
+.header-container {
+    padding-top: 0;
+}
+
+.site-footer {
+    margin-top: 24px;
+    background: rgba(15, 23, 42, 0.82);
+    color: #e2e8f0;
+    border-top: 1px solid rgba(148, 163, 184, 0.35);
+    backdrop-filter: blur(4px);
+}
+
+.site-footer-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 0.95rem;
 }
 
 .profile-page {

@@ -16,7 +16,7 @@
     
     {% block corecss %}
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&display=swap">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %} 
     
@@ -53,6 +53,7 @@
         </div>
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
           <form method="GET" action="{% url 'listings_page' %}" class="navbar-search-form">
+            <input type="hidden" name="vehicle_segment" value="{{ request.GET.vehicle_segment|default:'all' }}">
             <div class="input-group w-100">
               <input class="form-control border border-black rounded-0 js-navbar-search" id="navbar-search-input" type="text" name="q"
                 placeholder="Search car brand or model" value="{{ request.GET.q|default:'' }}">
@@ -84,10 +85,10 @@
                   </p>
                 </div>
               </a>
-              <div class="dropdown-menu border-0" aria-labelledby="user-options">
+              <div class="dropdown-menu border-0 account-dropdown-menu" aria-labelledby="user-options">
                 {% if request.user.is_authenticated %}
-                {% if request.user.is_superuser %}
-                <a href="" class="dropdown-item">Car Management</a>
+                {% if request.user.is_staff or request.user.is_superuser %}
+                <a href="{% url 'approvals_page' %}" class="dropdown-item">New Submissions</a>
                 {% endif %}
                 <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                 <a href="{% url 'inbox' %}" class="dropdown-item">Inbox{% if inbox_unread_count %} <span class="badge badge-pill badge-danger ml-1">{{ inbox_unread_count }}</span>{% endif %}</a>
@@ -140,6 +141,14 @@
     {% endblock %}
 
     {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        Backyard CarMarket © 2026
+      </div>
+    </footer>
     {% endblock %}
 
     {% if request.user.is_authenticated %}

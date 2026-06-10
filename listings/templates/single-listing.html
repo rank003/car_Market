@@ -45,6 +45,8 @@
         <p><strong>Transmission:</strong> {{ listing.transmission|default:'-' }}</p>
         <p><strong>Seats:</strong> {{ listing.seats|default:'-' }}</p>
         <p><strong>Torque:</strong> {{ listing.torque|default:'-' }}</p>
+        <p><strong>Date Added:</strong> {{ listing.created|date:'M d, Y H:i'|default:'-' }}</p>
+        <p><strong>Date Approved:</strong> {{ listing.approved_at|date:'M d, Y H:i'|default:'Pending approval' }}</p>
       </div>
 
       {% if listing.description %}
@@ -55,17 +57,15 @@
       {% endif %}
 
       <!-- Seller info -->
-      {% if listing.owner %}
-        <div style="background:#f8f9fa; padding:1rem; border-radius:8px; margin-top:1.5rem;">
-          <strong>Seller:</strong> {{ listing.owner.name|default:listing.owner.username }}
-          {% if listing.owner.email %}
-            &nbsp;&mdash;&nbsp;{{ listing.owner.email }}
-          {% endif %}
-          {% if listing.owner.phone %}
-            &nbsp;&mdash;&nbsp;{{ listing.owner.phone }}
-          {% endif %}
-        </div>
-      {% endif %}
+      <div style="background:#f8f9fa; padding:1rem; border-radius:8px; margin-top:1.5rem;">
+        {% if listing.is_approved %}
+          <strong>Seller:</strong> Backyard CarMarket
+        {% elif listing.owner %}
+          <strong>Seller:</strong> {{ listing.owner.username }}
+        {% else %}
+          <strong>Seller:</strong> -
+        {% endif %}
+      </div>
 
             {% if request.user.is_authenticated %}
                 <div class="listing-card-actions">

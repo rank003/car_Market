@@ -35,7 +35,7 @@
           {% for listing in listings %}
             <article class="listing-card" data-search-term="{{ listing.car_make }} {{ listing.car_model }} {{ listing.fuel_type }} {{ listing.year }}">
               <div class="listing-image-box">
-                <a href="{{ home_url }}" aria-label="Go to home page">
+                <a href="{% url 'single_listing' listing.id %}" aria-label="View {{ listing.car_make }} {{ listing.car_model }} details">
                   <img src="{{ listing.primary_image_url }}" alt="Car image for {{ listing.car_make }} {{ listing.car_model }}">
                 </a>
               </div>
@@ -106,7 +106,7 @@
                       <p><strong>Seats:</strong> {{ listing.seats|default:'-' }}</p>
                       <p><strong>Torque:</strong> {{ listing.torque|default:'-' }}</p>
                       <p><strong>Posted:</strong> {{ listing.created|date:'M d, Y H:i'|default:'-' }}</p>
-                      <p><strong>Seller:</strong> {% if listing.owner %}{{ listing.owner.name|default:listing.owner.username }}{% else %}-{% endif %}</p>
+                      <p><strong>Seller:</strong> {% if listing.is_approved %}Backyard CarMarket{% elif listing.owner %}{{ listing.owner.username }}{% else %}-{% endif %}</p>
                     </div>
 
                     <div class="vehicle-modal-description">
@@ -153,7 +153,7 @@
           <nav class="pagination-wrap" aria-label="Listings pagination">
             <div class="pagination-list">
               {% if listings.has_previous %}
-                <div><a href="?page={{ listings.previous_page_number }}&car_make={{ values.car_make|urlencode }}&car_model={{ values.car_model|urlencode }}&fuel_type={{ values.fuel_type|urlencode }}&year={{ values.year|urlencode }}&mileage={{ values.mileage|urlencode }}&price={{ values.price|urlencode }}">&laquo;</a></div>
+                <div><a href="?page={{ listings.previous_page_number }}&q={{ values.q|urlencode }}&car_make={{ values.car_make|urlencode }}&car_model={{ values.car_model|urlencode }}&fuel_type={{ values.fuel_type|urlencode }}&transmission={{ values.transmission|urlencode }}&year_from={{ values.year_from|urlencode }}&year_to={{ values.year_to|urlencode }}&mileage_min={{ values.mileage_min|urlencode }}&mileage_max={{ values.mileage_max|urlencode }}&price_min={{ values.price_min|urlencode }}&price_max={{ values.price_max|urlencode }}&vehicle_segment={{ vehicle_segment|urlencode }}&sort={{ sort|urlencode }}">&laquo;</a></div>
               {% else %}
                 <div class="disabled"><span>&laquo;</span></div>
               {% endif %}
@@ -162,12 +162,12 @@
                 {% if i == listings.number %}
                   <div class="active"><span>{{ i }}</span></div>
                 {% else %}
-                  <div><a href="?page={{ i }}&car_make={{ values.car_make|urlencode }}&car_model={{ values.car_model|urlencode }}&fuel_type={{ values.fuel_type|urlencode }}&year={{ values.year|urlencode }}&mileage={{ values.mileage|urlencode }}&price={{ values.price|urlencode }}">{{ i }}</a></div>
+                  <div><a href="?page={{ i }}&q={{ values.q|urlencode }}&car_make={{ values.car_make|urlencode }}&car_model={{ values.car_model|urlencode }}&fuel_type={{ values.fuel_type|urlencode }}&transmission={{ values.transmission|urlencode }}&year_from={{ values.year_from|urlencode }}&year_to={{ values.year_to|urlencode }}&mileage_min={{ values.mileage_min|urlencode }}&mileage_max={{ values.mileage_max|urlencode }}&price_min={{ values.price_min|urlencode }}&price_max={{ values.price_max|urlencode }}&vehicle_segment={{ vehicle_segment|urlencode }}&sort={{ sort|urlencode }}">{{ i }}</a></div>
                 {% endif %}
               {% endfor %}
 
               {% if listings.has_next %}
-                <div><a href="?page={{ listings.next_page_number }}&car_make={{ values.car_make|urlencode }}&car_model={{ values.car_model|urlencode }}&fuel_type={{ values.fuel_type|urlencode }}&year={{ values.year|urlencode }}&mileage={{ values.mileage|urlencode }}&price={{ values.price|urlencode }}">&raquo;</a></div>
+                <div><a href="?page={{ listings.next_page_number }}&q={{ values.q|urlencode }}&car_make={{ values.car_make|urlencode }}&car_model={{ values.car_model|urlencode }}&fuel_type={{ values.fuel_type|urlencode }}&transmission={{ values.transmission|urlencode }}&year_from={{ values.year_from|urlencode }}&year_to={{ values.year_to|urlencode }}&mileage_min={{ values.mileage_min|urlencode }}&mileage_max={{ values.mileage_max|urlencode }}&price_min={{ values.price_min|urlencode }}&price_max={{ values.price_max|urlencode }}&vehicle_segment={{ vehicle_segment|urlencode }}&sort={{ sort|urlencode }}">&raquo;</a></div>
               {% else %}
                 <div class="disabled"><span>&raquo;</span></div>
               {% endif %}
