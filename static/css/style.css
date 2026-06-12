@@ -26,6 +26,7 @@
 .listings-app .search-shell {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .listings-app .search-panel {
@@ -34,6 +35,8 @@
   background: #5a8fc7;
   border: 2px solid #456f9a;
   padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(2, 8, 23, 0.2);
 }
 
 .listings-app .search-grid {
@@ -89,6 +92,13 @@
   margin: 36px 0 24px;
 }
 
+.listings-app .section-title-wrap h2 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.01em;
+  color: #0f172a;
+}
+
 .listings-app .cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -102,6 +112,14 @@
   min-height: 320px;
   display: flex;
   flex-direction: column;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  transition: transform 0.16s ease, box-shadow 0.2s ease;
+}
+
+.listings-app .listing-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
 }
 
 .listings-app .listing-image-box {
@@ -141,6 +159,7 @@
 .listings-app .listing-card-body p {
   margin: 0 0 8px;
   font-size: 15px;
+  line-height: 1.45;
 }
 
 .listings-app .listing-card-body {
@@ -322,9 +341,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 16px;
+  padding: 8px 16px;
+  min-height: 36px;
   border-radius: 50px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -427,6 +447,32 @@
   align-items: center;
 }
 
+#main-nav .navbar-nav {
+  gap: 6px;
+}
+
+#main-nav .segment-nav-link {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 8px 14px !important;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+#main-nav .segment-nav-link:hover,
+#main-nav .segment-nav-link:focus {
+  color: #0b3f72 !important;
+  background: #eaf2fb;
+  border-color: #bfd4eb;
+}
+
+#main-nav .segment-nav-link.is-active {
+  color: #ffffff !important;
+  background: #12497f;
+  border-color: #12497f;
+  box-shadow: 0 5px 14px rgba(18, 73, 127, 0.3);
+}
+
 @media (max-width: 900px) {
   .listings-app .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -437,14 +483,41 @@
   }
 }
 
+@media (max-width: 991px) {
+  #main-nav .navbar-nav {
+    width: 100%;
+    padding: 10px 8px 8px;
+    gap: 8px;
+  }
+
+  #main-nav .nav-item {
+    width: 100%;
+  }
+
+  #main-nav .segment-nav-link {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    background: #f8fafc;
+    border-color: #d7e3f1;
+  }
+
+  #main-nav .nav-link {
+    margin-right: 0 !important;
+  }
+}
+
 @media (max-width: 640px) {
   .listings-app .page-shell {
-    padding: 24px 14px 36px;
+    padding: 18px 12px 30px;
   }
 
   .listings-app .search-panel {
-    max-width: 320px;
-    padding: 16px;
+    max-width: none;
+    padding: 14px;
+    border-radius: 10px;
   }
 
   .listings-app #mobileSearchFilters {
@@ -455,6 +528,73 @@
   .listings-app .cards-grid,
   .listings-app .create-listing-grid {
     grid-template-columns: 1fr;
+  }
+
+  .listings-app .section-title-wrap {
+    margin: 20px 0 14px;
+  }
+
+  .listings-app .section-title-wrap h2 {
+    font-size: 26px;
+  }
+
+  .listings-app .listing-card {
+    min-height: 0;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .listings-app .listing-card-body h3 {
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  .listings-app .listing-card-body p {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .listings-app .listing-card-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .listings-app .listing-card-actions .btn-pill,
+  .listings-app .listing-card-actions a.btn-pill {
+    width: 100%;
+  }
+
+  .listings-app .btn-pill {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
+  .listings-app .search-toggle-btn {
+    border-radius: 8px;
+    min-height: 42px;
+    font-size: 14px;
+  }
+
+  .listings-app .search-item input,
+  .listings-app .search-item select,
+  .listings-app .search-actions button,
+  .listings-app .search-actions a {
+    min-height: 42px;
+    font-size: 14px;
+  }
+
+  .vehicle-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vehicle-modal-footer .btn-pill,
+  .vehicle-modal-footer a.btn-pill,
+  .vehicle-modal-footer form {
+    width: 100%;
   }
 
   .listings-app .form-card-head {

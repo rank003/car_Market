@@ -1,19 +1,20 @@
 <div class="collapse navbar-collapse" id="main-nav">
+    {% with current_segment=request.GET.vehicle_segment|default:'all' %}
     <ul class="navbar-nav w-auto mx-auto">
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'listings_page' %}?vehicle_segment=all">
+            <a class="logo-font font-weight-bold nav-link text-black segment-nav-link {% if request.resolver_match.url_name == 'listings_page' and current_segment == 'all' %}is-active{% endif %}" href="{% url 'listings_page' %}?vehicle_segment=all">
                 All Vehicles
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'listings_page' %}?vehicle_segment=cars">
+            <a class="logo-font font-weight-bold nav-link text-black segment-nav-link {% if request.resolver_match.url_name == 'listings_page' and current_segment == 'cars' %}is-active{% endif %}" href="{% url 'listings_page' %}?vehicle_segment=cars">
                 Cars
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'listings_page' %}?vehicle_segment=suvs">
+            <a class="logo-font font-weight-bold nav-link text-black segment-nav-link {% if request.resolver_match.url_name == 'listings_page' and current_segment == 'suvs' %}is-active{% endif %}" href="{% url 'listings_page' %}?vehicle_segment=suvs">
                 SUVs
             </a>
         </li>
@@ -40,4 +41,5 @@
         </li>
         {% endif %}
     </ul>
+    {% endwith %}
 </div>
