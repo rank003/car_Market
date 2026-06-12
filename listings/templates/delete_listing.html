@@ -5,6 +5,11 @@
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .delete-listing-page {
+      min-height: calc(100vh - 260px);
+    }
+  </style>
 {% endblock %}
 
 {% block page_header %}
@@ -14,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="listings-app form-page-body">
+<div class="listings-app form-page-body delete-listing-page">
   <div class="form-card" style="max-width:600px; margin:2rem auto; text-align:center;">
 
     <div class="form-card-head">
