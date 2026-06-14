@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}- My Submissions{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block page_header %}
+  <div class="container header-container">
+    <div class="row"><div class="col"></div></div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="listings-app">
+  <main class="page-shell">
+    <section class="results-section">
+      <div class="section-title-wrap">
+        <h2>My Submissions</h2>
+      </div>
+
+      {% if submissions %}
+        <div class="cards-grid">
+          {% for listing in submissions %}
+            <article class="listing-card">
+              <div class="listing-image-box">
+                <a href="{% url 'single_listing' listing.id %}" aria-label="View {{ listing.car_make }} {{ listing.car_model }} details">
+                  <img src="{{ listing.primary_image_url }}" alt="{{ listing.car_make }} {{ listing.car_model }}">
+                </a>
+              </div>
+
+              <div class="listing-card-body">
+                <h3>
+                  {{ listing.car_make }} {{ listing.car_model }}
+                  {% if listing.is_approved %}
+                    <span class="approval-badge">Approved</span>
+                  {% else %}
+                    <span class="approval-badge" style="color:#7f1d1d; background:#fee2e2; border-color:#fecaca;">Pending</span>
+                  {% endif %}
+                </h3>
+                <p><strong>Fuel Type:</strong> {{ listing.fuel_type|default:'-' }}</p>
+                <p><strong>Year:</strong> {{ listing.year|default:'-' }}</p>
+                <p><strong>Mileage:</strong> {{ listing.mileage|default:'-' }}</p>
+                <p><strong>Price:</strong> €{{ listing.price|default:'-' }}</p>
+
+                <div class="listing-card-actions">
+                  <a href="{% url 'single_listing' listing.id %}" class="btn-pill btn-pill-view">View</a>
+                  <a href="{% url 'edit_listing' listing.id %}" class="btn-pill btn-pill-edit">Edit</a>
+                  <a href="{% url 'delete_listing' listing.id %}" class="btn-pill btn-pill-delete">Delete</a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <p>You have not submitted any listings yet.</p>
+          <a href="{% url 'create_listing_form' %}" class="btn-pill btn-pill-view">Create Your First Submission</a>
+        </div>
+      {% endif %}
+    </section>
+  </main>
+</div>
+{% endblock %}

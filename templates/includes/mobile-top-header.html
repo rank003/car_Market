@@ -42,6 +42,7 @@
                 <a href="{% url 'approvals_page' %}" class="dropdown-item">New Submissions</a>
             {% endif %}
             <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+            <a href="{% url 'my_submissions_page' %}" class="dropdown-item">Submissions</a>
             <a href="{% url 'inbox' %}" class="dropdown-item">Inbox{% if inbox_unread_count %} <span class="badge badge-pill badge-danger ml-1">{{ inbox_unread_count }}</span>{% endif %}</a>
             <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
         {% else %}

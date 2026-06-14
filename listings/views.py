@@ -759,6 +759,29 @@ def selected_vehicles_page(request):
     )
 
 
+@require_http_methods(["GET"])
+@login_required(login_url="login")
+def my_submissions_page(request):
+    """Display listings submitted by the logged-in user for easy edit/delete actions."""
+    profile = Profile.objects.filter(user=request.user).first()
+
+    submissions = []
+    if profile:
+        submissions = list(
+            Listing.objects.select_related("car_make", "car_model", "car_type")
+            .filter(owner=profile)
+            .order_by("-created")
+        )
+        for listing in submissions:
+            _attach_primary_image_url(listing)
+
+    return render(
+        request,
+        "submissions.html",
+        {"submissions": submissions},
+    )
+
+
 @require_http_methods(["GET", "POST"])
 @login_required(login_url="login")
 def approvals_page(request):
