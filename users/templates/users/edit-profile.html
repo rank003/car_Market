@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block extra_title %}- Edit Profile{% endblock %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 {% block page_header %}
 <div class="container header-container">
@@ -11,16 +17,41 @@
 {% endblock %}
 
 {% block content %}
-<section class="container py-5 mt-5">
+<section class="container py-5 mt-5 auth-page">
 	<div class="row justify-content-center">
-		<div class="col-12 col-md-9 col-lg-7">
-			<h2 class="mb-4">{{ page_title|default:'Edit Profile' }}</h2>
-			<form method="POST">
-				{% csrf_token %}
-				{{ form.as_p }}
-				<button type="submit" class="btn btn-dark">{{ submit_label|default:'Save Changes' }}</button>
-				<a href="{% url 'profile' %}" class="btn btn-outline-secondary ml-2">Cancel</a>
-			</form>
+		<div class="col-12 col-md-10 col-lg-8 col-xl-7">
+			<div class="auth-card">
+				<h2 class="auth-title">{{ page_title|default:'Edit Profile' }}</h2>
+				<p class="auth-subtitle">Update your details below.</p>
+
+				{% if form.non_field_errors %}
+					<div class="auth-alert auth-alert-error">
+						{{ form.non_field_errors }}
+					</div>
+				{% endif %}
+
+				<form method="POST" class="auth-form">
+					{% csrf_token %}
+
+					{% for field in form %}
+						<div class="auth-field-wrap">
+							<label for="{{ field.id_for_label }}" class="auth-label">{{ field.label }}</label>
+							{{ field }}
+							{% if field.help_text %}
+								<small class="auth-subtitle" style="margin-bottom:0; font-size:0.85rem;">{{ field.help_text }}</small>
+							{% endif %}
+							{% if field.errors %}
+								<small class="auth-error">{{ field.errors|striptags }}</small>
+							{% endif %}
+						</div>
+					{% endfor %}
+
+					<div class="auth-actions">
+						<button type="submit" class="btn auth-btn-primary">{{ submit_label|default:'Save Changes' }}</button>
+						<a href="{% url 'profile' %}" class="btn auth-btn-secondary">Cancel</a>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </section>

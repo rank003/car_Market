@@ -124,11 +124,79 @@ body {
 
 /* -------------------------------- Media Queries */
 
-/* Slightly larger container on xl screens */
-@media (min-width: 1200px) {
-  .container {
-    max-width: 80%;
-  }
+/* Responsive layout breakpoints */
+@media (max-width: 719.98px) {
+    body {
+        padding-top: 238px;
+        background-attachment: scroll;
+    }
+
+    header.container-fluid.fixed-top {
+        background: #fff;
+    }
+
+    .navbar,
+    .navbar-collapse,
+    .navbar-nav,
+    .list-inline,
+    .dropdown-menu,
+    .account-dropdown-menu {
+        text-align: center;
+    }
+
+    .navbar-toggler {
+        margin: 0 auto 10px;
+    }
+
+    .navbar-nav {
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .nav-link,
+    .dropdown-item {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    .message-container,
+    .header-container,
+    .site-footer-inner,
+    .profile-page,
+    .profile-nav,
+    .profile-card,
+    .auth-page,
+    .auth-card {
+        text-align: center;
+    }
+}
+
+@media (min-width: 720px) and (max-width: 1199.98px) {
+    body {
+        padding-top: 180px;
+    }
+
+    .container {
+        max-width: 94%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+    .container {
+        max-width: 80%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 72%;
+    }
 }
 
 /* fixed top navbar only on medium and up */
