@@ -256,11 +256,25 @@ body {
 }
 
 .profile-nav-link {
-    color: #4f6f95;
-    text-decoration: underline;
+    color: #ffffff;
+    text-decoration: none;
     font-size: 15px;
     margin-bottom: 10px;
     display: inline-block;
+    padding: 9px 14px;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.86);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(2, 6, 23, 0.22);
+}
+
+.profile-nav-link:hover,
+.profile-nav-link:focus {
+    color: #ffffff;
+    background: #1d4ed8;
+    border-color: #93c5fd;
+    text-decoration: none;
 }
 
 .profile-card {
