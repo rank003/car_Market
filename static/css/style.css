@@ -538,6 +538,15 @@
     grid-template-columns: 1fr;
   }
 
+  .listings-app .search-grid .reset-item,
+  .listings-app .search-grid .submit-item,
+  .listings-app .search-grid .sort-item {
+    grid-column: auto;
+    grid-row: auto;
+    max-width: none;
+    justify-self: stretch;
+  }
+
   .listings-app .search-shell,
   .listings-app .results-section,
   .listings-app .section-title-wrap,
@@ -636,6 +645,24 @@
 }
 
 @media (min-width: 1200px) and (max-width: 1599.98px) {
+  .listings-app .search-grid .reset-item {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .listings-app .search-grid .submit-item {
+    grid-column: 4;
+    grid-row: 3;
+  }
+
+  .listings-app .search-grid .sort-item {
+    grid-column: 2 / 4;
+    grid-row: 4;
+    justify-self: center;
+    width: 100%;
+    max-width: 360px;
+  }
+
   .listings-app .cards-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -646,6 +673,24 @@
 }
 
 @media (min-width: 1600px) {
+  .listings-app .search-grid .reset-item {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .listings-app .search-grid .submit-item {
+    grid-column: 4;
+    grid-row: 3;
+  }
+
+  .listings-app .search-grid .sort-item {
+    grid-column: 2 / 4;
+    grid-row: 4;
+    justify-self: center;
+    width: 100%;
+    max-width: 360px;
+  }
+
   .listings-app .cards-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

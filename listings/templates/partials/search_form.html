@@ -63,7 +63,7 @@
       <label for="price_max" class="sr-only">Maximum price</label>
       <input id="price_max" name="price_max" type="number" placeholder="Max. Price" value="{{ values.price_max|default:'' }}">
     </div>
-    <div class="search-item">
+    <div class="search-item sort-item">
       <label for="sort" class="sr-only">Sort by</label>
       <select id="sort" name="sort">
         <option value="car_make" {% if sort == 'car_make' or not sort %}selected{% endif %}>Sort: Car Make (A-Z)</option>
@@ -72,10 +72,10 @@
         <option value="date_added" {% if sort == 'date_added' %}selected{% endif %}>Date Added</option>
       </select>
     </div>
-    <div class="search-item search-actions">
+    <div class="search-item search-actions submit-item">
       <button type="submit">Search</button>
     </div>
-    <div class="search-item search-actions">
+    <div class="search-item search-actions reset-item">
       <a href="{% url 'listings_page' %}">Reset</a>
     </div>
   </div>
