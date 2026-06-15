@@ -197,7 +197,9 @@
 }
 
 .listings-app .pagination-list li a,
-.listings-app .pagination-list li span {
+.listings-app .pagination-list li span,
+.listings-app .pagination-list > div > a,
+.listings-app .pagination-list > div > span {
   min-width: 42px;
   height: 42px;
   padding: 0 12px;
@@ -208,16 +210,24 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  border-radius: 10px;
 }
 
-.listings-app .pagination-list li.active span {
+.listings-app .pagination-list li.active span,
+.listings-app .pagination-list > div.active > span {
   background: #12497f;
   color: #fff;
   border-color: #12497f;
+  border-radius: 999px;
+  width: 42px;
+  min-width: 42px;
+  padding: 0;
 }
 
-.listings-app .pagination-list li.disabled span {
+.listings-app .pagination-list li.disabled span,
+.listings-app .pagination-list > div.disabled > span {
   color: #9aa3af;
+  background: #fff;
 }
 
 .listings-app .sr-only {
@@ -473,23 +483,33 @@
   box-shadow: 0 5px 14px rgba(18, 73, 127, 0.3);
 }
 
-@media (max-width: 719.98px) {
-  .listings-app .cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .listings-app .search-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
+/* 720px - 1199px */
 @media (min-width: 720px) and (max-width: 1199.98px) {
+  .listings-app .page-shell {
+    padding: 28px 16px 44px;
+  }
+
   .listings-app .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .listings-app .search-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .listings-app .search-grid .sort-item {
+    grid-column: 1 / 3;
+    justify-self: center;
+    width: 100%;
+    max-width: 460px;
+  }
+
+  .listings-app .section-title-wrap h2 {
+    font-size: 30px;
+  }
+
+  .listings-app .listing-card-body h3 {
+    font-size: 20px;
   }
 
   #main-nav .navbar-nav {
@@ -517,6 +537,7 @@
   }
 }
 
+/* 320px - 719px */
 @media (max-width: 719.98px) {
   .listings-app .page-shell {
     padding: 18px 12px 30px;
@@ -644,7 +665,12 @@
   }
 }
 
+/* 1200px - 1599px */
 @media (min-width: 1200px) and (max-width: 1599.98px) {
+  .listings-app .page-shell {
+    max-width: 1280px;
+  }
+
   .listings-app .search-grid .reset-item {
     grid-column: 3;
     grid-row: 3;
@@ -672,7 +698,12 @@
   }
 }
 
+/* 1600px and above */
 @media (min-width: 1600px) {
+  .listings-app .page-shell {
+    max-width: 1520px;
+  }
+
   .listings-app .search-grid .reset-item {
     grid-column: 3;
     grid-row: 3;

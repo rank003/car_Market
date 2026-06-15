@@ -40,9 +40,14 @@
         {% if request.user.is_authenticated %}
             {% if request.user.is_staff or request.user.is_superuser %}
                 <a href="{% url 'approvals_page' %}" class="dropdown-item">New Submissions</a>
+                <a href="{% url 'my_submissions_page' %}" class="dropdown-item">Listings</a>
+                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+            {% else %}
+                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
             {% endif %}
-            <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-            <a href="{% url 'my_submissions_page' %}" class="dropdown-item">Submissions</a>
+            {% if not request.user.is_staff and not request.user.is_superuser %}
+                <a href="{% url 'my_submissions_page' %}" class="dropdown-item">Listings</a>
+            {% endif %}
             <a href="{% url 'inbox' %}" class="dropdown-item">Inbox{% if inbox_unread_count %} <span class="badge badge-pill badge-danger ml-1">{{ inbox_unread_count }}</span>{% endif %}</a>
             <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
         {% else %}

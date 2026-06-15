@@ -560,8 +560,10 @@ def edit_listing(request, listing_id):
     # Get the logged-in user's profile
     profile = Profile.objects.filter(user=request.user).first()
 
-    # Only the owner may edit
-    if not profile or listing.owner != profile:
+    # Owner or admin users may edit
+    is_admin_user = bool(request.user.is_staff or request.user.is_superuser)
+    is_owner = bool(profile and listing.owner == profile)
+    if not (is_owner or is_admin_user):
         messages.error(request, "You do not have permission to edit this listing.")
         return redirect("listings_page")
 
@@ -686,8 +688,10 @@ def delete_listing(request, listing_id):
     # Get the logged-in user's profile
     profile = Profile.objects.filter(user=request.user).first()
 
-    # Only the owner may delete
-    if not profile or listing.owner != profile:
+    # Owner or admin users may delete
+    is_admin_user = bool(request.user.is_staff or request.user.is_superuser)
+    is_owner = bool(profile and listing.owner == profile)
+    if not (is_owner or is_admin_user):
         messages.error(request, "You do not have permission to delete this listing.")
         return redirect("listings_page")
 
@@ -762,23 +766,22 @@ def selected_vehicles_page(request):
 @require_http_methods(["GET"])
 @login_required(login_url="login")
 def my_submissions_page(request):
-    """Display listings submitted by the logged-in user for easy edit/delete actions."""
-    profile = Profile.objects.filter(user=request.user).first()
-
-    submissions = []
-    if profile:
-        submissions = list(
-            Listing.objects.select_related("car_make", "car_model", "car_type")
-            .filter(owner=profile)
-            .order_by("-created")
-        )
-        for listing in submissions:
-            _attach_primary_image_url(listing)
+    """Display listings in a card view; admins can edit/delete while regular users can view only."""
+    submissions = list(
+        Listing.objects.select_related("car_make", "car_model", "car_type")
+        .filter(is_approved=True)
+        .order_by("-created", "-id")
+    )
+    for listing in submissions:
+        _attach_primary_image_url(listing)
 
     return render(
         request,
         "submissions.html",
-        {"submissions": submissions},
+        {
+            "submissions": submissions,
+            "is_admin_user": bool(request.user.is_staff or request.user.is_superuser),
+        },
     )
 
 

@@ -1,15 +1,24 @@
 html {
     height: 100%;
+    min-width: 320px;
 }
 
 body {
-    background: url('https://res.cloudinary.com/dutukkel2/image/upload/v1776968818/CarMarket_Cover_Pic_v2_fz1qkz.jpg') no-repeat center center fixed;
+    background: url('https://res.cloudinary.com/dutukkel2/image/upload/v1776968818/CarMarket_Cover_Pic_v2_fz1qkz.jpg') no-repeat center top fixed;
     background-size: cover;
+    background-color: #0b0b0b;
     min-height: 100vh;
     height: auto;
     padding-top: 118px;
     color: #555;
     font-family: 'Lato';
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-content {
+    flex: 1 0 auto;
 }
 
 /* from Bulma */
@@ -129,6 +138,9 @@ body {
     body {
         padding-top: 238px;
         background-attachment: scroll;
+        background-repeat: repeat-y;
+        background-position: center top;
+        background-size: 100% auto;
     }
 
     header.container-fluid.fixed-top {
@@ -219,7 +231,7 @@ body {
 }
 
 .site-footer {
-    margin-top: 24px;
+    margin-top: auto;
     background: rgba(15, 23, 42, 0.82);
     color: #e2e8f0;
     border-top: 1px solid rgba(148, 163, 184, 0.35);
