@@ -82,6 +82,15 @@ class LoginForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
+    profile_image = forms.FileField(
+        required=False,
+        label='Profile Picture',
+        widget=forms.ClearableFileInput(attrs={
+            'class': 'form-control',
+            'accept': 'image/*',
+        })
+    )
+
     class Meta:
         model = Profile
         fields = [
@@ -93,7 +102,6 @@ class ProfileForm(forms.ModelForm):
             'town',
             'county',
             'postcode',
-            'profile_image',
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -104,5 +112,4 @@ class ProfileForm(forms.ModelForm):
             'town': forms.TextInput(attrs={'class': 'form-control'}),
             'county': forms.TextInput(attrs={'class': 'form-control'}),
             'postcode': forms.TextInput(attrs={'class': 'form-control'}),
-            'profile_image': forms.TextInput(attrs={'class': 'form-control'}),
         }

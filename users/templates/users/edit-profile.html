@@ -30,7 +30,7 @@
 					</div>
 				{% endif %}
 
-				<form method="POST" class="auth-form">
+				<form method="POST" class="auth-form" enctype="multipart/form-data">
 					{% csrf_token %}
 
 					{% for field in form %}

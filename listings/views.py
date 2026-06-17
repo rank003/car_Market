@@ -612,6 +612,14 @@ def review_submission(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
 
     if request.method == "POST":
+        admin_action = (request.POST.get("admin_action") or "save").strip().lower()
+
+        if admin_action == "reject":
+            _send_submission_notification(listing, "rejected")
+            listing.delete()
+            messages.success(request, "Submission rejected and removed.")
+            return redirect("approvals_page")
+
         make_name = (request.POST.get("car_make") or "").strip()
         model_name = (request.POST.get("car_model") or "").strip()
 
@@ -624,26 +632,23 @@ def review_submission(request, listing_id):
                     "form_data": request.POST.dict(),
                     "is_admin_review": True,
                     "form_error": "Car make and car model are required.",
-                    "submit_label": "Edit & Approve",
                     "back_url": "approvals_page",
-                    "back_label": "Back to Approvals",
-                    "show_approval_checkbox": True,
+                    "back_label": "Back to New Submissions",
                     **_get_choice_options(),
                 },
             )
 
         data = request.POST.dict()
         _apply_listing_fields(listing, data, request.FILES, keep_existing_images=True)
-        listing.is_approved = request.POST.get("approve_listing") == "on"
+        listing.is_approved = admin_action == "approve"
         listing.save()
 
         if listing.is_approved:
             _send_submission_notification(listing, "approved")
+            messages.success(request, "Submission updated and approved.")
+        else:
+            messages.success(request, "Submission changes saved. It is still pending approval.")
 
-        messages.success(
-            request,
-            "Submission updated and approved." if listing.is_approved else "Submission updated and saved without approval.",
-        )
         return redirect("approvals_page")
 
     form_data = {
@@ -669,11 +674,8 @@ def review_submission(request, listing_id):
             "listing": listing,
             "form_data": form_data,
             "is_admin_review": True,
-            "submit_label": "Edit & Approve",
             "back_url": "approvals_page",
-            "back_label": "Back to Approvals",
-            "show_approval_checkbox": True,
-            "approval_checked": False,
+            "back_label": "Back to New Submissions",
             **_get_choice_options(),
         },
     )

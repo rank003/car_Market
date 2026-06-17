@@ -36,13 +36,11 @@
 <li class="list-inline-item">
     {% if request.user.is_authenticated %}
         <a class="text-black nav-link d-block d-lg-none"
-           href="#"
-           data-toggle="modal"
-           data-target="#shoppingBagModal"
+           href="{% url 'selected_vehicles_page' %}"
            aria-label="Open selected vehicles list">
             <div class="text-center">
                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                <p class="my-0">{{ selected_vehicle_count }} selected</p>
+                <p class="my-0">€{{ selected_vehicle_subtotal|default:0 }}</p>
             </div>
         </a>
     {% else %}

@@ -22,7 +22,7 @@
 
       <div class="form-card-head">
         <h1>{{ listing.car_make }} {{ listing.car_model }}</h1>
-        <a class="back-link" href="{% url 'listings_page' %}">Back to Listings</a>
+        <a class="back-link" href="{% if request.GET.next %}{{ request.GET.next }}{% elif request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'listings_page' %}{% endif %}">Back to Listings</a>
       </div>
 
       <!-- Listing image -->

@@ -1,11 +1,27 @@
+import os
+import uuid
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.core.files.storage import FileSystemStorage
 
 from .models import Profile, Notification
 from .forms import LoginForm, ProfileForm, RegisterForm
+
+
+def _store_profile_image(uploaded_file):
+    if not uploaded_file:
+        return ""
+
+    storage = FileSystemStorage(location=settings.MEDIA_ROOT, base_url=settings.MEDIA_URL)
+    base_name, ext = os.path.splitext(uploaded_file.name)
+    safe_name = f"profiles/{uuid.uuid4().hex}_{base_name[:40]}{ext}"
+    stored_name = storage.save(safe_name, uploaded_file)
+    return f"{settings.MEDIA_URL}{stored_name}"
 
 
 def register_user(request):
@@ -118,11 +134,16 @@ def create_profile(request):
         return redirect('update-profile')
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             created_profile = form.save(commit=False)
             created_profile.user = request.user
             created_profile.username = request.user.username
+
+            uploaded_profile_image = form.cleaned_data.get('profile_image')
+            if uploaded_profile_image:
+                created_profile.profile_image = _store_profile_image(uploaded_profile_image)
+
             created_profile.save()
 
             request.user.email = created_profile.email
@@ -153,11 +174,16 @@ def update_profile(request):
     )
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             updated_profile = form.save(commit=False)
             updated_profile.user = request.user
             updated_profile.username = request.user.username
+
+            uploaded_profile_image = form.cleaned_data.get('profile_image')
+            if uploaded_profile_image:
+                updated_profile.profile_image = _store_profile_image(uploaded_profile_image)
+
             updated_profile.save()
 
             request.user.email = updated_profile.email

@@ -213,17 +213,16 @@
           <input id="listing_image_6" name="listing_image_6" type="file" accept="image/*">
         </div>
 
-        {% if show_approval_checkbox %}
-          <div class="field-block full-span">
-            <label class="approval-check-wrap">
-              <input type="checkbox" name="approve_listing" {% if approval_checked %}checked{% endif %}>
-              Approve this listing after saving changes
-            </label>
-          </div>
-        {% endif %}
-
         <div class="field-block full-span form-actions">
-          <button type="submit">{{ submit_label|default:"Create Listing" }}</button>
+          {% if is_admin_review %}
+            <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+              <button type="submit" name="admin_action" value="save" class="btn-pill btn-pill-edit">Save Changes</button>
+              <button type="submit" name="admin_action" value="approve" class="btn-pill btn-pill-save">Approve</button>
+              <button type="submit" name="admin_action" value="reject" class="btn-pill btn-pill-delete" onclick="return confirm('Reject and remove this submission?');">Reject</button>
+            </div>
+          {% else %}
+            <button type="submit">{{ submit_label|default:"Create Listing" }}</button>
+          {% endif %}
         </div>
       </form>
     </div>

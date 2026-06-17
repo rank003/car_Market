@@ -28,7 +28,7 @@
 
       <section class="results-section">
         <div class="section-title-wrap">
-          <h2>Results</h2>
+          <h2><span class="section-title-pill">Results</span></h2>
         </div>
 
         <div class="cards-grid">
@@ -117,7 +117,9 @@
 
                   <div class="modal-footer vehicle-modal-footer">
                     {% if request.user.is_authenticated %}
-                      {% if listing.id in selected_vehicle_ids %}
+                      {% if listing.owner and listing.owner.user == request.user %}
+                        <span class="btn-pill btn-pill-cancel">Your Listing</span>
+                      {% elif listing.id in selected_vehicle_ids %}
                         <form method="post" action="{% url 'unselect_vehicle' listing.id %}">
                           {% csrf_token %}
                           <input type="hidden" name="next" value="{{ request.get_full_path }}">

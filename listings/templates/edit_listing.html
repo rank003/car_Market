@@ -18,7 +18,7 @@
   <div class="form-card">
     <div class="form-card-head">
       <h1>Edit Listing</h1>
-      <a class="back-link" href="{% url 'listings_page' %}">Cancel</a>
+      <a class="back-link" href="{% url 'my_submissions_page' %}">Cancel</a>
     </div>
 
     <p class="intro-copy">Update the details of your listing below. Fields marked with * are required.</p>
@@ -29,7 +29,7 @@
       </div>
     {% endif %}
 
-    <form method="post" class="create-listing-grid">
+    <form method="post" class="create-listing-grid" enctype="multipart/form-data">
       {% csrf_token %}
 
       <div class="field-block">
@@ -87,9 +87,39 @@
         <textarea id="description" name="description">{{ listing.description|default:'' }}</textarea>
       </div>
 
+      <div class="field-block full-span">
+        <label for="listing_image_1">Image 1</label>
+        <input id="listing_image_1" name="listing_image_1" type="file" accept="image/*">
+      </div>
+
+      <div class="field-block">
+        <label for="listing_image_2">Image 2</label>
+        <input id="listing_image_2" name="listing_image_2" type="file" accept="image/*">
+      </div>
+
+      <div class="field-block">
+        <label for="listing_image_3">Image 3</label>
+        <input id="listing_image_3" name="listing_image_3" type="file" accept="image/*">
+      </div>
+
+      <div class="field-block">
+        <label for="listing_image_4">Image 4</label>
+        <input id="listing_image_4" name="listing_image_4" type="file" accept="image/*">
+      </div>
+
+      <div class="field-block">
+        <label for="listing_image_5">Image 5</label>
+        <input id="listing_image_5" name="listing_image_5" type="file" accept="image/*">
+      </div>
+
+      <div class="field-block full-span">
+        <label for="listing_image_6">Image 6</label>
+        <input id="listing_image_6" name="listing_image_6" type="file" accept="image/*">
+      </div>
+
       <div class="field-block full-span form-actions" style="display:flex; gap:10px; align-items:center;">
         <button type="submit" class="btn-pill btn-pill-save">✓ Save Changes</button>
-        <a href="{% url 'listings_page' %}" class="btn-pill btn-pill-cancel">Cancel</a>
+        <a href="{% url 'my_submissions_page' %}" class="btn-pill btn-pill-cancel">Cancel</a>
       </div>
     </form>
 

@@ -1,4 +1,4 @@
-git log --oneline --decorate --graph --all{% extends "base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% with placeholder_img="images/listing-placeholder.svg" %}
@@ -20,7 +20,7 @@ git log --oneline --decorate --graph --all{% extends "base.html" %}
   <main class="page-shell">
     <section class="results-section">
       <div class="section-title-wrap">
-        <h2>Selected Vehicles</h2>
+        <h2><span class="section-title-pill">Selected Vehicles</span></h2>
       </div>
 
       {% if selected_listings %}
@@ -37,7 +37,7 @@ git log --oneline --decorate --graph --all{% extends "base.html" %}
                 <p><strong>Mileage:</strong> {{ listing.mileage|default:'-' }}</p>
                 <p><strong>Price:</strong> €{{ listing.price|default:'-' }}</p>
                 <div class="listing-card-actions">
-                  <a href="{% url 'single_listing' listing.id %}" class="btn-pill btn-pill-view">View</a>
+                  <a href="{% url 'single_listing' listing.id %}?next={% url 'selected_vehicles_page' %}" class="btn-pill btn-pill-view">View</a>
                   <form method="post" action="{% url 'unselect_vehicle' listing.id %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{% url 'selected_vehicles_page' %}">
