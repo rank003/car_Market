@@ -25,6 +25,7 @@
 import json
 import os
 import uuid
+from datetime import datetime
 from typing import Any, Dict, Optional, Tuple
 
 from django.conf import settings
@@ -770,6 +771,114 @@ def selected_vehicles_page(request):
         "selected_vehicles.html",
         {"selected_listings": ordered},
     )
+
+
+@require_http_methods(["POST"])
+@login_required(login_url="login")
+def complete_purchase(request):
+    """Submit a purchase request for all currently selected vehicles."""
+    selected_ids = _get_selected_vehicle_ids(request)
+    profile = Profile.objects.filter(user=request.user).first()
+
+    if not selected_ids:
+        messages.error(request, "Purchase failed: your bag is empty.")
+        if profile:
+            Notification.objects.create(
+                profile=profile,
+                subject="Payment failed",
+                message="Payment could not be completed because your bag was empty.",
+            )
+        return redirect("selected_vehicles_page")
+
+    full_name = (request.POST.get("full_name") or "").strip()
+    email = (request.POST.get("email") or "").strip()
+    phone = (request.POST.get("phone") or "").strip()
+    billing_address = (request.POST.get("billing_address") or "").strip()
+    delivery_address = (request.POST.get("delivery_address") or "").strip()
+    cardholder_name = (request.POST.get("cardholder_name") or "").strip()
+    card_number_raw = (request.POST.get("card_number") or "").strip()
+    expiry_raw = (request.POST.get("expiry") or "").strip()
+    cvv_raw = (request.POST.get("cvv") or "").strip()
+    notes = (request.POST.get("notes") or "").strip()
+
+    card_number = "".join(ch for ch in card_number_raw if ch.isdigit())
+    cvv = "".join(ch for ch in cvv_raw if ch.isdigit())
+
+    expiry_valid = False
+    expiry_month = None
+    expiry_year = None
+    if "/" in expiry_raw:
+        month_part, year_part = [item.strip() for item in expiry_raw.split("/", 1)]
+        if month_part.isdigit() and year_part.isdigit() and len(year_part) in {2, 4}:
+            expiry_month = int(month_part)
+            year_int = int(year_part)
+            expiry_year = 2000 + year_int if len(year_part) == 2 else year_int
+            if 1 <= expiry_month <= 12:
+                now = datetime.now()
+                expiry_valid = (expiry_year > now.year) or (
+                    expiry_year == now.year and expiry_month >= now.month
+                )
+
+    if (
+        not full_name
+        or not email
+        or not phone
+        or not billing_address
+        or not delivery_address
+        or not cardholder_name
+        or len(card_number) < 13
+        or len(card_number) > 19
+        or not expiry_valid
+        or len(cvv) not in {3, 4}
+    ):
+        messages.error(request, "Payment failed: please provide valid card and billing details.")
+        if profile:
+            Notification.objects.create(
+                profile=profile,
+                subject="Payment failed",
+                message="Your payment attempt failed validation. Please verify your card details and try again.",
+            )
+        return redirect("selected_vehicles_page")
+
+    vehicles = Listing.objects.filter(id__in=selected_ids, is_approved=True)
+    vehicle_count = vehicles.count()
+    subtotal = sum((item.price or 0) for item in vehicles)
+    masked_card = f"**** **** **** {card_number[-4:]}" if len(card_number) >= 4 else "****"
+    purchase_reference = uuid.uuid4().hex[:10].upper()
+
+    if vehicle_count == 0:
+        messages.error(request, "Payment failed: no approved vehicles were available in your bag.")
+        if profile:
+            Notification.objects.create(
+                profile=profile,
+                subject="Payment failed",
+                message="Your bag did not contain approved vehicles at checkout time.",
+            )
+        return redirect("selected_vehicles_page")
+
+    _save_selected_vehicle_ids(request, [])
+    messages.success(
+        request,
+        f"Payment successful for {vehicle_count} vehicle(s), total €{subtotal:,}. Ref: {purchase_reference}",
+    )
+
+    if profile:
+        Notification.objects.create(
+            profile=profile,
+            subject="Payment successful",
+            message=(
+                f"Your payment was successful.\n"
+                f"Reference: {purchase_reference}\n"
+                f"Vehicles: {vehicle_count}\n"
+                f"Total Paid: €{subtotal:,}\n"
+                f"Card: {masked_card}\n"
+                f"Billing Address: {billing_address}\n"
+                f"Delivery Address: {delivery_address}"
+                + (f"\nNotes: {notes}" if notes else "")
+            ),
+        )
+
+    return redirect("selected_vehicles_page")
 
 
 @require_http_methods(["GET"])

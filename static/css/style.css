@@ -550,6 +550,105 @@
   align-items: center;
 }
 
+.listings-app .purchase-cta-wrap {
+  margin: 28px auto 0;
+  text-align: center;
+}
+
+.listings-app .purchase-feedback-wrap {
+  max-width: 760px;
+  margin: 0 auto 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.listings-app .purchase-feedback-alert {
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  text-align: center;
+}
+
+.listings-app .purchase-feedback-alert.is-success {
+  background: #e9f8ef;
+  border-color: #a3dcb3;
+  color: #14532d;
+}
+
+.listings-app .purchase-feedback-alert.is-error {
+  background: #fff1f1;
+  border-color: #f0b1b1;
+  color: #7f1d1d;
+}
+
+.listings-app .purchase-cta-note {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.listings-app .purchase-btn {
+  background: #dc2626;
+  color: #ffffff;
+  border: 1px solid #dc2626;
+  box-shadow: 0 8px 18px rgba(220, 38, 38, 0.35);
+  animation: purchasePulse 1.6s ease-in-out infinite;
+}
+
+.listings-app .purchase-btn:hover,
+.listings-app .purchase-btn:focus {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+.purchase-modal .modal-content {
+  border-radius: 14px;
+  border: 1px solid #d7dee6;
+}
+
+.purchase-modal .modal-header,
+.purchase-modal .modal-footer {
+  border-color: #e5eaf1;
+}
+
+.purchase-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.purchase-form-grid .field-block label {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.purchase-form-grid .field-block input,
+.purchase-form-grid .field-block textarea {
+  border-radius: 8px;
+  border-color: #cfd8e3;
+}
+
+.purchase-form-grid .field-block textarea {
+  min-height: 90px;
+}
+
+@keyframes purchasePulse {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 8px 18px rgba(220, 38, 38, 0.35);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 10px 22px rgba(220, 38, 38, 0.45);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 8px 18px rgba(220, 38, 38, 0.35);
+  }
+}
+
 #main-nav .navbar-nav {
   gap: 6px;
 }
@@ -654,7 +753,8 @@
   .listings-app .cards-grid,
   .listings-app .create-listing-grid,
   .listings-app .current-images-grid,
-  .listings-app .image-upload-grid {
+  .listings-app .image-upload-grid,
+  .purchase-form-grid {
     grid-template-columns: 1fr;
   }
 

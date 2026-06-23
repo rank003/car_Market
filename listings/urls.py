@@ -37,6 +37,11 @@ urlpatterns = [
     ),
     path("selected/", views.selected_vehicles_page, name="selected_vehicles_page"),
     path(
+        "selected/complete-purchase/",
+        views.complete_purchase,
+        name="complete_purchase",
+    ),
+    path(
         "api/create/",
         views.create_listing_with_make_model,
         name="create_listing_with_make_model",

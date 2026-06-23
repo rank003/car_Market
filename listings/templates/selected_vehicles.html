@@ -23,6 +23,16 @@
         <h2><span class="section-title-pill">Selected Vehicles</span></h2>
       </div>
 
+      {% if messages %}
+        <div id="purchase-feedback" class="purchase-feedback-wrap">
+          {% for message in messages %}
+            <div class="purchase-feedback-alert {% if message.tags and 'success' in message.tags %}is-success{% else %}is-error{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       {% if selected_listings %}
         <div class="cards-grid">
           {% for listing in selected_listings %}
@@ -48,15 +58,108 @@
             </article>
           {% endfor %}
         </div>
+
+        <div class="purchase-cta-wrap">
+          <p class="purchase-cta-note">All {{ selected_listings|length }} selected vehicle(s) will be included in this purchase.</p>
+          <p class="purchase-cta-note">Total: €{{ selected_vehicle_subtotal_display|default:'0' }}</p>
+          <button
+            type="button"
+            class="btn-pill purchase-btn"
+            data-toggle="modal"
+            data-target="#purchaseModal"
+            aria-label="Complete purchase for selected vehicles">
+            Complete Purchase
+          </button>
+        </div>
       {% else %}
         <div class="empty-state">
           <p>You have not selected any vehicles yet.</p>
           <a href="{% url 'listings_page' %}" class="btn-pill btn-pill-view">Browse Listings</a>
         </div>
       {% endif %}
+
+      <div class="modal fade purchase-modal" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="purchaseModalLabel">Complete Purchase</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="post" action="{% url 'complete_purchase' %}">
+              {% csrf_token %}
+              <div class="modal-body purchase-form-grid">
+                <div class="field-block full-span">
+                  <label for="purchase_full_name">Full Name *</label>
+                  <input id="purchase_full_name" name="full_name" required>
+                </div>
+                <div class="field-block">
+                  <label for="purchase_email">Email *</label>
+                  <input id="purchase_email" name="email" type="email" required>
+                </div>
+                <div class="field-block">
+                  <label for="purchase_phone">Phone *</label>
+                  <input id="purchase_phone" name="phone" required>
+                </div>
+                <div class="field-block full-span">
+                  <label for="purchase_cardholder_name">Cardholder Name *</label>
+                  <input id="purchase_cardholder_name" name="cardholder_name" required>
+                </div>
+                <div class="field-block full-span">
+                  <label for="purchase_card_number">Card Number *</label>
+                  <input id="purchase_card_number" name="card_number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required>
+                </div>
+                <div class="field-block">
+                  <label for="purchase_expiry">Expiry (MM/YY) *</label>
+                  <input id="purchase_expiry" name="expiry" placeholder="MM/YY" autocomplete="cc-exp" required>
+                </div>
+                <div class="field-block">
+                  <label for="purchase_cvv">CVV *</label>
+                  <input id="purchase_cvv" name="cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="123" required>
+                </div>
+                <div class="field-block full-span">
+                  <label for="purchase_billing_address">Billing Address *</label>
+                  <textarea id="purchase_billing_address" name="billing_address" required></textarea>
+                </div>
+                <div class="field-block full-span">
+                  <label for="purchase_address">Delivery Address *</label>
+                  <textarea id="purchase_address" name="delivery_address" required></textarea>
+                </div>
+                <div class="field-block full-span">
+                  <label for="purchase_notes">Notes (Optional)</label>
+                  <textarea id="purchase_notes" name="notes"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn-pill btn-pill-cancel" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn-pill purchase-btn">Confirm Purchase</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+  {{ block.super }}
+  <script>
+    (function () {
+      const feedbackWrap = document.getElementById('purchase-feedback');
+      if (!feedbackWrap) return;
+
+      setTimeout(function () {
+        feedbackWrap.style.transition = 'opacity 0.35s ease';
+        feedbackWrap.style.opacity = '0';
+        setTimeout(function () {
+          feedbackWrap.remove();
+        }, 380);
+      }, 3000);
+    })();
+  </script>
 {% endblock %}
 
 {% endwith %}
