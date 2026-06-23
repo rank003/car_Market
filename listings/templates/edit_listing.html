@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% with placeholder_img="images/listing-placeholder.svg" %}
+
 {% block extra_title %}- Edit Listing{% endblock %}
 
 {% block extra_css %}
@@ -89,36 +91,78 @@
       </div>
 
       <div class="field-block full-span">
-        <label for="listing_image_1">Image 1</label>
-        <input id="listing_image_1" name="listing_image_1" type="file" accept="image/*">
+        <label>Current Images</label>
+        <div class="current-images-grid">
+          <div class="current-image-card">
+            <div class="current-image-item">
+              <img src="{% if listing.listing_image_1 and listing.listing_image_1 != 'listings/default-listing-img.jpg' and listing.listing_image_1 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_1 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 1">
+            </div>
+            <label class="current-image-delete"><input type="checkbox" name="delete_listing_image_1"> Delete image 1</label>
+          </div>
+          <div class="current-image-card">
+            <div class="current-image-item">
+              <img src="{% if listing.listing_image_2 and listing.listing_image_2 != 'listings/default-listing-img.jpg' and listing.listing_image_2 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_2 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 2">
+            </div>
+            <label class="current-image-delete"><input type="checkbox" name="delete_listing_image_2"> Delete image 2</label>
+          </div>
+          <div class="current-image-card">
+            <div class="current-image-item">
+              <img src="{% if listing.listing_image_3 and listing.listing_image_3 != 'listings/default-listing-img.jpg' and listing.listing_image_3 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_3 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 3">
+            </div>
+            <label class="current-image-delete"><input type="checkbox" name="delete_listing_image_3"> Delete image 3</label>
+          </div>
+          <div class="current-image-card">
+            <div class="current-image-item">
+              <img src="{% if listing.listing_image_4 and listing.listing_image_4 != 'listings/default-listing-img.jpg' and listing.listing_image_4 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_4 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 4">
+            </div>
+            <label class="current-image-delete"><input type="checkbox" name="delete_listing_image_4"> Delete image 4</label>
+          </div>
+          <div class="current-image-card">
+            <div class="current-image-item">
+              <img src="{% if listing.listing_image_5 and listing.listing_image_5 != 'listings/default-listing-img.jpg' and listing.listing_image_5 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_5 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 5">
+            </div>
+            <label class="current-image-delete"><input type="checkbox" name="delete_listing_image_5"> Delete image 5</label>
+          </div>
+          <div class="current-image-card">
+            <div class="current-image-item">
+              <img src="{% if listing.listing_image_6 and listing.listing_image_6 != 'listings/default-listing-img.jpg' and listing.listing_image_6 != 'Placeholder_00001.jpg' %}/assets/{{ listing.listing_image_6 }}{% else %}{% static placeholder_img %}{% endif %}" alt="Current image 6">
+            </div>
+            <label class="current-image-delete"><input type="checkbox" name="delete_listing_image_6"> Delete image 6</label>
+          </div>
+        </div>
       </div>
 
-      <div class="field-block">
-        <label for="listing_image_2">Image 2</label>
-        <input id="listing_image_2" name="listing_image_2" type="file" accept="image/*">
+      <div class="field-block full-span image-upload-section">
+        <label>Upload / Replace Images</label>
+        <div class="image-upload-grid">
+          <div class="image-upload-item">
+            <label for="listing_image_1">Image 1</label>
+            <input id="listing_image_1" name="listing_image_1" type="file" accept="image/*">
+          </div>
+          <div class="image-upload-item">
+            <label for="listing_image_2">Image 2</label>
+            <input id="listing_image_2" name="listing_image_2" type="file" accept="image/*">
+          </div>
+          <div class="image-upload-item">
+            <label for="listing_image_3">Image 3</label>
+            <input id="listing_image_3" name="listing_image_3" type="file" accept="image/*">
+          </div>
+          <div class="image-upload-item">
+            <label for="listing_image_4">Image 4</label>
+            <input id="listing_image_4" name="listing_image_4" type="file" accept="image/*">
+          </div>
+          <div class="image-upload-item">
+            <label for="listing_image_5">Image 5</label>
+            <input id="listing_image_5" name="listing_image_5" type="file" accept="image/*">
+          </div>
+          <div class="image-upload-item">
+            <label for="listing_image_6">Image 6</label>
+            <input id="listing_image_6" name="listing_image_6" type="file" accept="image/*">
+          </div>
+        </div>
       </div>
 
-      <div class="field-block">
-        <label for="listing_image_3">Image 3</label>
-        <input id="listing_image_3" name="listing_image_3" type="file" accept="image/*">
-      </div>
-
-      <div class="field-block">
-        <label for="listing_image_4">Image 4</label>
-        <input id="listing_image_4" name="listing_image_4" type="file" accept="image/*">
-      </div>
-
-      <div class="field-block">
-        <label for="listing_image_5">Image 5</label>
-        <input id="listing_image_5" name="listing_image_5" type="file" accept="image/*">
-      </div>
-
-      <div class="field-block full-span">
-        <label for="listing_image_6">Image 6</label>
-        <input id="listing_image_6" name="listing_image_6" type="file" accept="image/*">
-      </div>
-
-      <div class="field-block full-span form-actions" style="display:flex; gap:10px; align-items:center;">
+      <div class="field-block full-span form-actions">
         <button type="submit" class="btn-pill btn-pill-save">✓ Save Changes</button>
         <a href="{% if next_url %}{{ next_url }}{% else %}{% url 'my_submissions_page' %}{% endif %}" class="btn-pill btn-pill-cancel">Cancel</a>
       </div>
@@ -127,3 +171,5 @@
   </div>
 </div>
 {% endblock %}
+
+{% endwith %}

@@ -116,6 +116,10 @@ def _apply_listing_fields(listing: Listing, data: Dict[str, Any], files, *, keep
     listing.car_type = CarType.objects.filter(name__iexact=car_type_name).first() if car_type_name else None
 
     for field_name in IMAGE_FIELDS:
+        if str(data.get(f"delete_{field_name}") or "").lower() in {"1", "true", "yes", "on"}:
+            setattr(listing, field_name, "listings/default-listing-img.jpg")
+            continue
+
         current_value = getattr(listing, field_name)
         if keep_existing_images:
             new_value = _resolve_listing_image(data, files, field_name, current_value)
@@ -782,7 +786,11 @@ def my_submissions_page(request):
         empty_message = "No listings are available right now."
     else:
         profile = Profile.objects.filter(user=request.user).first()
-        queryset = base_queryset.filter(owner=profile).order_by("-created", "-id") if profile else base_queryset.none()
+        queryset = (
+            base_queryset.filter(owner=profile, is_approved=False).order_by("-created", "-id")
+            if profile
+            else base_queryset.none()
+        )
         page_title = "My Submissions"
         empty_message = "You have not submitted any listings yet."
 

@@ -25,6 +25,7 @@ Inbox
 
                     <form method="post" class="mb-4">
                         {% csrf_token %}
+                        <input type="hidden" name="action" value="mark_all_read">
                         <button type="submit" class="btn btn-blue text-white profile-btn">Mark all as read</button>
                     </form>
 
@@ -36,7 +37,43 @@ Inbox
                                         <strong>{{ notification.subject }}</strong>
                                         <small>{{ notification.created_at|date:"Y-m-d H:i" }}</small>
                                     </div>
-                                    <p class="mb-0 mt-2">{{ notification.message }}</p>
+                                    {% if view_notification_id == notification.id|stringformat:"s" %}
+                                        <p class="mb-2 mt-2">{{ notification.message }}</p>
+                                    {% else %}
+                                        <p class="mb-2 mt-2 text-muted">{{ notification.message|truncatechars:140 }}</p>
+                                    {% endif %}
+
+                                    <div class="d-flex flex-wrap" style="gap:8px;">
+                                        <a href="{% url 'inbox' %}?view={{ notification.id }}" class="btn btn-sm btn-outline-primary">View</a>
+
+                                        {% if not notification.is_read %}
+                                            <form method="post" class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="mark_read">
+                                                <input type="hidden" name="notification_id" value="{{ notification.id }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-success">Mark as read</button>
+                                            </form>
+                                        {% endif %}
+
+                                        <form method="post" class="d-inline" onsubmit="return confirm('Delete this message?');">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="notification_id" value="{{ notification.id }}">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </div>
+
+                                    {% if view_notification_id == notification.id|stringformat:"s" %}
+                                        <form method="post" class="mt-3">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="reply">
+                                            <input type="hidden" name="notification_id" value="{{ notification.id }}">
+                                            <label for="reply-{{ notification.id }}" class="mb-1 font-weight-bold">Reply</label>
+                                            <textarea id="reply-{{ notification.id }}" name="reply_message" class="form-control mb-2" rows="3" placeholder="Write your reply to admin..."></textarea>
+                                            <button type="submit" class="btn btn-sm btn-primary">Send Reply</button>
+                                        </form>
+                                    {% endif %}
+
                                     {% if not notification.is_read %}
                                         <small class="text-primary">New</small>
                                     {% endif %}

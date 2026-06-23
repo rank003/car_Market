@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Q
 
 from .models import Profile, Notification
 from .forms import LoginForm, ProfileForm, RegisterForm
@@ -231,12 +232,76 @@ def inbox_view(request):
         },
     )
 
-    profile.notifications.filter(is_read=False).update(is_read=True)
-    notifications = profile.notifications.all()
-    unread_count = 0
-
     if request.method == 'POST':
+        action = (request.POST.get('action') or '').strip().lower()
+        notification_id = (request.POST.get('notification_id') or '').strip()
+        notification = profile.notifications.filter(id=notification_id).first() if notification_id else None
+
+        if action == 'mark_all_read':
+            marked = profile.notifications.filter(is_read=False).update(is_read=True)
+            if marked:
+                messages.success(request, f'{marked} message(s) marked as read.')
+            else:
+                messages.info(request, 'All messages are already marked as read.')
+            return redirect('inbox')
+
+        if not notification:
+            messages.error(request, 'Message not found.')
+            return redirect('inbox')
+
+        if action == 'mark_read':
+            if notification.is_read:
+                messages.info(request, 'Message is already marked as read.')
+            else:
+                notification.is_read = True
+                notification.save(update_fields=['is_read'])
+                messages.success(request, 'Message marked as read.')
+            return redirect('inbox')
+
+        if action == 'delete':
+            notification.delete()
+            messages.success(request, 'Message deleted.')
+            return redirect('inbox')
+
+        if action == 'reply':
+            reply_text = (request.POST.get('reply_message') or '').strip()
+            if not reply_text:
+                messages.error(request, 'Reply cannot be empty.')
+                return redirect(f"{request.path}?view={notification.id}")
+
+            sender_name = profile.name or profile.username or request.user.username
+            recipients = Profile.objects.filter(
+                user__isnull=False,
+            ).filter(
+                Q(user__is_staff=True) | Q(user__is_superuser=True)
+            ).exclude(id=profile.id)
+
+            if not recipients.exists():
+                messages.info(request, 'No admin recipients available for this reply.')
+                return redirect('inbox')
+
+            reply_subject = f"Reply from {sender_name}: {notification.subject}"
+            for recipient in recipients:
+                Notification.objects.create(
+                    profile=recipient,
+                    subject=reply_subject[:255],
+                    message=reply_text,
+                    is_read=False,
+                )
+
+            if not notification.is_read:
+                notification.is_read = True
+                notification.save(update_fields=['is_read'])
+
+            messages.success(request, 'Reply sent successfully.')
+            return redirect('inbox')
+
+        messages.error(request, 'Unsupported inbox action.')
         return redirect('inbox')
+
+    notifications = profile.notifications.all()
+    unread_count = profile.notifications.filter(is_read=False).count()
+    view_notification_id = (request.GET.get('view') or '').strip()
 
     return render(
         request,
@@ -245,5 +310,6 @@ def inbox_view(request):
             'profile': profile,
             'notifications': notifications,
             'unread_count': unread_count,
+            'view_notification_id': view_notification_id,
         },
     )
