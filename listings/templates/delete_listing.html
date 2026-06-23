@@ -34,9 +34,10 @@
 
     <form method="post">
       {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next_url|default_if_none:'' }}">
       <div style="display:flex; gap:10px; justify-content:center; margin-top:1.5rem;">
         <button type="submit" class="btn-pill btn-pill-delete">🗑 Yes, Delete</button>
-        <a href="{% url 'listings_page' %}" class="btn-pill btn-pill-cancel">Cancel</a>
+        <a href="{% if next_url %}{{ next_url }}{% else %}{% url 'my_submissions_page' %}{% endif %}" class="btn-pill btn-pill-cancel">Cancel</a>
       </div>
     </form>
 

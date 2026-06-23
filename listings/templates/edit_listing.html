@@ -18,7 +18,7 @@
   <div class="form-card">
     <div class="form-card-head">
       <h1>Edit Listing</h1>
-      <a class="back-link" href="{% url 'my_submissions_page' %}">Cancel</a>
+      <a class="back-link" href="{% if next_url %}{{ next_url }}{% else %}{% url 'my_submissions_page' %}{% endif %}">Cancel</a>
     </div>
 
     <p class="intro-copy">Update the details of your listing below. Fields marked with * are required.</p>
@@ -31,6 +31,7 @@
 
     <form method="post" class="create-listing-grid" enctype="multipart/form-data">
       {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next_url|default_if_none:'' }}">
 
       <div class="field-block">
         <label for="car_make">Car Make *</label>
@@ -119,7 +120,7 @@
 
       <div class="field-block full-span form-actions" style="display:flex; gap:10px; align-items:center;">
         <button type="submit" class="btn-pill btn-pill-save">✓ Save Changes</button>
-        <a href="{% url 'my_submissions_page' %}" class="btn-pill btn-pill-cancel">Cancel</a>
+        <a href="{% if next_url %}{{ next_url }}{% else %}{% url 'my_submissions_page' %}{% endif %}" class="btn-pill btn-pill-cancel">Cancel</a>
       </div>
     </form>
 

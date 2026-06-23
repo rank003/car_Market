@@ -18,7 +18,7 @@
   <main class="page-shell">
     <section class="results-section">
       <div class="section-title-wrap">
-        <h2>Listings</h2>
+        <h2><span class="section-title-pill">{{ page_title|default:'Listings' }}</span></h2>
       </div>
 
       {% if submissions %}
@@ -47,9 +47,9 @@
 
                 <div class="listing-card-actions">
                   <a href="{% url 'single_listing' listing.id %}" class="btn-pill btn-pill-view">View</a>
-                  {% if is_admin_user %}
-                    <a href="{% url 'edit_listing' listing.id %}" class="btn-pill btn-pill-edit">Edit</a>
-                    <a href="{% url 'delete_listing' listing.id %}" class="btn-pill btn-pill-delete">Delete</a>
+                  {% if can_manage_submissions %}
+                    <a href="{% url 'edit_listing' listing.id %}?next={% url 'my_submissions_page' %}" class="btn-pill btn-pill-edit">Edit</a>
+                    <a href="{% url 'delete_listing' listing.id %}?next={% url 'my_submissions_page' %}" class="btn-pill btn-pill-delete">Delete</a>
                   {% endif %}
                 </div>
               </div>
@@ -58,8 +58,10 @@
         </div>
       {% else %}
         <div class="empty-state">
-          <p>No listings are available right now.</p>
-          <a href="{% url 'create_listing_form' %}" class="btn-pill btn-pill-view">Create Listing</a>
+          <p>{{ empty_message|default:'No listings are available right now.' }}</p>
+          {% if not is_admin_user %}
+            <a href="{% url 'create_listing_form' %}" class="btn-pill btn-pill-view">Create Listing</a>
+          {% endif %}
         </div>
       {% endif %}
     </section>

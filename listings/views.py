@@ -556,6 +556,7 @@ def single_listing(request, listing_id):
 def edit_listing(request, listing_id):
     """Allow the listing owner to edit their listing."""
     listing = get_object_or_404(Listing, pk=listing_id)
+    next_url = request.GET.get("next") or request.POST.get("next")
 
     # Get the logged-in user's profile
     profile = Profile.objects.filter(user=request.user).first()
@@ -565,7 +566,7 @@ def edit_listing(request, listing_id):
     is_owner = bool(profile and listing.owner == profile)
     if not (is_owner or is_admin_user):
         messages.error(request, "You do not have permission to edit this listing.")
-        return redirect("listings_page")
+        return redirect(next_url or "listings_page")
 
     # Clear any stale queued messages so unrelated alerts don't appear here.
     if request.method == "GET":
@@ -584,6 +585,7 @@ def edit_listing(request, listing_id):
                 {
                     "listing": listing,
                     "form_error": "Car make and car model are required.",
+                    "next_url": next_url,
                 },
             )
 
@@ -596,9 +598,9 @@ def edit_listing(request, listing_id):
             request,
             "Listing updated and sent back for admin approval.",
         )
-        return redirect("listings_page")
+        return redirect(next_url or "listings_page")
 
-    return render(request, "edit_listing.html", {"listing": listing})
+    return render(request, "edit_listing.html", {"listing": listing, "next_url": next_url})
 
 
 @require_http_methods(["GET", "POST"])
@@ -686,6 +688,7 @@ def review_submission(request, listing_id):
 def delete_listing(request, listing_id):
     """Allow the listing owner to delete their listing."""
     listing = get_object_or_404(Listing, pk=listing_id)
+    next_url = request.GET.get("next") or request.POST.get("next")
 
     # Get the logged-in user's profile
     profile = Profile.objects.filter(user=request.user).first()
@@ -695,14 +698,14 @@ def delete_listing(request, listing_id):
     is_owner = bool(profile and listing.owner == profile)
     if not (is_owner or is_admin_user):
         messages.error(request, "You do not have permission to delete this listing.")
-        return redirect("listings_page")
+        return redirect(next_url or "listings_page")
 
     if request.method == "POST":
         listing.delete()
         messages.success(request, "Listing deleted successfully.")
-        return redirect("listings_page")
+        return redirect(next_url or "listings_page")
 
-    return render(request, "delete_listing.html", {"listing": listing})
+    return render(request, "delete_listing.html", {"listing": listing, "next_url": next_url})
 
 
 @require_http_methods(["POST"])
@@ -768,12 +771,22 @@ def selected_vehicles_page(request):
 @require_http_methods(["GET"])
 @login_required(login_url="login")
 def my_submissions_page(request):
-    """Display listings in a card view; admins can edit/delete while regular users can view only."""
-    submissions = list(
-        Listing.objects.select_related("car_make", "car_model", "car_type")
-        .filter(is_approved=True)
-        .order_by("-created", "-id")
-    )
+    """Display listings page for admins and personal submissions page for regular users."""
+    is_admin_user = bool(request.user.is_staff or request.user.is_superuser)
+
+    base_queryset = Listing.objects.select_related("car_make", "car_model", "car_type", "owner")
+
+    if is_admin_user:
+        queryset = base_queryset.filter(is_approved=True).order_by("-created", "-id")
+        page_title = "Submissions"
+        empty_message = "No listings are available right now."
+    else:
+        profile = Profile.objects.filter(user=request.user).first()
+        queryset = base_queryset.filter(owner=profile).order_by("-created", "-id") if profile else base_queryset.none()
+        page_title = "My Submissions"
+        empty_message = "You have not submitted any listings yet."
+
+    submissions = list(queryset)
     for listing in submissions:
         _attach_primary_image_url(listing)
 
@@ -782,7 +795,10 @@ def my_submissions_page(request):
         "submissions.html",
         {
             "submissions": submissions,
-            "is_admin_user": bool(request.user.is_staff or request.user.is_superuser),
+            "is_admin_user": is_admin_user,
+            "can_manage_submissions": True,
+            "page_title": page_title,
+            "empty_message": empty_message,
         },
     )
 

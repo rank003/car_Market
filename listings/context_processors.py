@@ -14,6 +14,7 @@ def selected_vehicles(request):
             "selected_vehicles": [],
             "selected_vehicle_count": 0,
             "selected_vehicle_subtotal": 0,
+            "selected_vehicle_subtotal_display": "0",
         }
 
     raw_ids = request.session.get(SESSION_KEY_SELECTED_VEHICLES, [])
@@ -37,4 +38,5 @@ def selected_vehicles(request):
         "selected_vehicles": ordered_vehicles,
         "selected_vehicle_count": len(ordered_vehicles),
         "selected_vehicle_subtotal": subtotal,
+        "selected_vehicle_subtotal_display": f"{subtotal:,}",
     }
